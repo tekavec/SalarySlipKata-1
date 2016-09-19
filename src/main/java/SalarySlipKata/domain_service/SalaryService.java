@@ -3,6 +3,7 @@ package SalarySlipKata.domain_service;
 import SalarySlipKata.domain.Employee;
 
 public class SalaryService {
+
   private NationalInsuranceService nationalInsuranceService;
   private TaxService taxService;
 
@@ -12,11 +13,11 @@ public class SalaryService {
   }
 
   public double getTaxFreeAllowanceFor(Employee employee) {
-    return 11000.00;
+    return taxService.getTaxFreeAllowanceFor(employee);
   }
 
   public double getTaxableIncomeFor(Employee employee) {
-    return employee.annualSalary() - getTaxFreeAllowanceFor(employee);
+    return taxService.getTaxableIncomeFor(employee);
   }
 
   public double getNationalInsuranceFor(Employee employee) {

@@ -29,7 +29,7 @@ public class SalarySlipApplication {
     return salarySlip;
   }
 
-  protected String formatAmount(double amount) {
+  private String formatAmount(double amount) {
     return format("£%.2f", amount);
   }
 
