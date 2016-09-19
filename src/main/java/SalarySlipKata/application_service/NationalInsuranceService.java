@@ -20,11 +20,10 @@ public class NationalInsuranceService {
     }
 
     double deductibleSalary = getDeductibleSalary(annualSalary);
-    if (deductibleSalary > 0.0) {
-      return calculateBasicContributions(deductibleSalary);
-    }
+    return deductibleSalary > 0.0
+              ? calculateBasicContributions(deductibleSalary)
+              : 0.0;
 
-    return 0.0;
   }
 
   private boolean greaterThanHigherContributionsLimit(double annualSalary) {return annualSalary > HIGHER_CONTRIBUTIONS_LIMIT;}
