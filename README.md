@@ -25,7 +25,7 @@ Salary slip kata
       ```java
       
           public class SalarySlipApplication {
-            public void printFor(Employee employee);
+            public void generateFor(Employee employee);
           }
       
       ``` 
