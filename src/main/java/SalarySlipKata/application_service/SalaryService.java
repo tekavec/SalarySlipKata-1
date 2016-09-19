@@ -21,7 +21,7 @@ public class SalaryService {
   }
 
   public double getNationalInsuranceFor(Employee employee) {
-    return nationalInsuranceService.calculateFor(employee);
+    return nationalInsuranceService.calculateFor(employee.annualSalary());
   }
 
   public double getTaxPayableFor(Employee employee) {
