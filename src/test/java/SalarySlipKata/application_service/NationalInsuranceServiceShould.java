@@ -46,7 +46,7 @@ public class NationalInsuranceServiceShould {
   }
 
   @Test public void
-  return_zero_contribution_for_annual_salary_less_than_or_equal_to_8060() {
+  return_the_NI_contributions_for_a_given_annual_salary_based_on_the_NI_bands() {
     assertThat(nationalInsuranceService.calculateFor(annualSalary), is(equalTo(expectedNationalInsuranceContribution)));
   }
 }
