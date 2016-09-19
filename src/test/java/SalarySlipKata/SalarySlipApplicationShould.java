@@ -11,9 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import SalarySlipKata.domain.Employee;
-import SalarySlipKata.domain_service.NationalInsuranceService;
-import SalarySlipKata.domain_service.SalaryService;
-import SalarySlipKata.domain_service.TaxService;
+import SalarySlipKata.application_service.SalarySlipApplication;
+import SalarySlipKata.application_service.NationalInsuranceService;
+import SalarySlipKata.application_service.SalaryService;
+import SalarySlipKata.application_service.TaxService;
 
 public class SalarySlipApplicationShould {
 

@@ -1,4 +1,4 @@
-package SalarySlipKata.domain_service;
+package SalarySlipKata.application_service;
 
 import SalarySlipKata.domain.Employee;
 
