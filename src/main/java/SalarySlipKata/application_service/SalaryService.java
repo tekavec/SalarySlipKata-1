@@ -13,11 +13,11 @@ public class SalaryService {
   }
 
   public double getTaxFreeAllowanceFor(Employee employee) {
-    return taxService.getTaxFreeAllowanceFor(employee);
+    return taxService.getTaxFreeAllowanceFor(employee.annualSalary());
   }
 
   public double getTaxableIncomeFor(Employee employee) {
-    return taxService.getTaxableIncomeFor(employee);
+    return taxService.getTaxableIncomeFor(employee.annualSalary());
   }
 
   public double getNationalInsuranceFor(Employee employee) {
@@ -25,7 +25,7 @@ public class SalaryService {
   }
 
   public double getTaxPayableFor(Employee employee) {
-    return taxService.calculateFor(employee);
+    return taxService.calculateFor(employee.annualSalary());
   }
 
   public double getNetPayableFor(Employee employee) {
