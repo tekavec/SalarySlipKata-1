@@ -11,7 +11,9 @@ import SalarySlipKata.domain_service.SalaryCalculator;
 
 public class SalarySlipApplication {
 
-  private final SalaryCalculator salaryCalculator = new SalaryCalculator();
+  private final SalaryCalculator salaryCalculator;
+
+  public SalarySlipApplication(SalaryCalculator salaryCalculator) {this.salaryCalculator = salaryCalculator;}
 
   public List<String> generateFor(Employee employee) {
 
