@@ -23,10 +23,10 @@ public class SalarySlipApplication {
     salarySlip.add(format("Employee Name: %s%n", employee.name()));
     salarySlip.add(format("Gross Salary: %s%n", formatAmount(perMonth(employee.annualSalary()))));
     salarySlip.add(format("Tax-free allowance: %s%n", formatAmount(perMonth(salaryCalculator.getTaxFreeAllowance()))));
-    salarySlip.add(format("Taxable income: %s%n", formatAmount(perMonth(salaryCalculator.getTaxableIncome(employee.annualSalary())))));
-    salarySlip.add(format("National Insurance contributions: %s%n", formatAmount(perMonth(salaryCalculator.getNationInsuranceContributions(employee.annualSalary())))));
-    salarySlip.add(format("Tax Payable: %s%n", formatAmount(perMonth(salaryCalculator.getTaxPayable(employee.annualSalary())))));
-    salarySlip.add(format("Net Payable: %s%n", formatAmount(perMonth(salaryCalculator.getNetPayable(employee.annualSalary())))));
+    salarySlip.add(format("Taxable income: %s%n", formatAmount(perMonth(salaryCalculator.getTaxableIncomeFor(employee.annualSalary())))));
+    salarySlip.add(format("National Insurance contributions: %s%n", formatAmount(perMonth(salaryCalculator.getNationInsuranceContributionsFor(employee.annualSalary())))));
+    salarySlip.add(format("Tax Payable: %s%n", formatAmount(perMonth(salaryCalculator.getTaxPayableFor(employee.annualSalary())))));
+    salarySlip.add(format("Net Payable: %s%n", formatAmount(perMonth(salaryCalculator.getNetPayableFor(employee.annualSalary())))));
 
     return salarySlip;
   }

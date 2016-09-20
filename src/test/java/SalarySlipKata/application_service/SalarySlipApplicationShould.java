@@ -15,6 +15,7 @@ import org.junit.runners.Parameterized;
 import SalarySlipKata.domain.Employee;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
 import SalarySlipKata.domain_service.SalaryCalculator;
+import SalarySlipKata.domain_service.TaxCalculator;
 
 @RunWith(Parameterized.class)
 public class SalarySlipApplicationShould {
@@ -33,7 +34,8 @@ public class SalarySlipApplicationShould {
   @Before
   public void setUp() throws Exception {
     NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();
-    salaryCalculator = new SalaryCalculator(nationalInsuranceCalculator);
+    TaxCalculator taxCalculator = new TaxCalculator();
+    salaryCalculator = new SalaryCalculator(nationalInsuranceCalculator, taxCalculator);
     salarySlipApplication = new SalarySlipApplication(salaryCalculator);
   }
 
