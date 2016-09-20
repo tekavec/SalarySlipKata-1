@@ -14,7 +14,6 @@ import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Employee;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
-import SalarySlipKata.domain_service.SalaryCalculator;
 import SalarySlipKata.domain_service.TaxCalculator;
 
 @RunWith(Parameterized.class)
@@ -24,7 +23,6 @@ public class SalarySlipApplicationShould {
 
   private int annualSalary;
   private List<String> salarySlip;
-  private SalaryCalculator salaryCalculator;
 
   public SalarySlipApplicationShould(int annualSalary, List<String> salarySlip) {
     this.annualSalary = annualSalary;
@@ -35,8 +33,7 @@ public class SalarySlipApplicationShould {
   public void setUp() throws Exception {
     NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();
     TaxCalculator taxCalculator = new TaxCalculator();
-    salaryCalculator = new SalaryCalculator(nationalInsuranceCalculator, taxCalculator);
-    salarySlipApplication = new SalarySlipApplication(salaryCalculator);
+    salarySlipApplication = new SalarySlipApplication(nationalInsuranceCalculator, taxCalculator);
   }
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, a salary slip looks like {1}")
@@ -125,6 +122,18 @@ public class SalarySlipApplicationShould {
                   "National Insurance contributions: £377.73\n",
                   "Tax Payable: £1100.00\n",
                   "Net Payable: £3522.27\n"
+                )
+            },
+            {
+                100_000, asList(
+                  "Employee ID: 12345\n",
+                  "Employee Name: John J Doe\n",
+                  "Gross Salary: £8333.33\n",
+                  "Tax-free allowance: £916.67\n",
+                  "Taxable income: £7416.67\n",
+                  "National Insurance contributions: £444.40\n",
+                  "Tax Payable: £2433.33\n",
+                  "Net Payable: £5455.60\n"
                 )
             }
         }
