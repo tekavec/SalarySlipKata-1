@@ -1,4 +1,4 @@
-package SalarySlipKata;
+package SalarySlipKata.application_service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
