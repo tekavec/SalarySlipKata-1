@@ -39,7 +39,7 @@ public class SalarySlipApplicationShould {
     salarySlipApplication = new SalarySlipApplication(salaryCalculator);
   }
 
-  @Parameterized.Parameters
+  @Parameterized.Parameters(name = "For an annual salary of {0}, a salary slip looks like {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
@@ -65,6 +65,30 @@ public class SalarySlipApplicationShould {
                     "National Insurance contributions: £0.00\n",
                     "Tax Payable: £0.00\n",
                     "Net Payable: £416.67\n"
+                )
+            },
+            {
+                8_060, asList(
+                  "Employee ID: 12345\n",
+                  "Employee Name: John J Doe\n",
+                  "Gross Salary: £671.67\n",
+                  "Tax-free allowance: £916.67\n",
+                  "Taxable income: £0.00\n",
+                  "National Insurance contributions: £0.00\n",
+                  "Tax Payable: £0.00\n",
+                  "Net Payable: £671.67\n"
+                )
+            },
+            {
+                12_000, asList(
+                  "Employee ID: 12345\n",
+                  "Employee Name: John J Doe\n",
+                  "Gross Salary: £1000.00\n",
+                  "Tax-free allowance: £916.67\n",
+                  "Taxable income: £83.33\n",
+                  "National Insurance contributions: £39.40\n",
+                  "Tax Payable: £16.67\n",
+                  "Net Payable: £943.93\n"
                 )
             }
         }
