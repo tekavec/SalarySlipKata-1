@@ -6,7 +6,12 @@ public class TaxCalculator {
 
   public final double getTaxFreeAllowance() {return PERSONAL_ALLOWANCE;}
 
-  public final double getTaxableIncomeFor(double annualSalary) {return annualSalary - getTaxFreeAllowance();}
+  public final double getTaxableIncomeFor(double annualSalary) {
+    final double taxableIncome = annualSalary - getTaxFreeAllowance();
+    return taxableIncome > 0
+              ? taxableIncome
+              : 0.0;
+  }
 
-  public final double getTaxPayableFor(double annualSalary) {return (annualSalary - getTaxFreeAllowance()) * TAX_BASIC_RATE;}
+  public final double getTaxPayableFor(double annualSalary) {return (getTaxableIncomeFor(annualSalary)) * TAX_BASIC_RATE;}
 }

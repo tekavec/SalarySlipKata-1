@@ -43,14 +43,29 @@ public class SalarySlipApplicationShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { 24_000, asList("Employee ID: 12345\n",
-                "Employee Name: John J Doe\n",
-                "Gross Salary: £2000.00\n",
-                "Tax-free allowance: £916.67\n",
-                "Taxable income: £1083.33\n",
-                "National Insurance contributions: £159.40\n",
-                "Tax Payable: £216.67\n",
-                "Net Payable: £1623.93\n")
+            {
+                24_000, asList(
+                    "Employee ID: 12345\n",
+                    "Employee Name: John J Doe\n",
+                    "Gross Salary: £2000.00\n",
+                    "Tax-free allowance: £916.67\n",
+                    "Taxable income: £1083.33\n",
+                    "National Insurance contributions: £159.40\n",
+                    "Tax Payable: £216.67\n",
+                    "Net Payable: £1623.93\n"
+                )
+            },
+            {
+                5_000, asList(
+                    "Employee ID: 12345\n",
+                    "Employee Name: John J Doe\n",
+                    "Gross Salary: £416.67\n",
+                    "Tax-free allowance: £916.67\n",
+                    "Taxable income: £0.00\n",
+                    "National Insurance contributions: £0.00\n",
+                    "Tax Payable: £0.00\n",
+                    "Net Payable: £416.67\n"
+                )
             }
         }
     );
