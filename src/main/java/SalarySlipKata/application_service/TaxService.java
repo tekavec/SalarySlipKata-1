@@ -60,9 +60,9 @@ public class TaxService {
     return taxableIncome * BASIC_RATE;
   }
 
-  protected double getAdditionalRateTax(double annualSalary) {return (annualSalary - ADDITIONAL_RATE_LOWER_LIMIT) * ADDITIONAL_RATE;}
+  private double getAdditionalRateTax(double annualSalary) {return (annualSalary - ADDITIONAL_RATE_LOWER_LIMIT) * ADDITIONAL_RATE;}
 
-  protected double getHigherRateTaxWhen100KRuleApplies(double taxableIncome) {return (taxableIncome - BASIC_RATE_LIMITS_DIFFERENCE) * HIGHER_RATE;}
+  private double getHigherRateTaxWhen100KRuleApplies(double taxableIncome) {return (taxableIncome - BASIC_RATE_LIMITS_DIFFERENCE) * HIGHER_RATE;}
 
   private double getHigherRateTaxOnRemainingSalary(double annualSalary) {return (annualSalary - BASIC_RATE_UPPER_LIMIT) * HIGHER_RATE;}
 
