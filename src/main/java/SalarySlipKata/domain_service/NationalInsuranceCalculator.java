@@ -7,6 +7,11 @@ public class NationalInsuranceCalculator {
   public final double getContributionsFor(double annualSalary) {
     final double nationalInsuranceThresholdDifference = annualSalary - AMOUNT_UP_TO_WHICH_NI_CONTRIBUTION_IS_EXEMPTED;
 
+    if (annualSalary > 43_000.00) {
+      return (annualSalary - 43_000.00) * 0.02 +
+          (43_000.00 - 8_060) * NI_BASIC_CONTRIBUTIONS_RATE;
+    }
+
     if (nationalInsuranceThresholdDifference > 0) {
       return nationalInsuranceThresholdDifference * NI_BASIC_CONTRIBUTIONS_RATE;
     }
