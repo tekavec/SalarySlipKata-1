@@ -1,20 +1,30 @@
 package SalarySlipKata.domain_service;
 
 public class NationalInsuranceCalculator {
-  private static final double AMOUNT_UP_TO_WHICH_NI_CONTRIBUTION_IS_EXEMPTED = 8_060.00;
-  private static final double NI_BASIC_CONTRIBUTIONS_RATE = 0.12;
+  private static final double HIGHER_CONTRIBUTIONS_LOWER_LIMIT = 43_000.00;
+  private static final double HIGHER_CONTRIBUTIONS_RATE = 0.02;
+
+  private static final double BASIC_CONTRIBUTIONS_UPPER_LIMIT = 43_000.00;
+  private static final double BASIC_CONTRIBUTIONS_LOWER_LIMIT = 8_060.00;
+  private static final double BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE = BASIC_CONTRIBUTIONS_UPPER_LIMIT - BASIC_CONTRIBUTIONS_LOWER_LIMIT;
+  private static final double BASIC_CONTRIBUTIONS_RATE = 0.12;
 
   public final double getContributionsFor(double annualSalary) {
-    final double nationalInsuranceThresholdDifference = annualSalary - AMOUNT_UP_TO_WHICH_NI_CONTRIBUTION_IS_EXEMPTED;
-
-    if (annualSalary > 43_000.00) {
-      return (annualSalary - 43_000.00) * 0.02 +
-          (43_000.00 - 8_060) * NI_BASIC_CONTRIBUTIONS_RATE;
+    final double salaryDifferenceFromHigherContributionsLimit = annualSalary - HIGHER_CONTRIBUTIONS_LOWER_LIMIT;
+    if (salaryDifferenceFromHigherContributionsLimit > 0) {
+      return calculateHigherContributionsFrom(salaryDifferenceFromHigherContributionsLimit) +
+          calculateBasicContributionsFrom(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE);
     }
 
-    if (nationalInsuranceThresholdDifference > 0) {
-      return nationalInsuranceThresholdDifference * NI_BASIC_CONTRIBUTIONS_RATE;
+    final double salaryDifferenceFromBasicContributionsLimit = annualSalary - BASIC_CONTRIBUTIONS_LOWER_LIMIT;
+    if (salaryDifferenceFromBasicContributionsLimit > 0) {
+      return calculateBasicContributionsFrom(salaryDifferenceFromBasicContributionsLimit);
     }
+
     return 0.0;
   }
+
+  private double calculateBasicContributionsFrom(double amount) {return amount * BASIC_CONTRIBUTIONS_RATE;}
+
+  private double calculateHigherContributionsFrom(double higherContributionsThresholdDifference) {return higherContributionsThresholdDifference * HIGHER_CONTRIBUTIONS_RATE;}
 }
