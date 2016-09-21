@@ -6,13 +6,13 @@ import java.util.Objects;
 
 public class SalarySlip {
   private final Employee employee;
-  private final GBP grossSalary;
+  private final Money grossSalary;
   private TaxDetails taxDetails;
-  private final GBP niContributions;
-  private final GBP netPayable;
+  private final Money niContributions;
+  private final Money netPayable;
 
-  public SalarySlip(Employee employee, GBP grossSalary, TaxDetails taxDetails,
-      GBP niContributions, GBP netPayable) {
+  public SalarySlip(Employee employee, Money grossSalary, TaxDetails taxDetails,
+      Money niContributions, Money netPayable) {
     this.employee = employee;
     this.grossSalary = grossSalary;
     this.taxDetails = taxDetails;

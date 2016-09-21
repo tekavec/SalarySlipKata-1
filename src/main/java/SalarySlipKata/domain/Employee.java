@@ -7,16 +7,16 @@ import java.util.Objects;
 public class Employee {
   private int id;
   private String name;
-  private GBP annualSalary;
+  private Money annualSalary;
 
-  public Employee(int id, String name, GBP annualSalary) {
+  public Employee(int id, String name, Money annualSalary) {
     this.id = id;
     this.name = name;
     this.annualSalary = annualSalary;
   }
 
-  public GBP annualSalary() {
-    return new GBP(annualSalary);
+  public Money annualSalary() {
+    return new Money(annualSalary);
   }
 
   @Override

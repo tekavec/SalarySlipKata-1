@@ -7,56 +7,56 @@ import static java.math.BigDecimal.valueOf;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class GBP {
+public class Money {
   private static final int PLACES_AFTER_DECIMAL = 2;
 
   private BigDecimal denomination;
 
-  public GBP(double denomination) {
+  public Money(double denomination) {
     this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL);
   }
 
-  public GBP(BigDecimal denomination) {
+  public Money(BigDecimal denomination) {
     this.denomination = denomination;
   }
 
-  public GBP(GBP amount) {
-    this.denomination = amount.denomination;
+  public Money(Money money) {
+    this.denomination = money.denomination;
   }
 
-  public static GBP zero(double denomination) {return new GBP(denomination);}
+  public static Money zero(double denomination) {return new Money(denomination);}
 
-  public GBP divideBy(int divisor) {
+  public Money divideBy(int divisor) {
     BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL);
     final BigDecimal quotient = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
-    return new GBP(quotient);
+    return new Money(quotient);
   }
 
-  public GBP plus(GBP anotherAmount) {
-    return new GBP(denomination.add(anotherAmount.denomination));
+  public Money plus(Money money) {
+    return new Money(denomination.add(money.denomination));
   }
 
   public boolean isGreaterThanZero() {
     return denomination.compareTo(valueOf(0)) > 0;
   }
 
-  public GBP minus(GBP anotherAmount) {
-    return new GBP(denomination.subtract(anotherAmount.denomination));
+  public Money minus(Money money) {
+    return new Money(denomination.subtract(money.denomination));
   }
 
-  public GBP multiplyBy(double anotherDenomination) {
-    return new GBP(denomination.multiply(valueOf(anotherDenomination)));
+  public Money multiplyBy(double anotherDenomination) {
+    return new Money(denomination.multiply(valueOf(anotherDenomination)));
   }
 
-  public static GBP zero() {
-    return new GBP(0.0);
+  public static Money zero() {
+    return new Money(0.0);
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    GBP gbp = (GBP) o;
+    Money gbp = (Money) o;
     return Objects.equals(denomination, gbp.denomination);
   }
 

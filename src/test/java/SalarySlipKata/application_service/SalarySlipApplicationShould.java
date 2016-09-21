@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Employee;
-import SalarySlipKata.domain.GBP;
+import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.SalarySlip;
 import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
@@ -23,10 +23,10 @@ public class SalarySlipApplicationShould {
 
   private SalarySlipApplication salarySlipApplication;
 
-  private GBP annualSalary;
+  private Money annualSalary;
   private SalarySlip salarySlip;
 
-  public SalarySlipApplicationShould(GBP annualSalary, SalarySlip salarySlip) {
+  public SalarySlipApplicationShould(Money annualSalary, SalarySlip salarySlip) {
     this.annualSalary = annualSalary;
     this.salarySlip = salarySlip;
   }
@@ -43,131 +43,131 @@ public class SalarySlipApplicationShould {
     return asList(
         new Object[][] {
             {
-                new GBP(24_000.00),
+                new Money(24_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(24_000.00)),
-                    new GBP(2000.00),
-                    new TaxDetails(new GBP(916.67), new GBP(1083.33), new GBP(216.67)),
-                    new GBP(159.40),
-                    new GBP(1623.93)
+                    new Employee(12345, "John J Doe", new Money(24_000.00)),
+                    new Money(2000.00),
+                    new TaxDetails(new Money(916.67), new Money(1083.33), new Money(216.67)),
+                    new Money(159.40),
+                    new Money(1623.93)
                 )
             },
             {
-                new GBP(5_000.00),
+                new Money(5_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(5_000.00)),
-                    new GBP(416.67),
-                    new TaxDetails(new GBP(916.67), new GBP(0.00), new GBP(0.00)),
-                    new GBP(0.00),
-                    new GBP(416.67)
+                    new Employee(12345, "John J Doe", new Money(5_000.00)),
+                    new Money(416.67),
+                    new TaxDetails(new Money(916.67), new Money(0.00), new Money(0.00)),
+                    new Money(0.00),
+                    new Money(416.67)
                 )
             },
             {
-                new GBP(8_060.00),
+                new Money(8_060.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(8_060.00)),
-                    new GBP(671.67),
-                    new TaxDetails(new GBP(916.67), new GBP(0.00), new GBP(0.00)),
-                    new GBP(0.00),
-                    new GBP(671.67)
+                    new Employee(12345, "John J Doe", new Money(8_060.00)),
+                    new Money(671.67),
+                    new TaxDetails(new Money(916.67), new Money(0.00), new Money(0.00)),
+                    new Money(0.00),
+                    new Money(671.67)
                 )
             },
             {
-                new GBP(12_000.00),
+                new Money(12_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(12_000.00)),
-                    new GBP(1000.00),
-                    new TaxDetails(new GBP(916.67), new GBP(83.33), new GBP(16.67)),
-                    new GBP(39.40),
-                    new GBP(943.93)
+                    new Employee(12345, "John J Doe", new Money(12_000.00)),
+                    new Money(1000.00),
+                    new TaxDetails(new Money(916.67), new Money(83.33), new Money(16.67)),
+                    new Money(39.40),
+                    new Money(943.93)
                 )
             },
             {
-                new GBP(40_000.00),
+                new Money(40_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(40_000.00)),
-                    new GBP(3333.33),
-                    new TaxDetails(new GBP(916.67), new GBP(2416.67), new GBP(483.33)),
-                    new GBP(319.40),
-                    new GBP(2530.60)
+                    new Employee(12345, "John J Doe", new Money(40_000.00)),
+                    new Money(3333.33),
+                    new TaxDetails(new Money(916.67), new Money(2416.67), new Money(483.33)),
+                    new Money(319.40),
+                    new Money(2530.60)
                 )
             },
             {
-                new GBP(43_000.00),
+                new Money(43_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(43_000.00)),
-                    new GBP(3583.33),
-                    new TaxDetails(new GBP(916.67), new GBP(2666.67), new GBP(533.33)),
-                    new GBP(349.40),
-                    new GBP(2700.60)
+                    new Employee(12345, "John J Doe", new Money(43_000.00)),
+                    new Money(3583.33),
+                    new TaxDetails(new Money(916.67), new Money(2666.67), new Money(533.33)),
+                    new Money(349.40),
+                    new Money(2700.60)
                 )
             },
             {
-                new GBP(60_000.00),
+                new Money(60_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(60_000)),
-                    new GBP(5000.00),
-                    new TaxDetails(new GBP(916.67), new GBP(4083.33), new GBP(1100.00)),
-                    new GBP(377.73),
-                    new GBP(3522.27)
+                    new Employee(12345, "John J Doe", new Money(60_000)),
+                    new Money(5000.00),
+                    new TaxDetails(new Money(916.67), new Money(4083.33), new Money(1100.00)),
+                    new Money(377.73),
+                    new Money(3522.27)
                 )
             },
             {
-                new GBP(100_000.00),
+                new Money(100_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(100_000)),
-                    new GBP(8333.33),
-                    new TaxDetails(new GBP(916.67), new GBP(7416.67), new GBP(2433.33)),
-                    new GBP(444.40),
-                    new GBP(5455.60)
+                    new Employee(12345, "John J Doe", new Money(100_000)),
+                    new Money(8333.33),
+                    new TaxDetails(new Money(916.67), new Money(7416.67), new Money(2433.33)),
+                    new Money(444.40),
+                    new Money(5455.60)
                 )
             },
             {
-                new GBP(111_000.00),
+                new Money(111_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(111_000)),
-                    new GBP(9250.00),
-                    new TaxDetails(new GBP(458.33), new GBP(8791.67), new GBP(2983.33)),
-                    new GBP(462.73),
-                    new GBP(5803.93)
+                    new Employee(12345, "John J Doe", new Money(111_000)),
+                    new Money(9250.00),
+                    new TaxDetails(new Money(458.33), new Money(8791.67), new Money(2983.33)),
+                    new Money(462.73),
+                    new Money(5803.93)
                 )
             },
             {
-                new GBP(122_000),
+                new Money(122_000),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(122_000)),
-                    new GBP(10166.67),
-                    new TaxDetails(new GBP(0.00), new GBP(10166.67), new GBP(3533.33)),
-                    new GBP(481.07),
-                    new GBP(6152.27)
+                    new Employee(12345, "John J Doe", new Money(122_000)),
+                    new Money(10166.67),
+                    new TaxDetails(new Money(0.00), new Money(10166.67), new Money(3533.33)),
+                    new Money(481.07),
+                    new Money(6152.27)
                 )
             },
             {
-                new GBP(150_000.00),
+                new Money(150_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(150_000)),
-                    new GBP(12500.00),
-                    new TaxDetails(new GBP(0.00), new GBP(12500.00), new GBP(4466.67)),
-                    new GBP(527.73),
-                    new GBP(7505.60)
+                    new Employee(12345, "John J Doe", new Money(150_000)),
+                    new Money(12500.00),
+                    new TaxDetails(new Money(0.00), new Money(12500.00), new Money(4466.67)),
+                    new Money(527.73),
+                    new Money(7505.60)
                 )
             },
             {
-                new GBP(160_000.00),
+                new Money(160_000.00),
                 createSalarySlip(
-                    new Employee(12345, "John J Doe", new GBP(160_000)),
-                    new GBP(13333.33),
-                    new TaxDetails(new GBP(0.00), new GBP(13333.33), new GBP(4841.67)),
-                    new GBP(544.40),
-                    new GBP(7947.27)
+                    new Employee(12345, "John J Doe", new Money(160_000)),
+                    new Money(13333.33),
+                    new TaxDetails(new Money(0.00), new Money(13333.33), new Money(4841.67)),
+                    new Money(544.40),
+                    new Money(7947.27)
                 )
             }
         }
     );
   }
 
-  private static SalarySlip createSalarySlip(Employee employee, GBP grossSalary, TaxDetails taxDetails,
-      GBP  niContributions, GBP netPayable) {
+  private static SalarySlip createSalarySlip(Employee employee, Money grossSalary, TaxDetails taxDetails,
+      Money niContributions, Money netPayable) {
     return new SalarySlip(
         employee, grossSalary, taxDetails, niContributions, netPayable
     );

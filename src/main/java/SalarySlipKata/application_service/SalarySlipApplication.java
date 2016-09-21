@@ -1,7 +1,7 @@
 package SalarySlipKata.application_service;
 
 import SalarySlipKata.domain.Employee;
-import SalarySlipKata.domain.GBP;
+import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.SalarySlip;
 import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
@@ -39,17 +39,17 @@ public class SalarySlipApplication {
     );
   }
 
-  private GBP getNetPayable(GBP annualSalary) {
-    final GBP niContributions = nationalInsuranceCalculator.getContributionsFor(annualSalary);
-    final GBP taxPayable = taxCalculator.getTaxPayableFor(annualSalary);
-    return new GBP(
+  private Money getNetPayable(Money annualSalary) {
+    final Money niContributions = nationalInsuranceCalculator.getContributionsFor(annualSalary);
+    final Money taxPayable = taxCalculator.getTaxPayableFor(annualSalary);
+    return new Money(
         annualSalary
             .minus(niContributions)
             .minus(taxPayable)
     );
   }
 
-  private GBP perMonth(GBP value) {
+  private Money perMonth(Money value) {
     return value.divideBy(TWELVE_MONTHS);
   }
 }

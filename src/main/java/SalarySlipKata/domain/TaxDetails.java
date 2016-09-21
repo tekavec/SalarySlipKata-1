@@ -5,11 +5,11 @@ import static java.lang.String.*;
 import java.util.Objects;
 
 public class TaxDetails {
-  private final GBP taxFreeAllowance;
-  private final GBP taxableIncome;
-  private final GBP taxPayable;
+  private final Money taxFreeAllowance;
+  private final Money taxableIncome;
+  private final Money taxPayable;
 
-  public TaxDetails(GBP taxFreeAllowance, GBP taxableIncome, GBP taxPayable) {
+  public TaxDetails(Money taxFreeAllowance, Money taxableIncome, Money taxPayable) {
     this.taxFreeAllowance = taxFreeAllowance;
     this.taxableIncome = taxableIncome;
     this.taxPayable = taxPayable;
