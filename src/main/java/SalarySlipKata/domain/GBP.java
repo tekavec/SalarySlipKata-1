@@ -8,9 +8,13 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class GBP {
+  private static final int PLACES_AFTER_DECIMAL = 2;
+
   private BigDecimal denomination;
 
-  public GBP(double denomination) {this.denomination = valueOf(denomination);}
+  public GBP(double denomination) {
+    this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL);
+  }
 
   public GBP(BigDecimal denomination) {
     this.denomination = denomination;
@@ -23,8 +27,8 @@ public class GBP {
   public static GBP zero(double denomination) {return new GBP(denomination);}
 
   public GBP divideBy(int divisor) {
-    BigDecimal bdDivisor = valueOf(divisor);
-    final BigDecimal quotient = denomination.divide(bdDivisor, 2, ROUND_HALF_UP);
+    BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL);
+    final BigDecimal quotient = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
     return new GBP(quotient);
   }
 

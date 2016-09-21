@@ -178,8 +178,8 @@ public class SalarySlipApplicationShould {
     Employee employee = new Employee(12345, "John J Doe", annualSalary);
 
     assertThat(
-        salarySlipApplication.generateFor(employee).toString(),
-        is(salarySlip.toString())
+        salarySlipApplication.generateFor(employee),
+        is(salarySlip)
     );
   }
 }

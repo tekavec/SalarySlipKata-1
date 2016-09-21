@@ -46,7 +46,6 @@ public class SalarySlipApplication {
   }
 
   private GBP perMonth(GBP value) {
-    return new GBP(value.divideBy(TWELVE_MONTHS));
-
+    return value.divideBy(TWELVE_MONTHS);
   }
 }
