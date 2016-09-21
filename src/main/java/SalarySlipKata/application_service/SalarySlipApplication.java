@@ -27,7 +27,7 @@ public class SalarySlipApplication {
     salarySlip.add(format("Employee ID: %s%n", valueOf(employee.id())));
     salarySlip.add(format("Employee Name: %s%n", employee.name()));
     salarySlip.add(format("Gross Salary: %s%n", formatAmount(perMonth(employee.annualSalary()))));
-    salarySlip.add(format("Tax-free allowance: %s%n", formatAmount(perMonth(taxCalculator.getTaxFreeAllowance()))));
+    salarySlip.add(format("Tax-free allowance: %s%n", formatAmount(perMonth(taxCalculator.getTaxFreeAllowance(employee.annualSalary())))));
     salarySlip.add(format("Taxable income: %s%n", formatAmount(perMonth(taxCalculator.getTaxableIncomeFor(employee.annualSalary())))));
     salarySlip.add(format("National Insurance contributions: %s%n", formatAmount(perMonth(nationalInsuranceCalculator.getContributionsFor(employee.annualSalary())))));
     salarySlip.add(format("Tax Payable: %s%n", formatAmount(perMonth(taxCalculator.getTaxPayableFor(employee.annualSalary())))));

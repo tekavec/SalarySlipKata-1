@@ -12,18 +12,31 @@ public class TaxCalculator {
   private static final double HIGHER_TAX_LOWER_LIMIT = 43_000.00;
   private static final double HIGHER_TAX_RATE = 0.40;
 
-  public final double getTaxFreeAllowance() {return PERSONAL_ALLOWANCE;}
+  public final double getTaxFreeAllowance(double annualSalary) {
+    final double differenceAbove100k = getDifferenceAbove100k(annualSalary);
+
+    if (differenceAbove100k > 0) {
+      double halfOfTheDifference = differenceAbove100k / 2;
+      return PERSONAL_ALLOWANCE - halfOfTheDifference;
+    }
+
+    return PERSONAL_ALLOWANCE;
+  }
 
   public final double getTaxableIncomeFor(double annualSalary) {
-    final double taxableIncome = annualSalary - getTaxFreeAllowance();
+    final double taxableIncome = annualSalary - getTaxFreeAllowance(annualSalary);
     return taxableIncome > 0
               ? taxableIncome
               : 0.0;
   }
 
   public final double getTaxPayableFor(double annualSalary) {
-    final double higherTaxLimitsDifference = annualSalary - HIGHER_TAX_LOWER_LIMIT;
+    if (getDifferenceAbove100k(annualSalary) > 0) {
+      return calculateHigherTaxFrom(getTaxableIncomeFor(annualSalary) - BASIC_TAX_LIMITS_DIFFERENCE) +
+          calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE);
+    }
 
+    final double higherTaxLimitsDifference = annualSalary - HIGHER_TAX_LOWER_LIMIT;
     if (higherTaxLimitsDifference > 0) {
       return calculateHigherTaxFrom(higherTaxLimitsDifference) +
           calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE);
@@ -31,6 +44,8 @@ public class TaxCalculator {
 
     return calculateBasicTaxFrom(getTaxableIncomeFor(annualSalary));
   }
+
+  private double getDifferenceAbove100k(double annualSalary) {return annualSalary - 100_000.00;}
 
   private double calculateHigherTaxFrom(double amount) {return amount * HIGHER_TAX_RATE;}
 
