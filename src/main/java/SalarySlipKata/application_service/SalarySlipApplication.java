@@ -28,7 +28,7 @@ public class SalarySlipApplication {
 
     Money monthlySalary = calculateMonthlySalaryOf(employee);
     final Money monthlyNetPayable =
-        calculateMonthlyNetPayable(monthlySalary, monthlyTaxDetails, monthlyNIContributions);
+        calculateMonthlyNetPayableWith(monthlySalary, monthlyTaxDetails, monthlyNIContributions);
 
     return new SalarySlip(
                   employee,
@@ -41,7 +41,7 @@ public class SalarySlipApplication {
 
   private Money calculateMonthlySalaryOf(Employee employee) {return employee.annualSalary().divideBy(TWELVE_MONTHS);}
 
-  private Money calculateMonthlyNetPayable(Money monthlySalary, TaxDetails monthlyTaxDetails, Money monthlyNIContributions) {
+  private Money calculateMonthlyNetPayableWith(Money monthlySalary, TaxDetails monthlyTaxDetails, Money monthlyNIContributions) {
     return monthlySalary
               .minus(monthlyTaxDetails.taxPayable())
               .minus(monthlyNIContributions);
