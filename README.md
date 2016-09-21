@@ -28,9 +28,10 @@ Salary slip kata
             public void generateFor(Employee employee);
           }
       
-      ``` 
-    - The salary slip must contain the below items: 
       ```
+    - The salary slip must contain the below items:     
+      ```text
+      
          Employee ID: 12345
          Employee Name: John J Doe
          Gross Salary: £2000.00
