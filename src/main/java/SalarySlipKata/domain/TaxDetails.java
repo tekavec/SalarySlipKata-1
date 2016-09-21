@@ -15,6 +15,10 @@ public class TaxDetails {
     this.taxPayable = taxPayable;
   }
 
+  public Money taxPayable() {
+    return taxPayable;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

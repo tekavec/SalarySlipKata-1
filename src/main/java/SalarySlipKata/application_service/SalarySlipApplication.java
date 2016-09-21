@@ -3,6 +3,7 @@ package SalarySlipKata.application_service;
 import SalarySlipKata.domain.Employee;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.SalarySlip;
+import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
 import SalarySlipKata.domain_service.TaxCalculator;
 
@@ -21,23 +22,28 @@ public class SalarySlipApplication {
   }
 
   public SalarySlip generateFor(Employee employee) {
+    final TaxDetails monthlyTaxDetails = taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
+    final Money monthlyNIContributions =
+        nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
+
+    Money monthlySalary = calculateMonthlySalaryOf(employee);
+    final Money monthlyNetPayable =
+        calculateMonthlyNetPayable(monthlySalary, monthlyTaxDetails, monthlyNIContributions);
+
     return new SalarySlip(
                   employee,
-                  monthlySalaryOf(employee),
-                  taxCalculator.getMonthlyTaxDetailsFor(employee.annualSalary()),
-                  nationalInsuranceCalculator.getMonthlyContributionsFor(employee.annualSalary()),
-                  getMonthlyNetPayable(employee.annualSalary())
+                  monthlySalary,
+                  monthlyTaxDetails,
+                  monthlyNIContributions,
+                  monthlyNetPayable
     );
   }
 
-  private Money monthlySalaryOf(Employee employee) {return employee.annualSalary().divideBy(TWELVE_MONTHS);}
+  private Money calculateMonthlySalaryOf(Employee employee) {return employee.annualSalary().divideBy(TWELVE_MONTHS);}
 
-  private Money getMonthlyNetPayable(Money annualSalary) {
-    final Money nationalInsuranceContributions = nationalInsuranceCalculator.getMonthlyContributionsFor(annualSalary);
-    final Money taxPayable = taxCalculator.getMonthlyTaxPayableFor(annualSalary);
-
-    return annualSalary.divideBy(TWELVE_MONTHS)
-              .minus(nationalInsuranceContributions)
-              .minus(taxPayable);
+  private Money calculateMonthlyNetPayable(Money monthlySalary, TaxDetails monthlyTaxDetails, Money monthlyNIContributions) {
+    return monthlySalary
+              .minus(monthlyTaxDetails.taxPayable())
+              .minus(monthlyNIContributions);
   }
 }

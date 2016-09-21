@@ -11,21 +11,21 @@ import java.util.Objects;
 public class Money {
   private static final int PLACES_AFTER_DECIMAL = 2;
 
+  public static Money zero() {return new Money(0.0);}
+
   private BigDecimal denomination;
 
   public Money(double denomination) {
     this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL);
   }
 
-  public Money(BigDecimal denomination) {
-    this.denomination = denomination;
-  }
-
   public Money(Money money) {
     this.denomination = money.denomination;
   }
 
-  public static Money zero() {return new Money(0.0);}
+  private Money(BigDecimal denomination) {
+    this.denomination = denomination;
+  }
 
   public Money divideBy(int divisor) {
     BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL);

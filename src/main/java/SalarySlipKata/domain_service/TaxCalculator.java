@@ -24,20 +24,20 @@ public class TaxCalculator {
 
   private static final int TWELVE_MONTHS = 12;
 
-  public TaxDetails getMonthlyTaxDetailsFor(Money annualSalary) {
+  public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
     return new TaxDetails(
-        getMonthlyTaxFreeAllowance(annualSalary),
-        getMonthlyTaxableIncomeFor(annualSalary),
-        getMonthlyTaxPayableFor(annualSalary)
+        calculateMonthlyTaxFreeAllowance(annualSalary),
+        calculateMonthlyTaxableIncomeFor(annualSalary),
+        calculateMonthlyTaxPayableFor(annualSalary)
     );
   }
 
-  private Money getMonthlyTaxFreeAllowance(Money annualSalary) {
-    return getTaxFreeAllowance(annualSalary).divideBy(TWELVE_MONTHS);
+  private Money calculateMonthlyTaxFreeAllowance(Money annualSalary) {
+    return calculateTaxFreeAllowance(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
-  private Money getTaxFreeAllowance(Money annualSalary) {
-    final Money differenceAbove100k = getDifferenceAbove100k(annualSalary);
+  private Money calculateTaxFreeAllowance(Money annualSalary) {
+    final Money differenceAbove100k = calculateDifferenceAbove100k(annualSalary);
 
     if (differenceAbove100k.isGreaterThanZero()) {
       Money halfOfTheDifference = differenceAbove100k.divideBy(2);
@@ -50,22 +50,22 @@ public class TaxCalculator {
     return PERSONAL_ALLOWANCE;
   }
 
-  private Money getMonthlyTaxableIncomeFor(Money annualSalary) {
-    return getTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
+  private Money calculateMonthlyTaxableIncomeFor(Money annualSalary) {
+    return calculateTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
-  private Money getTaxableIncomeFor(Money annualSalary) {
-    final Money taxableIncome = annualSalary.minus(getTaxFreeAllowance(annualSalary));
+  private Money calculateTaxableIncomeFor(Money annualSalary) {
+    final Money taxableIncome = annualSalary.minus(calculateTaxFreeAllowance(annualSalary));
     return taxableIncome.isGreaterThanZero()
               ? taxableIncome
               : zero();
   }
 
-  public Money getMonthlyTaxPayableFor(Money annualSalary) {
-    return getTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
+  public Money calculateMonthlyTaxPayableFor(Money annualSalary) {
+    return calculateTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
-  private Money getTaxPayableFor(Money annualSalary) {
+  private Money calculateTaxPayableFor(Money annualSalary) {
     final Money additionalTaxLimitsDifference = annualSalary.minus(HIGHER_TAX_UPPER_LIMIT);
     if (additionalTaxLimitsDifference.isGreaterThanZero()) {
       return
@@ -74,8 +74,8 @@ public class TaxCalculator {
               .plus(calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE));
     }
 
-    final Money taxableIncome = getTaxableIncomeFor(annualSalary);
-    if (getDifferenceAbove100k(annualSalary).isGreaterThanZero()) {
+    final Money taxableIncome = calculateTaxableIncomeFor(annualSalary);
+    if (calculateDifferenceAbove100k(annualSalary).isGreaterThanZero()) {
       return
           calculateHigherTaxFrom(taxableIncome.minus(BASIC_TAX_LIMITS_DIFFERENCE))
           .plus(calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE));
@@ -93,7 +93,7 @@ public class TaxCalculator {
 
   private Money calculateAdditionalTaxFrom(Money amount) {return amount.multiplyBy(ADDITIONAL_TAX_RATE);}
 
-  private Money getDifferenceAbove100k(Money annualSalary) {return annualSalary.minus(UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);}
+  private Money calculateDifferenceAbove100k(Money annualSalary) {return annualSalary.minus(UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);}
 
   private Money calculateHigherTaxFrom(Money amount) {return amount.multiplyBy(HIGHER_TAX_RATE);}
 
