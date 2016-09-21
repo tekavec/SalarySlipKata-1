@@ -78,14 +78,14 @@ public class TaxCalculator {
     if (calculateDifferenceAbove100k(annualSalary).isGreaterThanZero()) {
       return
           calculateHigherTaxFor(taxableIncome.minus(BASIC_TAX_LIMITS_DIFFERENCE))
-          .plus(calculateBasicTaxFor(BASIC_TAX_LIMITS_DIFFERENCE));
+              .plus(calculateBasicTaxFor(BASIC_TAX_LIMITS_DIFFERENCE));
     }
 
     final Money higherTaxLimitsDifference = annualSalary.minus(HIGHER_TAX_LOWER_LIMIT);
     if (higherTaxLimitsDifference.isGreaterThanZero()) {
       return
           calculateHigherTaxFor(higherTaxLimitsDifference)
-          .plus(calculateBasicTaxFor(BASIC_TAX_LIMITS_DIFFERENCE));
+              .plus(calculateBasicTaxFor(BASIC_TAX_LIMITS_DIFFERENCE));
     }
 
     return calculateBasicTaxFor(taxableIncome);

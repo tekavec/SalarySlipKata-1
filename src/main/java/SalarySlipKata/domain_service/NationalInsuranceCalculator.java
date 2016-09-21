@@ -23,8 +23,9 @@ public class NationalInsuranceCalculator {
   private Money calculateContributionsFor(Money annualSalary) {
     final Money salaryDifferenceFromHigherContributionsLimit = annualSalary.minus(HIGHER_CONTRIBUTIONS_LOWER_LIMIT);
     if (salaryDifferenceFromHigherContributionsLimit.isGreaterThanZero()) {
-      return calculateHigherContributionsFor(salaryDifferenceFromHigherContributionsLimit)
-          .plus(calculateBasicContributionsFor(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE));
+      return
+          calculateHigherContributionsFor(salaryDifferenceFromHigherContributionsLimit)
+            .plus(calculateBasicContributionsFor(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE));
     }
 
     final Money salaryDifferenceFromBasicContributionsLimit = annualSalary.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
