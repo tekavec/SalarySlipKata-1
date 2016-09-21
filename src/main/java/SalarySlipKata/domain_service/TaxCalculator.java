@@ -17,7 +17,10 @@ public class TaxCalculator {
 
     if (differenceAbove100k > 0) {
       double halfOfTheDifference = differenceAbove100k / 2;
-      return PERSONAL_ALLOWANCE - halfOfTheDifference;
+      final double actualPersonalAllowance = PERSONAL_ALLOWANCE - halfOfTheDifference;
+      return actualPersonalAllowance > 0
+                ? actualPersonalAllowance
+                : 0;
     }
 
     return PERSONAL_ALLOWANCE;
