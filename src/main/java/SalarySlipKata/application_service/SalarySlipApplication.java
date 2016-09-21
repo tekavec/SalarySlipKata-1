@@ -25,13 +25,17 @@ public class SalarySlipApplication {
     return new SalarySlip(
                   employee,
                   perMonth(employee.annualSalary()),
-                  new TaxDetails(
-                      perMonth(taxCalculator.getTaxFreeAllowance(employee.annualSalary())),
-                      perMonth(taxCalculator.getTaxableIncomeFor(employee.annualSalary())),
-                      perMonth(taxCalculator.getTaxPayableFor(employee.annualSalary()))
-                  ),
+                  getTaxDetailsFor(employee),
                   perMonth(nationalInsuranceCalculator.getContributionsFor(employee.annualSalary())),
                   perMonth(getNetPayable(employee.annualSalary()))
+    );
+  }
+
+  private TaxDetails getTaxDetailsFor(Employee employee) {
+    return new TaxDetails(
+        perMonth(taxCalculator.getTaxFreeAllowance(employee.annualSalary())),
+        perMonth(taxCalculator.getTaxableIncomeFor(employee.annualSalary())),
+        perMonth(taxCalculator.getTaxPayableFor(employee.annualSalary()))
     );
   }
 
