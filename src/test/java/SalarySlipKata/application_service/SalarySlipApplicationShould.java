@@ -129,7 +129,7 @@ public class SalarySlipApplicationShould {
                     new Money(9250.00),
                     new TaxDetails(new Money(458.33), new Money(8791.67), new Money(2983.33)),
                     new Money(462.73),
-                    new Money(5803.93)
+                    new Money(5803.94)
                 )
             },
             {
@@ -159,7 +159,7 @@ public class SalarySlipApplicationShould {
                     new Money(13333.33),
                     new TaxDetails(new Money(0.00), new Money(13333.33), new Money(4841.67)),
                     new Money(544.40),
-                    new Money(7947.27)
+                    new Money(7947.26)
                 )
             }
         }

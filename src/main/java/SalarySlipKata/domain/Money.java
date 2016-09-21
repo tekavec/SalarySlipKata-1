@@ -2,6 +2,7 @@ package SalarySlipKata.domain;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.ROUND_HALF_UP;
+import static java.math.BigDecimal.ZERO;
 import static java.math.BigDecimal.valueOf;
 
 import java.math.BigDecimal;
@@ -24,7 +25,7 @@ public class Money {
     this.denomination = money.denomination;
   }
 
-  public static Money zero(double denomination) {return new Money(denomination);}
+  public static Money zero() {return new Money(0.0);}
 
   public Money divideBy(int divisor) {
     BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL);
@@ -37,7 +38,7 @@ public class Money {
   }
 
   public boolean isGreaterThanZero() {
-    return denomination.compareTo(valueOf(0)) > 0;
+    return denomination.compareTo(ZERO) > 0;
   }
 
   public Money minus(Money money) {
@@ -46,10 +47,6 @@ public class Money {
 
   public Money multiplyBy(double anotherDenomination) {
     return new Money(denomination.multiply(valueOf(anotherDenomination)));
-  }
-
-  public static Money zero() {
-    return new Money(0.0);
   }
 
   @Override

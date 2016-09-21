@@ -1,6 +1,9 @@
 package SalarySlipKata.domain_service;
 
+import static SalarySlipKata.domain.Money.zero;
+
 import SalarySlipKata.domain.Money;
+import SalarySlipKata.domain.TaxDetails;
 
 public class TaxCalculator {
   private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
@@ -19,7 +22,21 @@ public class TaxCalculator {
 
   private static final Money UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
-  public final Money getTaxFreeAllowance(Money annualSalary) {
+  private static final int TWELVE_MONTHS = 12;
+
+  public TaxDetails getMonthlyTaxDetailsFor(Money annualSalary) {
+    return new TaxDetails(
+        getMonthlyTaxFreeAllowance(annualSalary),
+        getMonthlyTaxableIncomeFor(annualSalary),
+        getMonthlyTaxPayableFor(annualSalary)
+    );
+  }
+
+  private Money getMonthlyTaxFreeAllowance(Money annualSalary) {
+    return getTaxFreeAllowance(annualSalary).divideBy(TWELVE_MONTHS);
+  }
+
+  private Money getTaxFreeAllowance(Money annualSalary) {
     final Money differenceAbove100k = getDifferenceAbove100k(annualSalary);
 
     if (differenceAbove100k.isGreaterThanZero()) {
@@ -27,20 +44,28 @@ public class TaxCalculator {
       final Money actualPersonalAllowance = PERSONAL_ALLOWANCE.minus(halfOfTheDifference);
       return actualPersonalAllowance.isGreaterThanZero()
                 ? actualPersonalAllowance
-                : Money.zero(0);
+                : zero();
     }
 
     return PERSONAL_ALLOWANCE;
   }
 
-  public final Money getTaxableIncomeFor(Money annualSalary) {
+  private Money getMonthlyTaxableIncomeFor(Money annualSalary) {
+    return getTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
+  }
+
+  private Money getTaxableIncomeFor(Money annualSalary) {
     final Money taxableIncome = annualSalary.minus(getTaxFreeAllowance(annualSalary));
     return taxableIncome.isGreaterThanZero()
               ? taxableIncome
-              : Money.zero();
+              : zero();
   }
 
-  public final Money getTaxPayableFor(Money annualSalary) {
+  public Money getMonthlyTaxPayableFor(Money annualSalary) {
+    return getTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
+  }
+
+  private Money getTaxPayableFor(Money annualSalary) {
     final Money additionalTaxLimitsDifference = annualSalary.minus(HIGHER_TAX_UPPER_LIMIT);
     if (additionalTaxLimitsDifference.isGreaterThanZero()) {
       return

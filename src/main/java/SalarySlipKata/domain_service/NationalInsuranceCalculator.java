@@ -14,7 +14,9 @@ public class NationalInsuranceCalculator {
       BASIC_CONTRIBUTIONS_UPPER_LIMIT.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
   private static final double BASIC_CONTRIBUTIONS_RATE = 0.12;
 
-  public final Money getContributionsFor(Money annualSalary) {
+  private static final int TWELVE_MONTHS = 12;
+
+  private final Money getContributionsFor(Money annualSalary) {
     final Money salaryDifferenceFromHigherContributionsLimit = annualSalary.minus(HIGHER_CONTRIBUTIONS_LOWER_LIMIT);
     if (salaryDifferenceFromHigherContributionsLimit.isGreaterThanZero()) {
       return calculateHigherContributionsFrom(salaryDifferenceFromHigherContributionsLimit)
@@ -29,8 +31,15 @@ public class NationalInsuranceCalculator {
     return zero();
   }
 
-  private Money calculateBasicContributionsFrom(Money amount) {return amount.multiplyBy(BASIC_CONTRIBUTIONS_RATE);}
+  private Money calculateBasicContributionsFrom(Money amount) {
+    return amount.multiplyBy(BASIC_CONTRIBUTIONS_RATE);
+  }
 
   private Money calculateHigherContributionsFrom(Money higherContributionsThresholdDifference) {
-    return higherContributionsThresholdDifference.multiplyBy(HIGHER_CONTRIBUTIONS_RATE);}
+    return higherContributionsThresholdDifference.multiplyBy(HIGHER_CONTRIBUTIONS_RATE);
+  }
+
+  public Money getMonthlyContributionsFor(Money annualSalary) {
+    return getContributionsFor(annualSalary).divideBy(TWELVE_MONTHS);
+  }
 }
