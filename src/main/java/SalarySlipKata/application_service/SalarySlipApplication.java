@@ -1,51 +1,52 @@
 package SalarySlipKata.application_service;
 
-import static java.lang.String.format;
-import static java.lang.String.valueOf;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import SalarySlipKata.domain.Employee;
+import SalarySlipKata.domain.GBP;
+import SalarySlipKata.domain.SalarySlip;
+import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
 import SalarySlipKata.domain_service.TaxCalculator;
 
 public class SalarySlipApplication {
 
+  private static final int TWELVE_MONTHS = 12;
+
   private TaxCalculator taxCalculator;
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
-  public SalarySlipApplication(NationalInsuranceCalculator nationalInsuranceCalculator, TaxCalculator taxCalculator) {
+  public SalarySlipApplication(
+      NationalInsuranceCalculator nationalInsuranceCalculator,
+      TaxCalculator taxCalculator) {
     this.nationalInsuranceCalculator = nationalInsuranceCalculator;
     this.taxCalculator = taxCalculator;
   }
 
-  public List<String> generateFor(Employee employee) {
-
-    List<String> salarySlip = new ArrayList<>();
-
-    salarySlip.add(format("Employee ID: %s%n", valueOf(employee.id())));
-    salarySlip.add(format("Employee Name: %s%n", employee.name()));
-    salarySlip.add(format("Gross Salary: %s%n", formatAmount(perMonth(employee.annualSalary()))));
-    salarySlip.add(format("Tax-free allowance: %s%n", formatAmount(perMonth(taxCalculator.getTaxFreeAllowance(employee.annualSalary())))));
-    salarySlip.add(format("Taxable income: %s%n", formatAmount(perMonth(taxCalculator.getTaxableIncomeFor(employee.annualSalary())))));
-    salarySlip.add(format("National Insurance contributions: %s%n", formatAmount(perMonth(nationalInsuranceCalculator.getContributionsFor(employee.annualSalary())))));
-    salarySlip.add(format("Tax Payable: %s%n", formatAmount(perMonth(taxCalculator.getTaxPayableFor(employee.annualSalary())))));
-    salarySlip.add(format("Net Payable: %s%n", formatAmount(perMonth(getNetPayable(employee.annualSalary())))));
-
-    return salarySlip;
+  public SalarySlip generateFor(Employee employee) {
+    return new SalarySlip(
+                  employee,
+                  perMonth(employee.annualSalary()),
+                  new TaxDetails(
+                      perMonth(taxCalculator.getTaxFreeAllowance(employee.annualSalary())),
+                      perMonth(taxCalculator.getTaxableIncomeFor(employee.annualSalary())),
+                      perMonth(taxCalculator.getTaxPayableFor(employee.annualSalary()))
+                  ),
+                  perMonth(nationalInsuranceCalculator.getContributionsFor(employee.annualSalary())),
+                  perMonth(getNetPayable(employee.annualSalary()))
+    );
   }
 
-  private double getNetPayable(double annualSalary) {
-    return annualSalary - (nationalInsuranceCalculator.getContributionsFor(annualSalary)
-        + taxCalculator.getTaxPayableFor(annualSalary));
+  private GBP getNetPayable(GBP annualSalary) {
+    final GBP niContributions = nationalInsuranceCalculator.getContributionsFor(annualSalary);
+    final GBP taxPayable = taxCalculator.getTaxPayableFor(annualSalary);
+    return new GBP(
+        annualSalary
+            .minus(niContributions)
+            .minus(taxPayable)
+    );
   }
 
-  private String formatAmount(double amount) {
-    return format("£%.2f", amount);
-  }
+  private GBP perMonth(GBP value) {
+    return new GBP(value.divideBy(TWELVE_MONTHS));
 
-  private double perMonth(double value) {
-    return value / 12;
   }
 }

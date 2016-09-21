@@ -1,11 +1,10 @@
 package SalarySlipKata.application_service;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +12,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Employee;
+import SalarySlipKata.domain.GBP;
+import SalarySlipKata.domain.SalarySlip;
+import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
 import SalarySlipKata.domain_service.TaxCalculator;
 
@@ -21,10 +23,10 @@ public class SalarySlipApplicationShould {
 
   private SalarySlipApplication salarySlipApplication;
 
-  private int annualSalary;
-  private List<String> salarySlip;
+  private GBP annualSalary;
+  private SalarySlip salarySlip;
 
-  public SalarySlipApplicationShould(int annualSalary, List<String> salarySlip) {
+  public SalarySlipApplicationShould(GBP annualSalary, SalarySlip salarySlip) {
     this.annualSalary = annualSalary;
     this.salarySlip = salarySlip;
   }
@@ -36,165 +38,148 @@ public class SalarySlipApplicationShould {
     salarySlipApplication = new SalarySlipApplication(nationalInsuranceCalculator, taxCalculator);
   }
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, a salary slip looks like {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, a monthly salary slip looks like {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
             {
-                24_000, asList(
-                    "Employee ID: 12345\n",
-                    "Employee Name: John J Doe\n",
-                    "Gross Salary: £2000.00\n",
-                    "Tax-free allowance: £916.67\n",
-                    "Taxable income: £1083.33\n",
-                    "National Insurance contributions: £159.40\n",
-                    "Tax Payable: £216.67\n",
-                    "Net Payable: £1623.93\n"
+                new GBP(24_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(24_000.00)),
+                    new GBP(2000.00),
+                    new TaxDetails(new GBP(916.67), new GBP(1083.33), new GBP(216.67)),
+                    new GBP(159.40),
+                    new GBP(1623.93)
                 )
             },
             {
-                5_000, asList(
-                    "Employee ID: 12345\n",
-                    "Employee Name: John J Doe\n",
-                    "Gross Salary: £416.67\n",
-                    "Tax-free allowance: £916.67\n",
-                    "Taxable income: £0.00\n",
-                    "National Insurance contributions: £0.00\n",
-                    "Tax Payable: £0.00\n",
-                    "Net Payable: £416.67\n"
+                new GBP(5_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(5_000.00)),
+                    new GBP(416.67),
+                    new TaxDetails(new GBP(916.67), new GBP(0.00), new GBP(0.00)),
+                    new GBP(0.00),
+                    new GBP(416.67)
                 )
             },
             {
-                8_060, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £671.67\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £0.00\n",
-                  "National Insurance contributions: £0.00\n",
-                  "Tax Payable: £0.00\n",
-                  "Net Payable: £671.67\n"
+                new GBP(8_060.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(8_060.00)),
+                    new GBP(671.67),
+                    new TaxDetails(new GBP(916.67), new GBP(0.00), new GBP(0.00)),
+                    new GBP(0.00),
+                    new GBP(671.67)
                 )
             },
             {
-                12_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £1000.00\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £83.33\n",
-                  "National Insurance contributions: £39.40\n",
-                  "Tax Payable: £16.67\n",
-                  "Net Payable: £943.93\n"
+                new GBP(12_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(12_000.00)),
+                    new GBP(1000.00),
+                    new TaxDetails(new GBP(916.67), new GBP(83.33), new GBP(16.67)),
+                    new GBP(39.40),
+                    new GBP(943.93)
                 )
             },
             {
-                40_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £3333.33\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £2416.67\n",
-                  "National Insurance contributions: £319.40\n",
-                  "Tax Payable: £483.33\n",
-                  "Net Payable: £2530.60\n"
+                new GBP(40_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(40_000.00)),
+                    new GBP(3333.33),
+                    new TaxDetails(new GBP(916.67), new GBP(2416.67), new GBP(483.33)),
+                    new GBP(319.40),
+                    new GBP(2530.60)
                 )
             },
             {
-                43_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £3583.33\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £2666.67\n",
-                  "National Insurance contributions: £349.40\n",
-                  "Tax Payable: £533.33\n",
-                  "Net Payable: £2700.60\n"
+                new GBP(43_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(43_000.00)),
+                    new GBP(3583.33),
+                    new TaxDetails(new GBP(916.67), new GBP(2666.67), new GBP(533.33)),
+                    new GBP(349.40),
+                    new GBP(2700.60)
                 )
             },
             {
-                60_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £5000.00\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £4083.33\n",
-                  "National Insurance contributions: £377.73\n",
-                  "Tax Payable: £1100.00\n",
-                  "Net Payable: £3522.27\n"
+                new GBP(60_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(60_000)),
+                    new GBP(5000.00),
+                    new TaxDetails(new GBP(916.67), new GBP(4083.33), new GBP(1100.00)),
+                    new GBP(377.73),
+                    new GBP(3522.27)
                 )
             },
             {
-                100_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £8333.33\n",
-                  "Tax-free allowance: £916.67\n",
-                  "Taxable income: £7416.67\n",
-                  "National Insurance contributions: £444.40\n",
-                  "Tax Payable: £2433.33\n",
-                  "Net Payable: £5455.60\n"
+                new GBP(100_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(100_000)),
+                    new GBP(8333.33),
+                    new TaxDetails(new GBP(916.67), new GBP(7416.67), new GBP(2433.33)),
+                    new GBP(444.40),
+                    new GBP(5455.60)
                 )
             },
             {
-                111_000, asList(
-                  "Employee ID: 12345\n",
-                  "Employee Name: John J Doe\n",
-                  "Gross Salary: £9250.00\n",
-                  "Tax-free allowance: £458.33\n",
-                  "Taxable income: £8791.67\n",
-                  "National Insurance contributions: £462.73\n",
-                  "Tax Payable: £2983.33\n",
-                  "Net Payable: £5803.93\n"
+                new GBP(111_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(111_000)),
+                    new GBP(9250.00),
+                    new TaxDetails(new GBP(458.33), new GBP(8791.67), new GBP(2983.33)),
+                    new GBP(462.73),
+                    new GBP(5803.93)
                 )
             },
             {
-                122_000, asList(
-                "Employee ID: 12345\n",
-                "Employee Name: John J Doe\n",
-                "Gross Salary: £10166.67\n",
-                "Tax-free allowance: £0.00\n",
-                "Taxable income: £10166.67\n",
-                "National Insurance contributions: £481.07\n",
-                "Tax Payable: £3533.33\n",
-                "Net Payable: £6152.27\n"
+                new GBP(122_000),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(122_000)),
+                    new GBP(10166.67),
+                    new TaxDetails(new GBP(0.00), new GBP(10166.67), new GBP(3533.33)),
+                    new GBP(481.07),
+                    new GBP(6152.27)
                 )
             },
             {
-                150_000, asList(
-                "Employee ID: 12345\n",
-                "Employee Name: John J Doe\n",
-                "Gross Salary: £12500.00\n",
-                "Tax-free allowance: £0.00\n",
-                "Taxable income: £12500.00\n",
-                "National Insurance contributions: £527.73\n",
-                "Tax Payable: £4466.67\n",
-                "Net Payable: £7505.60\n"
+                new GBP(150_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(150_000)),
+                    new GBP(12500.00),
+                    new TaxDetails(new GBP(0.00), new GBP(12500.00), new GBP(4466.67)),
+                    new GBP(527.73),
+                    new GBP(7505.60)
                 )
             },
             {
-                160_000, asList(
-                "Employee ID: 12345\n",
-                "Employee Name: John J Doe\n",
-                "Gross Salary: £13333.33\n",
-                "Tax-free allowance: £0.00\n",
-                "Taxable income: £13333.33\n",
-                "National Insurance contributions: £544.40\n",
-                "Tax Payable: £4841.67\n",
-                "Net Payable: £7947.27\n"
+                new GBP(160_000.00),
+                createSalarySlip(
+                    new Employee(12345, "John J Doe", new GBP(160_000)),
+                    new GBP(13333.33),
+                    new TaxDetails(new GBP(0.00), new GBP(13333.33), new GBP(4841.67)),
+                    new GBP(544.40),
+                    new GBP(7947.27)
                 )
             }
         }
     );
   }
-  
+
+  private static SalarySlip createSalarySlip(Employee employee, GBP grossSalary, TaxDetails taxDetails,
+      GBP  niContributions, GBP netPayable) {
+    return new SalarySlip(
+        employee, grossSalary, taxDetails, niContributions, netPayable
+    );
+  }
+
   @Test public void
   return_generated_monthly_salary_slip_for_a_given_annual_salary() {
     Employee employee = new Employee(12345, "John J Doe", annualSalary);
 
     assertThat(
-        salarySlipApplication.generateFor(employee),
-        equalTo(salarySlip)
+        salarySlipApplication.generateFor(employee).toString(),
+        is(salarySlip.toString())
     );
   }
 }

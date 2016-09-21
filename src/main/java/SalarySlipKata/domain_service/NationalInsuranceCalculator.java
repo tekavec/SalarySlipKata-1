@@ -1,32 +1,36 @@
 package SalarySlipKata.domain_service;
 
+import static SalarySlipKata.domain.GBP.zero;
+
+import SalarySlipKata.domain.GBP;
+
 public class NationalInsuranceCalculator {
-  private static final double HIGHER_CONTRIBUTIONS_LOWER_LIMIT = 43_000.00;
+  private static final GBP HIGHER_CONTRIBUTIONS_LOWER_LIMIT = new GBP(43_000.00);
   private static final double HIGHER_CONTRIBUTIONS_RATE = 0.02;
 
-  private static final double BASIC_CONTRIBUTIONS_UPPER_LIMIT = 43_000.00;
-  private static final double BASIC_CONTRIBUTIONS_LOWER_LIMIT = 8_060.00;
-  private static final double BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE =
-      BASIC_CONTRIBUTIONS_UPPER_LIMIT - BASIC_CONTRIBUTIONS_LOWER_LIMIT;
+  private static final GBP BASIC_CONTRIBUTIONS_UPPER_LIMIT = new GBP(43_000.00);
+  private static final GBP BASIC_CONTRIBUTIONS_LOWER_LIMIT = new GBP(8_060.00);
+  private static final GBP BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE =
+      BASIC_CONTRIBUTIONS_UPPER_LIMIT.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
   private static final double BASIC_CONTRIBUTIONS_RATE = 0.12;
 
-  public final double getContributionsFor(double annualSalary) {
-    final double salaryDifferenceFromHigherContributionsLimit = annualSalary - HIGHER_CONTRIBUTIONS_LOWER_LIMIT;
-    if (salaryDifferenceFromHigherContributionsLimit > 0) {
-      return calculateHigherContributionsFrom(salaryDifferenceFromHigherContributionsLimit) +
-          calculateBasicContributionsFrom(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE);
+  public final GBP getContributionsFor(GBP annualSalary) {
+    final GBP salaryDifferenceFromHigherContributionsLimit = annualSalary.minus(HIGHER_CONTRIBUTIONS_LOWER_LIMIT);
+    if (salaryDifferenceFromHigherContributionsLimit.isGreaterThanZero()) {
+      return calculateHigherContributionsFrom(salaryDifferenceFromHigherContributionsLimit)
+          .plus(calculateBasicContributionsFrom(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE));
     }
 
-    final double salaryDifferenceFromBasicContributionsLimit = annualSalary - BASIC_CONTRIBUTIONS_LOWER_LIMIT;
-    if (salaryDifferenceFromBasicContributionsLimit > 0) {
+    final GBP salaryDifferenceFromBasicContributionsLimit = annualSalary.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
+    if (salaryDifferenceFromBasicContributionsLimit.isGreaterThanZero()) {
       return calculateBasicContributionsFrom(salaryDifferenceFromBasicContributionsLimit);
     }
 
-    return 0.0;
+    return zero();
   }
 
-  private double calculateBasicContributionsFrom(double amount) {return amount * BASIC_CONTRIBUTIONS_RATE;}
+  private GBP calculateBasicContributionsFrom(GBP amount) {return amount.multiplyBy(BASIC_CONTRIBUTIONS_RATE);}
 
-  private double calculateHigherContributionsFrom(double higherContributionsThresholdDifference) {
-    return higherContributionsThresholdDifference * HIGHER_CONTRIBUTIONS_RATE;}
+  private GBP calculateHigherContributionsFrom(GBP higherContributionsThresholdDifference) {
+    return higherContributionsThresholdDifference.multiplyBy(HIGHER_CONTRIBUTIONS_RATE);}
 }

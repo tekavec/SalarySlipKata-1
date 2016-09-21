@@ -1,25 +1,41 @@
 package SalarySlipKata.domain;
 
+import static java.lang.String.format;
+
+import java.util.Objects;
+
 public class Employee {
   private int id;
   private String name;
-  private int annualSalary;
+  private GBP annualSalary;
 
-  public Employee(int id, String name, int annualSalary) {
+  public Employee(int id, String name, GBP annualSalary) {
     this.id = id;
     this.name = name;
     this.annualSalary = annualSalary;
   }
 
-  public int id() {
-    return id;
+  public GBP annualSalary() {
+    return new GBP(annualSalary);
   }
 
-  public String name() {
-    return name;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Employee employee = (Employee) o;
+    return id == employee.id &&
+        Objects.equals(name, employee.name) &&
+        Objects.equals(annualSalary, employee.annualSalary);
   }
 
-  public int annualSalary() {
-    return annualSalary;
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, annualSalary);
+  }
+
+  @Override
+  public String toString() {
+    return format("id=%d, name='%s', annualSalary=%s", id, name, annualSalary);
   }
 }
