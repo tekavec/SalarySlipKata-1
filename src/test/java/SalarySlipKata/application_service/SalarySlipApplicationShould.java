@@ -171,6 +171,18 @@ public class SalarySlipApplicationShould {
                 "Tax Payable: £4466.67\n",
                 "Net Payable: £7505.60\n"
                 )
+            },
+            {
+                160_000, asList(
+                "Employee ID: 12345\n",
+                "Employee Name: John J Doe\n",
+                "Gross Salary: £13333.33\n",
+                "Tax-free allowance: £0.00\n",
+                "Taxable income: £13333.33\n",
+                "National Insurance contributions: £544.40\n",
+                "Tax Payable: £4841.67\n",
+                "Net Payable: £7947.27\n"
+                )
             }
         }
     );

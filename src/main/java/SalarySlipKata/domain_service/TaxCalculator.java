@@ -12,6 +12,11 @@ public class TaxCalculator {
   private static final double HIGHER_TAX_LOWER_LIMIT = 43_000.00;
   private static final double HIGHER_TAX_RATE = 0.40;
 
+  private static final double ADDITIONAL_TAX_RATE = 0.45;
+  private static final double HIGHER_TAX_UPPER_LIMIT = 150_000.00;
+
+  private static final double UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = 100_000.00;
+
   public final double getTaxFreeAllowance(double annualSalary) {
     final double differenceAbove100k = getDifferenceAbove100k(annualSalary);
 
@@ -34,21 +39,34 @@ public class TaxCalculator {
   }
 
   public final double getTaxPayableFor(double annualSalary) {
+    final double additionalTaxLimitsDifference = annualSalary - HIGHER_TAX_UPPER_LIMIT;
+    if (additionalTaxLimitsDifference > 0) {
+      return
+          calculateAdditionalTaxFrom(additionalTaxLimitsDifference) +
+          calculateHigherTaxFrom(HIGHER_TAX_UPPER_LIMIT - BASIC_TAX_LIMITS_DIFFERENCE) +
+          calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE);
+    }
+
+    final double taxableIncome = getTaxableIncomeFor(annualSalary);
     if (getDifferenceAbove100k(annualSalary) > 0) {
-      return calculateHigherTaxFrom(getTaxableIncomeFor(annualSalary) - BASIC_TAX_LIMITS_DIFFERENCE) +
+      return
+          calculateHigherTaxFrom(taxableIncome - BASIC_TAX_LIMITS_DIFFERENCE) +
           calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE);
     }
 
     final double higherTaxLimitsDifference = annualSalary - HIGHER_TAX_LOWER_LIMIT;
     if (higherTaxLimitsDifference > 0) {
-      return calculateHigherTaxFrom(higherTaxLimitsDifference) +
+      return
+          calculateHigherTaxFrom(higherTaxLimitsDifference) +
           calculateBasicTaxFrom(BASIC_TAX_LIMITS_DIFFERENCE);
     }
 
-    return calculateBasicTaxFrom(getTaxableIncomeFor(annualSalary));
+    return calculateBasicTaxFrom(taxableIncome);
   }
 
-  private double getDifferenceAbove100k(double annualSalary) {return annualSalary - 100_000.00;}
+  private double calculateAdditionalTaxFrom(double additionalTaxLimitsDifference) {return additionalTaxLimitsDifference * ADDITIONAL_TAX_RATE;}
+
+  private double getDifferenceAbove100k(double annualSalary) {return annualSalary - UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE;}
 
   private double calculateHigherTaxFrom(double amount) {return amount * HIGHER_TAX_RATE;}
 
