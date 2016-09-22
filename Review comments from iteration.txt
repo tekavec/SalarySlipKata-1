@@ -1,0 +1,36 @@
+SalarySlipApplication
+	- the monthly calculation on the salary of the employee stands out - is this the right place for it?
+	- are all the calls to methods at the same level of abstraction?
+	- are all the variables named well and at the same level?
+	- are the order of the statements coherent?
+	- is the SalarySlip getting all the data at the right level?
+	- employee.annualSalary() is repeated in every call made - is this duplication or can it be extracted into a variable an reused?
+	- is it better to say calculateMonthlySalaryOf(employee); or calculateMonthlySalaryOf(employee.annualSalary()); ?
+
+Money
+	- the name seems close to what it should be
+	- are all the 3 constructors in the right level
+	- are all the method at the same level
+	- are all the methods doing the right thing?
+	- are the conversion between double, Money and BigDecimal correct and happening coherently and efficiently
+
+SalarySlip
+	- are the fields grouped well
+	- are they at the same level
+	- is the combination making up a SalarySlip
+
+TaxDetails
+	- are the fields grouped well
+
+NationalInsuranceCalculator
+	- is it in the right package?
+	- there is repition or duplication across the if blocks in the calculateContributionsFor() function
+	- calculateMonthlyContributionsFor() function is it at the right level?
+	- are all the constants named correctly
+	- could this be converted into a class with more cohesive method calls between each other
+	- constants could be converted into a Map/Array?
+	- calculateContributionsFor() function could be more generic/extendable?
+	
+
+TaxCalculator
+	- is it in the right package?
