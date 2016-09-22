@@ -65,7 +65,7 @@ public class TaxCalculator {
               : zero();
   }
 
-  public Money calculateMonthlyTaxPayableFor(Money annualSalary) {
+  private Money calculateMonthlyTaxPayableFor(Money annualSalary) {
     return calculateTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
