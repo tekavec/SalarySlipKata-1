@@ -1,7 +1,7 @@
 package SalarySlipKata.domain;
 
 import static java.lang.String.format;
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import static java.math.BigDecimal.ROUND_HALF_DOWN;
 import static java.math.BigDecimal.ZERO;
 import static java.math.BigDecimal.valueOf;
 
@@ -16,7 +16,7 @@ public class Money {
   private BigDecimal denomination;
 
   public Money(double denomination) {
-    this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL);
+    this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
   }
 
   public Money(Money money) {
@@ -27,18 +27,12 @@ public class Money {
     this.denomination = denomination;
   }
 
-  public Money divideBy(int divisor) {
-    BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL);
-    final BigDecimal quotient = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
-    return new Money(quotient);
+  public boolean isGreaterThanZero() {
+    return denomination.compareTo(ZERO) > 0;
   }
 
   public Money plus(Money money) {
     return new Money(denomination.add(money.denomination));
-  }
-
-  public boolean isGreaterThanZero() {
-    return denomination.compareTo(ZERO) > 0;
   }
 
   public Money minus(Money money) {
@@ -47,6 +41,12 @@ public class Money {
 
   public Money multiplyBy(double anotherDenomination) {
     return new Money(denomination.multiply(valueOf(anotherDenomination)));
+  }
+
+  public Money divideBy(int divisor) {
+    BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    final BigDecimal quotient = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    return new Money(quotient);
   }
 
   @Override
