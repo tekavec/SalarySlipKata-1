@@ -40,14 +40,18 @@ public class TaxCalculator {
     final Money differenceAbove100k = calculateDifferenceAbove100k(annualSalary);
 
     if (differenceAbove100k.isGreaterThanZero()) {
-      Money halfOfTheDifference = differenceAbove100k.divideBy(2);
-      final Money actualPersonalAllowance = PERSONAL_ALLOWANCE.minus(halfOfTheDifference);
-      return actualPersonalAllowance.isGreaterThanZero()
-                ? actualPersonalAllowance
-                : zero();
+      return calculateTheReducedPersonalAllowanceFromThe(differenceAbove100k);
     }
 
     return PERSONAL_ALLOWANCE;
+  }
+
+  private Money calculateTheReducedPersonalAllowanceFromThe(Money differenceAbove100k) {
+    Money halfOfTheDifference = differenceAbove100k.divideBy(2);
+    final Money actualPersonalAllowance = PERSONAL_ALLOWANCE.minus(halfOfTheDifference);
+    return actualPersonalAllowance.isGreaterThanZero()
+              ? actualPersonalAllowance
+              : zero();
   }
 
   private Money calculateMonthlyTaxableIncomeFor(Money annualSalary) {
