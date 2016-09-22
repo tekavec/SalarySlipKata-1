@@ -22,14 +22,14 @@ public class SalarySlipApplication {
   }
 
   public SalarySlip generateFor(Employee employee) {
+    final Money monthlySalary = calculateMonthlySalaryOf(employee);
     final TaxDetails monthlyTaxDetails =
         taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
     final Money monthlyNIContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
 
-    Money monthlySalary = calculateMonthlySalaryOf(employee);
     final Money monthlyNetPayable =
-        calculateMonthlyNetPayableWith(monthlySalary, monthlyTaxDetails, monthlyNIContributions);
+        calculateMonthlyNetPayableWith(monthlySalary, monthlyTaxDetails.taxPayable(), monthlyNIContributions);
 
     return new SalarySlip(
                   employee,
@@ -45,9 +45,9 @@ public class SalarySlipApplication {
   }
 
   private Money calculateMonthlyNetPayableWith(
-      Money monthlySalary, TaxDetails monthlyTaxDetails, Money monthlyNIContributions) {
+      Money monthlySalary, Money monthlyTaxPayable, Money monthlyNIContributions) {
     return monthlySalary
-              .minus(monthlyTaxDetails.taxPayable())
+              .minus(monthlyTaxPayable)
               .minus(monthlyNIContributions);
   }
 }

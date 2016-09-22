@@ -36,6 +36,6 @@ public class Employee {
 
   @Override
   public String toString() {
-    return format("id=%d, name='%s', annualSalary=%s", id, name, annualSalary);
+    return format("id=%d, name=%s, annualSalary=%s", id, name, annualSalary);
   }
 }
