@@ -23,7 +23,7 @@ public class TaxCalculator {
 
   private static final Money PERSONAL_ALLOWANCE = TaxBands.BASIC_TAX.limit;
   private static final Money
-      UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
+      THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
   private static final int TWELVE_MONTHS = 12;
 
@@ -61,21 +61,31 @@ public class TaxCalculator {
 
   private Money calculateTaxPayableFor(Money originalAnnualSalary) {
     Money annualSalary = new Money(originalAnnualSalary);
+
     Money adjustmentDueToPersonalAllowanceReductionRule = zero();
     Money contributions = zero();
 
     for (TaxBands taxBand: TaxBands.values()) {
-      Money difference = annualSalary
-          .minus(taxBand.limit)
-          .plus(adjustmentDueToPersonalAllowanceReductionRule);
-      contributions = contributions.plus(difference.multiplyBy(taxBand.rate));
+      Money taxableIncomeForBand = calculateTaxableIncomeForBandWith(
+          annualSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.limit);
+      contributions = contributions.plus(
+          calculateContribution(taxableIncomeForBand, taxBand.rate)
+      );
       adjustmentDueToPersonalAllowanceReductionRule =
           calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(annualSalary);
-      annualSalary = annualSalary.minus(difference);
+      annualSalary = annualSalary.minus(taxableIncomeForBand);
     }
 
     return contributions;
   }
+
+  private Money calculateTaxableIncomeForBandWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money limit) {
+    return annualSalary
+              .minus(limit)
+              .plus(adjustmentDueToPersonalAllowanceReductionRule);
+  }
+
+  private Money calculateContribution(Money amount, double taxRate) {return amount.multiplyBy(taxRate);}
 
   private Money calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(Money annualSalary) {
     final Money differenceAbove100K = calculateDifferenceAbove100kOf(annualSalary);
@@ -91,7 +101,7 @@ public class TaxCalculator {
   }
 
   private Money calculateDifferenceAbove100kOf(Money annualSalary) {
-    return annualSalary.minus(UPPER_LIMIT_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
+    return annualSalary.minus(THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 
   private Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
