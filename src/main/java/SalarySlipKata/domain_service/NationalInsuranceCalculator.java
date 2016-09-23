@@ -1,15 +1,18 @@
 package SalarySlipKata.domain_service;
 
+import static java.lang.Double.valueOf;
 import static SalarySlipKata.domain.Money.zero;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import SalarySlipKata.domain.Money;
 
 public class NationalInsuranceCalculator {
-  private static final Money HIGHER_CONTRIBUTIONS_LOWER_LIMIT = new Money(43_000.00);
-  private static final double HIGHER_CONTRIBUTIONS_RATE = 0.02;
-
-  private static final Money BASIC_CONTRIBUTIONS_LOWER_LIMIT = new Money(8_060.00);
-  private static final double BASIC_CONTRIBUTIONS_RATE = 0.12;
+  private static final Map<Money, Double> RATES_TABLE = new LinkedHashMap<Money, Double>() {
+    { put(new Money(43_000.00), valueOf(0.02)); }
+    { put( new Money(8_060.00), valueOf(0.12)); }
+  };
 
   private static final int TWELVE_MONTHS = 12;
 
@@ -17,36 +20,30 @@ public class NationalInsuranceCalculator {
     return calculateContributionsFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
-  private Money calculateContributionsFor(Money annualSalary) {
+  private Money calculateContributionsFor(Money originalAnnualSalary) {
+    Money annualSalary = new Money(originalAnnualSalary);
     Money contributions = zero();
 
-    Money difference = deductHigherContributionsLowerLimitFrom(annualSalary);
-    if (difference.isGreaterThanZero()) {
-      contributions = calculateHigherContributionsFor(difference);
-      annualSalary = annualSalary.minus(difference);
-    }
+    for(Map.Entry<Money, Double> band: RATES_TABLE.entrySet()) {
+      Money differenceSalaryAndBandLimit = differenceBetween(annualSalary, band);
 
-    difference = deductBasicContributionsLowerLimitFrom(annualSalary);
-    if (difference.isGreaterThanOrEqualToZero()) {
-      contributions = contributions.plus(calculateBasicContributionsFor(difference));
+      contributions = contributions.plus(
+          calculateContribution(band, differenceSalaryAndBandLimit)
+      );
+
+      annualSalary = annualSalary.minus(differenceSalaryAndBandLimit);
     }
 
     return contributions;
   }
 
-  private Money deductBasicContributionsLowerLimitFrom(Money amount) {
-    return amount.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
+  private Money calculateContribution(Map.Entry<Money, Double> band, Money difference) {
+    final Double contributionRate = band.getValue();
+    return difference.multiplyBy(contributionRate);
   }
 
-  private Money deductHigherContributionsLowerLimitFrom(Money amount) {
-    return amount.minus(HIGHER_CONTRIBUTIONS_LOWER_LIMIT);
-  }
-
-  private Money calculateBasicContributionsFor(Money amount) {
-    return amount.multiplyBy(BASIC_CONTRIBUTIONS_RATE);
-  }
-
-  private Money calculateHigherContributionsFor(Money amount) {
-    return amount.multiplyBy(HIGHER_CONTRIBUTIONS_RATE);
+  private Money differenceBetween(Money annualSalary, Map.Entry<Money, Double> band) {
+    final Money contributionStartAmount = band.getKey();
+    return annualSalary.minus(contributionStartAmount);
   }
 }

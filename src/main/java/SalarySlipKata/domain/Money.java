@@ -31,16 +31,16 @@ public class Money {
     return denomination.compareTo(ZERO) > 0;
   }
 
-  public boolean isGreaterThanOrEqualToZero() {
-      return denomination.compareTo(ZERO) >= 0;
-  }
-
   public Money plus(Money money) {
     return new Money(denomination.add(money.denomination));
   }
 
   public Money minus(Money money) {
-    return new Money(denomination.subtract(money.denomination));
+    if (denomination.compareTo(money.denomination) > 0) {
+      return new Money(this.denomination.subtract(money.denomination));
+    }
+
+    return zero();
   }
 
   public Money multiplyBy(double anotherDenomination) {
