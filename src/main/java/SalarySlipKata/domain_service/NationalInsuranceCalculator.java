@@ -25,25 +25,23 @@ public class NationalInsuranceCalculator {
     Money contributions = zero();
 
     for(Map.Entry<Money, Double> band: RATES_TABLE.entrySet()) {
-      Money differenceSalaryAndBandLimit = differenceBetween(annualSalary, band);
+      Money difference = differenceBetween(annualSalary, band.getKey());
 
       contributions = contributions.plus(
-          calculateContribution(band, differenceSalaryAndBandLimit)
+          calculateContribution(band.getValue(), difference)
       );
 
-      annualSalary = annualSalary.minus(differenceSalaryAndBandLimit);
+      annualSalary = annualSalary.minus(difference);
     }
 
     return contributions;
   }
 
-  private Money calculateContribution(Map.Entry<Money, Double> band, Money difference) {
-    final Double contributionRate = band.getValue();
+  private Money calculateContribution(Double contributionRate, Money difference) {
     return difference.multiplyBy(contributionRate);
   }
 
-  private Money differenceBetween(Money annualSalary, Map.Entry<Money, Double> band) {
-    final Money contributionStartAmount = band.getKey();
+  private Money differenceBetween(Money annualSalary, Money contributionStartAmount) {
     return annualSalary.minus(contributionStartAmount);
   }
 }
