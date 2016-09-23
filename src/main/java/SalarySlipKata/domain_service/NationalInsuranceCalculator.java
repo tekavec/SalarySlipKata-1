@@ -6,14 +6,14 @@ import SalarySlipKata.domain.Money;
 
 public class NationalInsuranceCalculator {
 
-  private enum Rates {
-    HIGHER_RATE(new Money(43_000.00), 0.02),
-    BASIC_RATE(new Money(8_060.00), 0.12);
+  private enum ContributionBands {
+    HIGHER_CONTRIBUTION(new Money(43_000.00), 0.02),
+    BASIC_CONTRIBUTION(new Money(8_060.00), 0.12);
 
     private final Money limit;
     private final double rate;
 
-    Rates(Money limit, double rate) {
+    ContributionBands(Money limit, double rate) {
       this.limit = limit;
       this.rate = rate;
     }
@@ -29,7 +29,7 @@ public class NationalInsuranceCalculator {
     Money annualSalary = new Money(originalAnnualSalary);
     Money contributions = zero();
 
-    for(Rates contribution: Rates.values()) {
+    for(ContributionBands contribution: ContributionBands.values()) {
       Money difference = differenceBetween(annualSalary, contribution.limit);
 
       contributions = contributions.plus(
