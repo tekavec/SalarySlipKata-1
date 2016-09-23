@@ -66,20 +66,20 @@ public class TaxCalculator {
     Money contributions = zero();
 
     for (TaxBands taxBand: TaxBands.values()) {
-      Money taxableIncomeForBand = calculateTaxableIncomeForBandWith(
+      Money excessIncome = calculateExcessForBandIncomeWith(
           annualSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.limit);
       contributions = contributions.plus(
-          calculateContribution(taxableIncomeForBand, taxBand.rate)
+          calculateContribution(excessIncome, taxBand.rate)
       );
       adjustmentDueToPersonalAllowanceReductionRule =
           calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(annualSalary);
-      annualSalary = annualSalary.minus(taxableIncomeForBand);
+      annualSalary = annualSalary.minus(excessIncome);
     }
 
     return contributions;
   }
 
-  private Money calculateTaxableIncomeForBandWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money limit) {
+  private Money calculateExcessForBandIncomeWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money limit) {
     return annualSalary
               .minus(limit)
               .plus(adjustmentDueToPersonalAllowanceReductionRule);

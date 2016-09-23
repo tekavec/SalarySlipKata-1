@@ -30,13 +30,13 @@ public class NationalInsuranceCalculator {
     Money contributions = zero();
 
     for(ContributionBands contribution: ContributionBands.values()) {
-      Money difference = differenceBetween(annualSalary, contribution.limit);
+      Money excessIncomeForBand = calculateExcessIncomeForBandWith(annualSalary, contribution.limit);
 
       contributions = contributions.plus(
-          calculateContribution(contribution.rate, difference)
+          calculateContribution(contribution.rate, excessIncomeForBand)
       );
 
-      annualSalary = annualSalary.minus(difference);
+      annualSalary = annualSalary.minus(excessIncomeForBand);
     }
 
     return contributions;
@@ -46,7 +46,7 @@ public class NationalInsuranceCalculator {
     return difference.multiplyBy(contributionRate);
   }
 
-  private Money differenceBetween(Money annualSalary, Money contributionStartAmount) {
+  private Money calculateExcessIncomeForBandWith(Money annualSalary, Money contributionStartAmount) {
     return annualSalary.minus(contributionStartAmount);
   }
 }
