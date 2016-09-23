@@ -8,6 +8,12 @@ SalarySlipApplicationShould
 	- employee creation is repeated - can be extracted into a common method
 	- there's repetition in the setup of the tests
 
+NationalInsuranceCalculatorShould
+	- the tests are inputting values as annual salary and checking for its monthly equivalent - is this coherent, as the tables contain values at the Annual Salary level?
+
+TaxCalculatorShould
+	- the tests are inputting values as annual salary and checking for its monthly equivalent - is this coherent, as the tables contain values at the Annual Salary level?
+
 SalarySlipApplication
 	- the monthly calculation on the salary of the employee stands out - is this the right place for it?
 	- are all the calls to methods at the same level of abstraction?
@@ -56,3 +62,11 @@ TaxCalculator
 	- calculateTaxPayableFor() function could be more generic/extendible?
 	- following the above comments, if class is reduced to use generic code, is it clearer and a better win over the existing implementation, is this generalisation needed at this point? Will it help extend the class in future, is it a bit of Designing Upfront? Or overengineering? Maybe its still simpler and more readable now and might become less readable later on, its worth investing in it to find out the design benefits and if it is worth the effort.
 	- why are there no unit tests, before refactoring best to write unit tests?
+
+Template of questions
+---------------------
+1. Does my code violate any of the SOLID principles? If yes, where? why? Is it a problem? How could I fix it? Do I need to fix it?
+2. Does my code violate any other principle? If yes, where? why? Is it a problem? How could I fix it? Do I need to fix it?
+3. Are there any code smells? If yes, where? why? Is it a problem? How could I fix it? Do I need to fix it?
+4. Naming (package, class, method, variables, parameters, etc)
+5. Are my tests descriptive enough?

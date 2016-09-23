@@ -29,6 +29,7 @@ public class NationalInsuranceCalculatorShould {
             {  new Money(5_000.00),   new Money(0.00) },
             {  new Money(8_060.00),   new Money(0.00) },
             { new Money(10_000.00),  new Money(19.40) },
+            { new Money(40_000.00), new Money(319.40) },
             { new Money(43_000.00), new Money(349.40) },
             { new Money(45_000.00), new Money(352.73) },
             { new Money(50_000.00), new Money(361.07) },

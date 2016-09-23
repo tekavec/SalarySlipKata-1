@@ -27,8 +27,12 @@ public class Money {
     this.denomination = denomination;
   }
 
-  public boolean isGreaterThanZero() {
+  public boolean isGreaterThanZero()  {
     return denomination.compareTo(ZERO) > 0;
+  }
+
+  public boolean isLessThanOrEqualToZero() {
+    return denomination.compareTo(ZERO) <= 0;
   }
 
   public Money plus(Money money) {

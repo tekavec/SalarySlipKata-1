@@ -21,20 +21,26 @@ public class NationalInsuranceCalculator {
   }
 
   private Money calculateContributionsFor(Money annualSalary) {
-    final Money salaryDifferenceFromHigherContributionsLimit = annualSalary.minus(HIGHER_CONTRIBUTIONS_LOWER_LIMIT);
-    if (salaryDifferenceFromHigherContributionsLimit.isGreaterThanZero()) {
-      return
-          calculateHigherContributionsFor(salaryDifferenceFromHigherContributionsLimit)
-            .plus(calculateBasicContributionsFor(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE));
+    Money remaining = annualSalary.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
+    Money contributions = zero();
+
+    if (remaining.isLessThanOrEqualToZero()) {
+      return contributions;
     }
 
-    final Money salaryDifferenceFromBasicContributionsLimit = annualSalary.minus(BASIC_CONTRIBUTIONS_LOWER_LIMIT);
-    if (salaryDifferenceFromBasicContributionsLimit.isGreaterThanZero()) {
-      return calculateBasicContributionsFor(salaryDifferenceFromBasicContributionsLimit);
+    if (calculateDifferenceFromBasicContributionsLimit(remaining).isGreaterThanZero()) {
+      remaining = calculateDifferenceFromBasicContributionsLimit(remaining);
+      contributions = contributions
+          .plus(calculateBasicContributionsFor(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE))
+          .plus(calculateHigherContributionsFor(remaining));
+    } else {
+      contributions = calculateBasicContributionsFor(remaining);
     }
 
-    return zero();
+    return contributions;
   }
+
+  private Money calculateDifferenceFromBasicContributionsLimit(Money remaining) {return remaining.minus(BASIC_CONTRIBUTIONS_LIMIT_DIFFERENCE);}
 
   private Money calculateBasicContributionsFor(Money amount) {
     return amount.multiplyBy(BASIC_CONTRIBUTIONS_RATE);
