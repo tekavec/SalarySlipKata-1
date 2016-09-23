@@ -31,8 +31,8 @@ public class Money {
     return denomination.compareTo(ZERO) > 0;
   }
 
-  public boolean isLessThanOrEqualToZero() {
-    return denomination.compareTo(ZERO) <= 0;
+  public boolean isGreaterThanOrEqualToZero() {
+      return denomination.compareTo(ZERO) >= 0;
   }
 
   public Money plus(Money money) {
