@@ -10,18 +10,20 @@ public class TaxCalculator {
   private enum TaxBands {
     ADDITIONAL_TAX(new Money(150_000.00), 0.45),
     HIGHER_TAX    (new Money(43_000.00),  0.40),
-    BASIC_TAX     (new Money(11_000.00),  0.20);
+    BASIC_TAX     (new Money(11_000.00),  0.20),
+    ZERO_TAX      (new Money(0.00),       0.00);
 
-    private final Money limit;
+
+    private final Money threshold;
     private final double rate;
 
-    TaxBands(Money limit, double rate) {
-      this.limit = limit;
+    TaxBands(Money threshold, double rate) {
+      this.threshold = threshold;
       this.rate = rate;
     }
   }
 
-  private static final Money PERSONAL_ALLOWANCE = TaxBands.BASIC_TAX.limit;
+  private static final Money PERSONAL_ALLOWANCE = TaxBands.BASIC_TAX.threshold;
   private static final Money
       THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
@@ -67,21 +69,22 @@ public class TaxCalculator {
 
     for (TaxBands taxBand: TaxBands.values()) {
       Money excessIncome = calculateExcessForBandIncomeWith(
-          annualSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.limit);
+          annualSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.threshold);
       contributions = contributions.plus(
           calculateContribution(excessIncome, taxBand.rate)
       );
       adjustmentDueToPersonalAllowanceReductionRule =
           calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(annualSalary);
+
       annualSalary = annualSalary.minus(excessIncome);
     }
 
     return contributions;
   }
 
-  private Money calculateExcessForBandIncomeWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money limit) {
+  private Money calculateExcessForBandIncomeWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money threshold) {
     return annualSalary
-              .minus(limit)
+              .minus(threshold)
               .plus(adjustmentDueToPersonalAllowanceReductionRule);
   }
 
