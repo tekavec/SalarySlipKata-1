@@ -55,7 +55,7 @@ NationalInsuranceCalculator
 TaxCalculator
 	- is it in the right package?
 	- class might come across a bit more complex than expected [ev(G)=4,iv(G)=4,v(G)=4]
-	- there is repition or duplication across the if blocks in the calculateContributionsFor() function
+	- there is repetition or duplication across the if blocks in the calculateContributionsFor() function
 	- calculateMonthlyTaxDetailsFor() function is it at the right level?
 	- are all the constants named correctly
 	- could this be converted into a class with more cohesive method calls between each other
