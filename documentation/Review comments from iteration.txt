@@ -50,6 +50,7 @@ NationalInsuranceCalculator
 	- calculateContributionsFor() function could be more generic/extendable?
 	- following the above comments, if class is reduced to use generic code, is it clearer and a better win over the existing implementation, is this generalisation needed at this point? Will it help extend the class in future, is it a bit of Designing Upfront? Or overengineering? Maybe its still simpler and more readable now and might become less readable later on, its worth investing in it to find out the design benefits and if it is worth the effort.
 	- why are there no unit tests, before refactoring best to write unit tests?
+	- is the calculations for excess in the right place? Is it explaining how the calculation is taking place.
 
 TaxCalculator
 	- is it in the right package?
@@ -62,6 +63,7 @@ TaxCalculator
 	- calculateTaxPayableFor() function could be more generic/extendible?
 	- following the above comments, if class is reduced to use generic code, is it clearer and a better win over the existing implementation, is this generalisation needed at this point? Will it help extend the class in future, is it a bit of Designing Upfront? Or overengineering? Maybe its still simpler and more readable now and might become less readable later on, its worth investing in it to find out the design benefits and if it is worth the effort.
 	- why are there no unit tests, before refactoring best to write unit tests?
+	- is the calculations for excess in the right place? Is it explaining how the calculation is taking place.
 
 Template of questions
 ---------------------
