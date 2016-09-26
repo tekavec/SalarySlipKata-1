@@ -35,19 +35,20 @@ public class SalarySlipApplicationShould {
   public void setUp() throws Exception {
     NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();
     TaxCalculator taxCalculator = new TaxCalculator();
+
     salarySlipApplication = new SalarySlipApplication(nationalInsuranceCalculator, taxCalculator);
   }
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, a monthly salary slip looks like {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, a monthly salary slip contains {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
             {
                 annualSalaryOf(24_000.00),
                 createSalarySlipFrom(
-                    employeeWith(24_000.00),
+                    employeeWithAnnualSalaryOf(24_000.00),
                     grossSalaryOf(2000.00),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(1083.33), taxPayable(216.67)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(1083.33), taxPayableOf(216.67)),
                     nationalInsuranceContributionsOf(159.40),
                     netPayableOf(1623.93)
                 )
@@ -55,9 +56,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(5_000.00),
                 createSalarySlipFrom(
-                    employeeWith(5_000.00),
+                    employeeWithAnnualSalaryOf(5_000.00),
                     grossSalaryOf(416.67),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(0.00), taxPayable(0.00)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(0.00), taxPayableOf(0.00)),
                     nationalInsuranceContributionsOf(0.00),
                     netPayableOf(416.67)
                 )
@@ -65,9 +66,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(8_060.00),
                 createSalarySlipFrom(
-                    employeeWith(8_060.00),
+                    employeeWithAnnualSalaryOf(8_060.00),
                     grossSalaryOf(671.67),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(0.00), taxPayable(0.00)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(0.00), taxPayableOf(0.00)),
                     nationalInsuranceContributionsOf(0.00),
                     netPayableOf(671.67)
                 )
@@ -75,9 +76,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(12_000.00),
                 createSalarySlipFrom(
-                    employeeWith(12_000.00),
+                    employeeWithAnnualSalaryOf(12_000.00),
                     grossSalaryOf(1000.00),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(83.33), taxPayable(16.67)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(83.33), taxPayableOf(16.67)),
                     nationalInsuranceContributionsOf(39.40),
                     netPayableOf(943.93)
                 )
@@ -85,9 +86,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(40_000.00),
                 createSalarySlipFrom(
-                    employeeWith(40_000.00),
+                    employeeWithAnnualSalaryOf(40_000.00),
                     grossSalaryOf(3333.33),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(2416.67), taxPayable(483.33)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(2416.67), taxPayableOf(483.33)),
                     nationalInsuranceContributionsOf(319.40),
                     netPayableOf(2530.60)
                 )
@@ -95,9 +96,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(43_000.00),
                 createSalarySlipFrom(
-                    employeeWith(43_000.00),
+                    employeeWithAnnualSalaryOf(43_000.00),
                     grossSalaryOf(3583.33),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(2666.67), taxPayable(533.33)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(2666.67), taxPayableOf(533.33)),
                     nationalInsuranceContributionsOf(349.40),
                     netPayableOf(2700.60)
                 )
@@ -105,9 +106,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(60_000.00),
                 createSalarySlipFrom(
-                    employeeWith(60_000.00),
+                    employeeWithAnnualSalaryOf(60_000.00),
                     grossSalaryOf(5000.00),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(4083.33), taxPayable(1100.00)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(4083.33), taxPayableOf(1100.00)),
                     nationalInsuranceContributionsOf(377.73),
                     netPayableOf(3522.27)
                 )
@@ -115,9 +116,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(100_000.00),
                 createSalarySlipFrom(
-                    employeeWith(100_000.00),
+                    employeeWithAnnualSalaryOf(100_000.00),
                     grossSalaryOf(8333.33),
-                    taxDetailsWith(taxFreeAllowance(916.67), taxableIncome(7416.67), taxPayable(2433.33)),
+                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(7416.67), taxPayableOf(2433.33)),
                     nationalInsuranceContributionsOf(444.40),
                     netPayableOf(5455.60)
                 )
@@ -125,9 +126,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(111_000.00),
                 createSalarySlipFrom(
-                    employeeWith(111_000.00),
+                    employeeWithAnnualSalaryOf(111_000.00),
                     grossSalaryOf(9250.00),
-                    taxDetailsWith(taxFreeAllowance(458.33), taxableIncome(8791.67), taxPayable(2983.33)),
+                    taxDetailsWith(taxFreeAllowanceOf(458.33), taxableIncomeOf(8791.67), taxPayableOf(2983.33)),
                     nationalInsuranceContributionsOf(462.73),
                     netPayableOf(5803.94)
                 )
@@ -135,9 +136,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(122_000.00),
                 createSalarySlipFrom(
-                    employeeWith(122_000.00),
+                    employeeWithAnnualSalaryOf(122_000.00),
                     grossSalaryOf(10166.67),
-                    taxDetailsWith(taxFreeAllowance(0.00), taxableIncome(10166.67), taxPayable(3533.33)),
+                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(10166.67), taxPayableOf(3533.33)),
                     nationalInsuranceContributionsOf(481.07),
                     netPayableOf(6152.27)
                 )
@@ -145,9 +146,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(150_000.00),
                 createSalarySlipFrom(
-                    employeeWith(150_000.00),
+                    employeeWithAnnualSalaryOf(150_000.00),
                     grossSalaryOf(12500.00),
-                    taxDetailsWith(taxFreeAllowance(0.00), taxableIncome(12500.00), taxPayable(4466.67)),
+                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(12500.00), taxPayableOf(4466.67)),
                     nationalInsuranceContributionsOf(527.73),
                     netPayableOf(7505.60)
                 )
@@ -155,9 +156,9 @@ public class SalarySlipApplicationShould {
             {
                 annualSalaryOf(160_000.00),
                 createSalarySlipFrom(
-                    employeeWith(160_000.00),
+                    employeeWithAnnualSalaryOf(160_000.00),
                     grossSalaryOf(13333.33),
-                    taxDetailsWith(taxFreeAllowance(0.00), taxableIncome(13333.33), taxPayable(4841.67)),
+                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(13333.33), taxPayableOf(4841.67)),
                     nationalInsuranceContributionsOf(544.40),
                     netPayableOf(7947.26)
                 )
@@ -177,7 +178,7 @@ public class SalarySlipApplicationShould {
     );
   }
 
-  private static Employee employeeWith(double annualSalary) {
+  private static Employee employeeWithAnnualSalaryOf(double annualSalary) {
     return new Employee(12345, "John J Doe", new Money(annualSalary));
   }
 
@@ -193,15 +194,15 @@ public class SalarySlipApplicationShould {
     return new TaxDetails(taxFreeAllowance, taxableIncome, taxPayable);
   }
 
-  private static Money taxFreeAllowance(double money) {
+  private static Money taxFreeAllowanceOf(double money) {
     return new Money(money);
   }
 
-  private static Money taxableIncome(double money) {
+  private static Money taxableIncomeOf(double money) {
     return new Money(money);
   }
 
-  private static Money taxPayable(double money) {
+  private static Money taxPayableOf(double money) {
     return new Money(money);
   }
 
@@ -211,7 +212,7 @@ public class SalarySlipApplicationShould {
 
   @Test public void
   return_generated_monthly_salary_slip_for_a_given_annual_salary() {
-    Employee employee = employeeWith(annualSalary);
+    Employee employee = employeeWithAnnualSalaryOf(annualSalary);
 
     assertThat(
         salarySlipApplication.generateFor(employee),

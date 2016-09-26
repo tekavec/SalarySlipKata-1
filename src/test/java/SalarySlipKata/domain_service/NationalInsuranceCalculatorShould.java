@@ -17,12 +17,13 @@ import SalarySlipKata.domain.Money;
 public class NationalInsuranceCalculatorShould {
 
   private static final int TWELVE_MONTHS = 12;
+
   private final Money annualSalary;
   private final Money expectedMonthlyContributions;
 
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, the monthly contribution is {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, the monthly national insurance contribution is {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
@@ -48,7 +49,7 @@ public class NationalInsuranceCalculatorShould {
   }
 
   @Test public void
-  return_a_monthly_contribution_for_a_given_annual_salary() {
+  return_the_monthly_contribution_for_a_given_annual_salary() {
     final Money actualAnnualContributions = nationalInsuranceCalculator.calculateContributionsFor(annualSalary);
     final Money actualMonthlyContributions = actualAnnualContributions.divideBy(TWELVE_MONTHS);
     assertThat(actualMonthlyContributions, is(expectedMonthlyContributions)
