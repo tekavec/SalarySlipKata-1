@@ -15,8 +15,16 @@ public class TaxDetails {
     this.taxPayable = taxPayable;
   }
 
+  public Money taxFreeAllowance() {
+    return new Money(taxFreeAllowance);
+  }
+
   public Money taxPayable() {
-    return taxPayable;
+    return new Money(taxPayable);
+  }
+
+  public Money taxableIncome() {
+    return new Money(taxableIncome);
   }
 
   @Override

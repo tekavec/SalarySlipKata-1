@@ -17,8 +17,10 @@ import SalarySlipKata.domain.TaxDetails;
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {
 
+  private static final int TWELVE_MONTHS = 12;
+
   private final Money annualSalary;
-  private final TaxDetails monthlyTaxDetails;
+  private final TaxDetails expectedMonthlyTaxDetails;
 
   private TaxCalculator taxCalculator;
 
@@ -65,15 +67,26 @@ public class TaxCalculatorShould {
     return new TaxDetails(freeTaxAllowance, taxableIncome, taxPayable);
   }
 
-  public TaxCalculatorShould(Money annualSalary, TaxDetails monthlyTaxDetails) {
+  public TaxCalculatorShould(Money annualSalary, TaxDetails expectedMonthlyTaxDetails) {
     this.annualSalary = annualSalary;
-    this.monthlyTaxDetails = monthlyTaxDetails;
+    this.expectedMonthlyTaxDetails = expectedMonthlyTaxDetails;
   }
   
   @Test public void
   return_a_monthly_payable_tax_for_a_given_annual_salary() {
-      assertThat(taxCalculator.calculateMonthlyTaxDetailsFor(annualSalary),
-          is(monthlyTaxDetails)
-      );
-  }  
+    final TaxDetails actualTaxDetails = taxCalculator.calculateTaxDetailsFor(annualSalary);
+    assertThat(monthly(actualTaxDetails), is(expectedMonthlyTaxDetails));
+  }
+
+  private TaxDetails monthly(TaxDetails actualTaxDetails) {
+    return new TaxDetails(
+        monthly(actualTaxDetails.taxFreeAllowance()),
+        monthly(actualTaxDetails.taxableIncome()),
+        monthly(actualTaxDetails.taxPayable())
+    );
+  }
+
+  private Money monthly(Money amount) {
+    return amount.divideBy(TWELVE_MONTHS);
+  }
 }

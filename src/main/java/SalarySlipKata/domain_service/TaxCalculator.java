@@ -27,56 +27,42 @@ public class TaxCalculator {
   private static final Money
       THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
-  private static final int TWELVE_MONTHS = 12;
-
-  public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
+  public TaxDetails calculateTaxDetailsFor(Money annualSalary) {
     return new TaxDetails(
-        calculateMonthlyTaxFreeAllowanceFor(annualSalary),
-        calculateMonthlyTaxableIncomeFor(annualSalary),
-        calculateMonthlyTaxPayableFor(annualSalary)
+        calculateTaxFreeAllowanceFor(annualSalary),
+        calculateTaxableIncomeFor(annualSalary),
+        calculateTaxPayableFor(annualSalary)
     );
-  }
-
-  private Money calculateMonthlyTaxFreeAllowanceFor(Money annualSalary) {
-    return calculateTaxFreeAllowanceFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
   private Money calculateTaxFreeAllowanceFor(Money annualSalary) {
     final Money differenceAbove100k = calculateDifferenceAbove100kOf(annualSalary);
 
-    return differenceAbove100k.isGreaterThanZero()
-                ? reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k)
-                : PERSONAL_ALLOWANCE;
-  }
-
-  private Money calculateMonthlyTaxableIncomeFor(Money annualSalary) {
-    return calculateTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
+    return (differenceAbove100k.isGreaterThanZero()
+        ? reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k)
+        : PERSONAL_ALLOWANCE);
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
     return annualSalary.minus(calculateTaxFreeAllowanceFor(annualSalary));
   }
 
-  private Money calculateMonthlyTaxPayableFor(Money annualSalary) {
-    return calculateTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
-  }
-
   private Money calculateTaxPayableFor(Money originalAnnualSalary) {
-    Money annualSalary = new Money(originalAnnualSalary);
+    Money remainingSalary = new Money(originalAnnualSalary);
 
     Money adjustmentDueToPersonalAllowanceReductionRule = zero();
     Money contributions = zero();
 
     for (TaxBands taxBand: TaxBands.values()) {
       Money excessIncome = calculateExcessForBandIncomeWith(
-          annualSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.threshold);
+          remainingSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.threshold);
       contributions = contributions.plus(
           calculateContribution(excessIncome, taxBand.rate)
       );
       adjustmentDueToPersonalAllowanceReductionRule =
-          calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(annualSalary);
+          calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(remainingSalary);
 
-      annualSalary = annualSalary.minus(excessIncome);
+      remainingSalary = remainingSalary.minus(excessIncome);
     }
 
     return contributions;
