@@ -54,16 +54,15 @@ public class TaxCalculatorShould {
     );
   }
 
-  private static double taxPayable(double amount) {return amount;}
+  private static Money taxPayable(double amount) {return new Money(amount);}
 
-  private static double taxableIncome(double amount) {return amount;}
+  private static Money taxableIncome(double amount) {return new Money(amount);}
 
-  private static double freeTaxAllowance(double amount) {return amount;}
+  private static Money freeTaxAllowance(double amount) {return new Money(amount);}
 
   private static TaxDetails taxDetailsWith(
-      double freeTaxAllowance, double taxableIncome, double taxPayable) {
-    return new TaxDetails(
-        new Money(freeTaxAllowance), new Money(taxableIncome), new Money(taxPayable));
+      Money freeTaxAllowance, Money taxableIncome, Money taxPayable) {
+    return new TaxDetails(freeTaxAllowance, taxableIncome, taxPayable);
   }
 
   public TaxCalculatorShould(Money annualSalary, TaxDetails monthlyTaxDetails) {
