@@ -20,24 +20,18 @@ public class NationalInsuranceCalculator {
     }
   }
 
-  private static final int TWELVE_MONTHS = 12;
-
-  public Money calculateMonthlyContributionsFor(Money annualSalary) {
-    return calculateContributionsFor(annualSalary).divideBy(TWELVE_MONTHS);
-  }
-
-  private Money calculateContributionsFor(Money originalAnnualSalary) {
-    Money annualSalary = new Money(originalAnnualSalary);
+  public Money calculateContributionsFor(Money originalSalary) {
+    Money remainingSalary = new Money(originalSalary);
     Money contributions = zero();
 
     for(ContributionBands contribution: ContributionBands.values()) {
-      Money excessIncomeForBand = calculateExcessIncomeForBandWith(annualSalary, contribution.threshold);
+      Money excessIncomeForBand = calculateExcessIncomeForBandWith(remainingSalary, contribution.threshold);
 
       contributions = contributions.plus(
           calculateContribution(contribution.rate, excessIncomeForBand)
       );
 
-      annualSalary = annualSalary.minus(excessIncomeForBand);
+      remainingSalary = remainingSalary.minus(excessIncomeForBand);
     }
 
     return contributions;

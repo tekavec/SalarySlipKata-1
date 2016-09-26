@@ -170,8 +170,8 @@ public class SalarySlipApplicationShould {
     return money;
   }
 
-  private static SalarySlip createSalarySlipFrom(Employee employee, Money grossSalary, TaxDetails taxDetails,
-      Money niContributions, Money netPayable) {
+  private static SalarySlip createSalarySlipFrom(Employee employee, Money grossSalary,
+      TaxDetails taxDetails, Money niContributions, Money netPayable) {
     return new SalarySlip(
         employee, grossSalary, taxDetails, niContributions, netPayable
     );

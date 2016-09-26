@@ -2,7 +2,6 @@ package SalarySlipKata.domain_service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -17,8 +16,9 @@ import SalarySlipKata.domain.Money;
 @RunWith(Parameterized.class)
 public class NationalInsuranceCalculatorShould {
 
+  private static final int TWELVE_MONTHS = 12;
   private final Money annualSalary;
-  private final Money monthlyContributions;
+  private final Money expectedMonthlyContributions;
 
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
@@ -37,9 +37,9 @@ public class NationalInsuranceCalculatorShould {
     );
   }
 
-  public NationalInsuranceCalculatorShould(Money annualSalary, Money monthlyContributions) {
+  public NationalInsuranceCalculatorShould(Money annualSalary, Money expectedMonthlyContributions) {
     this.annualSalary = annualSalary;
-    this.monthlyContributions = monthlyContributions;
+    this.expectedMonthlyContributions = expectedMonthlyContributions;
   }
 
   @Before
@@ -49,6 +49,9 @@ public class NationalInsuranceCalculatorShould {
 
   @Test public void
   return_a_monthly_contribution_for_a_given_annual_salary() {
-    assertThat(nationalInsuranceCalculator.calculateMonthlyContributionsFor(annualSalary), is(monthlyContributions));
+    final Money actualAnnualContributions = nationalInsuranceCalculator.calculateContributionsFor(annualSalary);
+    final Money actualMonthlyContributions = actualAnnualContributions.divideBy(TWELVE_MONTHS);
+    assertThat(actualMonthlyContributions, is(expectedMonthlyContributions)
+    );
   } 
 }

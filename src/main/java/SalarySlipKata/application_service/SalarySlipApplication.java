@@ -26,7 +26,7 @@ public class SalarySlipApplication {
     final TaxDetails monthlyTaxDetails =
         taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
     final Money monthlyNIContributions =
-        nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
+        monthly(nationalInsuranceCalculator.calculateContributionsFor(employee.annualSalary()));
 
     final Money monthlyNetPayable =
         calculateMonthlyNetPayableWith(monthlySalary, monthlyTaxDetails.taxPayable(), monthlyNIContributions);
@@ -49,5 +49,9 @@ public class SalarySlipApplication {
     return monthlySalary
               .minus(monthlyTaxPayable)
               .minus(monthlyNIContributions);
+  }
+
+  private Money monthly(Money amount) {
+    return amount.divideBy(TWELVE_MONTHS);
   }
 }
