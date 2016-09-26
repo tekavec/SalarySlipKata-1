@@ -49,8 +49,8 @@ public class Money {
 
   public Money divideBy(int divisor) {
     BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
-    final BigDecimal quotient = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
-    return new Money(quotient);
+    final BigDecimal result = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    return new Money(result);
   }
 
   @Override
