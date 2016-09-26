@@ -47,120 +47,120 @@ public class SalarySlipApplicationShould {
                 annualSalaryOf(24_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(24_000.00),
-                    grossSalaryOf(2000.00),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(1083.33), taxPayableOf(216.67)),
-                    nationalInsuranceContributionsOf(159.40),
-                    netPayableOf(1623.93)
+                    monthlyGrossSalaryOf(2000.00),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(1083.33), monthlyTaxPayableOf(216.67)),
+                    monthlyNationalInsuranceContributionsOf(159.40),
+                    monthlyNetPayableOf(1623.93)
                 )
             },
             {
                 annualSalaryOf(5_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(5_000.00),
-                    grossSalaryOf(416.67),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(0.00), taxPayableOf(0.00)),
-                    nationalInsuranceContributionsOf(0.00),
-                    netPayableOf(416.67)
+                    monthlyGrossSalaryOf(416.67),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(0.00), monthlyTaxPayableOf(0.00)),
+                    monthlyNationalInsuranceContributionsOf(0.00),
+                    monthlyNetPayableOf(416.67)
                 )
             },
             {
                 annualSalaryOf(8_060.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(8_060.00),
-                    grossSalaryOf(671.67),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(0.00), taxPayableOf(0.00)),
-                    nationalInsuranceContributionsOf(0.00),
-                    netPayableOf(671.67)
+                    monthlyGrossSalaryOf(671.67),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(0.00), monthlyTaxPayableOf(0.00)),
+                    monthlyNationalInsuranceContributionsOf(0.00),
+                    monthlyNetPayableOf(671.67)
                 )
             },
             {
                 annualSalaryOf(12_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(12_000.00),
-                    grossSalaryOf(1000.00),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(83.33), taxPayableOf(16.67)),
-                    nationalInsuranceContributionsOf(39.40),
-                    netPayableOf(943.93)
+                    monthlyGrossSalaryOf(1000.00),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(83.33), monthlyTaxPayableOf(16.67)),
+                    monthlyNationalInsuranceContributionsOf(39.40),
+                    monthlyNetPayableOf(943.93)
                 )
             },
             {
                 annualSalaryOf(40_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(40_000.00),
-                    grossSalaryOf(3333.33),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(2416.67), taxPayableOf(483.33)),
-                    nationalInsuranceContributionsOf(319.40),
-                    netPayableOf(2530.60)
+                    monthlyGrossSalaryOf(3333.33),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(2416.67), monthlyTaxPayableOf(483.33)),
+                    monthlyNationalInsuranceContributionsOf(319.40),
+                    monthlyNetPayableOf(2530.60)
                 )
             },
             {
                 annualSalaryOf(43_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(43_000.00),
-                    grossSalaryOf(3583.33),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(2666.67), taxPayableOf(533.33)),
-                    nationalInsuranceContributionsOf(349.40),
-                    netPayableOf(2700.60)
+                    monthlyGrossSalaryOf(3583.33),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(2666.67), monthlyTaxPayableOf(533.33)),
+                    monthlyNationalInsuranceContributionsOf(349.40),
+                    monthlyNetPayableOf(2700.60)
                 )
             },
             {
                 annualSalaryOf(60_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(60_000.00),
-                    grossSalaryOf(5000.00),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(4083.33), taxPayableOf(1100.00)),
-                    nationalInsuranceContributionsOf(377.73),
-                    netPayableOf(3522.27)
+                    monthlyGrossSalaryOf(5000.00),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(4083.33), monthlyTaxPayableOf(1100.00)),
+                    monthlyNationalInsuranceContributionsOf(377.73),
+                    monthlyNetPayableOf(3522.27)
                 )
             },
             {
                 annualSalaryOf(100_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(100_000.00),
-                    grossSalaryOf(8333.33),
-                    taxDetailsWith(taxFreeAllowanceOf(916.67), taxableIncomeOf(7416.67), taxPayableOf(2433.33)),
-                    nationalInsuranceContributionsOf(444.40),
-                    netPayableOf(5455.60)
+                    monthlyGrossSalaryOf(8333.33),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(916.67), monthlyTaxableIncomeOf(7416.67), monthlyTaxPayableOf(2433.33)),
+                    monthlyNationalInsuranceContributionsOf(444.40),
+                    monthlyNetPayableOf(5455.60)
                 )
             },
             {
                 annualSalaryOf(111_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(111_000.00),
-                    grossSalaryOf(9250.00),
-                    taxDetailsWith(taxFreeAllowanceOf(458.33), taxableIncomeOf(8791.67), taxPayableOf(2983.33)),
-                    nationalInsuranceContributionsOf(462.73),
-                    netPayableOf(5803.94)
+                    monthlyGrossSalaryOf(9250.00),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(458.33), monthlyTaxableIncomeOf(8791.67), monthlyTaxPayableOf(2983.33)),
+                    monthlyNationalInsuranceContributionsOf(462.73),
+                    monthlyNetPayableOf(5803.94)
                 )
             },
             {
                 annualSalaryOf(122_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(122_000.00),
-                    grossSalaryOf(10166.67),
-                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(10166.67), taxPayableOf(3533.33)),
-                    nationalInsuranceContributionsOf(481.07),
-                    netPayableOf(6152.27)
+                    monthlyGrossSalaryOf(10166.67),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(0.00), monthlyTaxableIncomeOf(10166.67), monthlyTaxPayableOf(3533.33)),
+                    monthlyNationalInsuranceContributionsOf(481.07),
+                    monthlyNetPayableOf(6152.27)
                 )
             },
             {
                 annualSalaryOf(150_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(150_000.00),
-                    grossSalaryOf(12500.00),
-                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(12500.00), taxPayableOf(4466.67)),
-                    nationalInsuranceContributionsOf(527.73),
-                    netPayableOf(7505.60)
+                    monthlyGrossSalaryOf(12500.00),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(0.00), monthlyTaxableIncomeOf(12500.00), monthlyTaxPayableOf(4466.67)),
+                    monthlyNationalInsuranceContributionsOf(527.73),
+                    monthlyNetPayableOf(7505.60)
                 )
             },
             {
                 annualSalaryOf(160_000.00),
                 createSalarySlipFrom(
                     employeeWithAnnualSalaryOf(160_000.00),
-                    grossSalaryOf(13333.33),
-                    taxDetailsWith(taxFreeAllowanceOf(0.00), taxableIncomeOf(13333.33), taxPayableOf(4841.67)),
-                    nationalInsuranceContributionsOf(544.40),
-                    netPayableOf(7947.26)
+                    monthlyGrossSalaryOf(13333.33),
+                    monthlyTaxDetailsWith(monthlyTaxFreeAllowanceOf(0.00), monthlyTaxableIncomeOf(13333.33), monthlyTaxPayableOf(4841.67)),
+                    monthlyNationalInsuranceContributionsOf(544.40),
+                    monthlyNetPayableOf(7947.26)
                 )
             }
         }
@@ -182,31 +182,31 @@ public class SalarySlipApplicationShould {
     return new Employee(12345, "John J Doe", new Money(annualSalary));
   }
 
-  private static Money grossSalaryOf(double money) {
+  private static Money monthlyGrossSalaryOf(double money) {
     return new Money(money);
   }
 
-  private static Money nationalInsuranceContributionsOf(double money) {
+  private static Money monthlyNationalInsuranceContributionsOf(double money) {
     return new Money(money);
   }
 
-  private static TaxDetails taxDetailsWith(Money taxFreeAllowance, Money taxableIncome, Money taxPayable) {
+  private static TaxDetails monthlyTaxDetailsWith(Money taxFreeAllowance, Money taxableIncome, Money taxPayable) {
     return new TaxDetails(taxFreeAllowance, taxableIncome, taxPayable);
   }
 
-  private static Money taxFreeAllowanceOf(double money) {
+  private static Money monthlyTaxFreeAllowanceOf(double money) {
     return new Money(money);
   }
 
-  private static Money taxableIncomeOf(double money) {
+  private static Money monthlyTaxableIncomeOf(double money) {
     return new Money(money);
   }
 
-  private static Money taxPayableOf(double money) {
+  private static Money monthlyTaxPayableOf(double money) {
     return new Money(money);
   }
 
-  private static Money netPayableOf(double money) {
+  private static Money monthlyNetPayableOf(double money) {
     return new Money(money);
   }
 

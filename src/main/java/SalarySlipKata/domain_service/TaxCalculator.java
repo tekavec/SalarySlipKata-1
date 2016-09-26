@@ -38,29 +38,34 @@ public class TaxCalculator {
   private Money calculateTaxFreeAllowanceFor(Money annualSalary) {
     final Money differenceAbove100k = calculateDifferenceAbove100kOf(annualSalary);
 
-    return (differenceAbove100k.isGreaterThanZero()
-        ? reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k)
-        : PERSONAL_ALLOWANCE);
+    return differenceAbove100k.isGreaterThanZero()
+              ? reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k)
+              : PERSONAL_ALLOWANCE;
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
     return annualSalary.minus(calculateTaxFreeAllowanceFor(annualSalary));
   }
 
-  private Money calculateTaxPayableFor(Money originalAnnualSalary) {
-    Money remainingSalary = new Money(originalAnnualSalary);
+  private Money calculateTaxPayableFor(Money annualSalary) {
+    Money remainingSalary = new Money(annualSalary);
 
-    Money adjustmentDueToPersonalAllowanceReductionRule = zero();
+    Money adjustmentForEarningsOver100K = zero();
     Money contributions = zero();
 
     for (TaxBands taxBand: TaxBands.values()) {
-      Money excessIncome = calculateExcessForBandIncomeWith(
-          remainingSalary, adjustmentDueToPersonalAllowanceReductionRule, taxBand.threshold);
+      Money excessIncome = calculateExcessForBandIncomeFrom(remainingSalary, taxBand.threshold);
+
+      excessIncome = applyPersonalAllowanceReductionRuleForEarningsOver100K(
+          excessIncome, adjustmentForEarningsOver100K
+      );
+
+      adjustmentForEarningsOver100K =
+          calculateAdjustmentForExcessOver100KDueToPersonalAllowanceReductionRuleWith(remainingSalary);
+
       contributions = contributions.plus(
           calculateContribution(excessIncome, taxBand.rate)
       );
-      adjustmentDueToPersonalAllowanceReductionRule =
-          calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(remainingSalary);
 
       remainingSalary = remainingSalary.minus(excessIncome);
     }
@@ -68,22 +73,27 @@ public class TaxCalculator {
     return contributions;
   }
 
-  private Money calculateExcessForBandIncomeWith(Money annualSalary, Money adjustmentDueToPersonalAllowanceReductionRule, Money threshold) {
-    return annualSalary
-              .minus(threshold)
-              .plus(adjustmentDueToPersonalAllowanceReductionRule);
+  private Money applyPersonalAllowanceReductionRuleForEarningsOver100K(
+      Money excessIncome, Money adjustmentForEarningsOver100K) {
+    return excessIncome.plus(adjustmentForEarningsOver100K);
   }
 
-  private Money calculateContribution(Money amount, double taxRate) {return amount.multiplyBy(taxRate);}
+  private Money calculateExcessForBandIncomeFrom(Money remainingSalary, Money threshold) {
+    return remainingSalary.minus(threshold);
+  }
 
-  private Money calculateAdjustmentDueTo100KPersonalAllowanceReductionRuleWith(Money annualSalary) {
+  private Money calculateContribution(Money excessAmount, double taxRate) {
+    return excessAmount.multiplyBy(taxRate);
+  }
+
+  private Money calculateAdjustmentForExcessOver100KDueToPersonalAllowanceReductionRuleWith(Money annualSalary) {
     final Money differenceAbove100K = calculateDifferenceAbove100kOf(annualSalary);
 
     if (differenceAbove100K.isGreaterThanZero()) {
-      final Money actualPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100K);
-      return actualPersonalAllowance.isGreaterThanZero()
-          ? actualPersonalAllowance
-          : PERSONAL_ALLOWANCE;
+      final Money adjustedPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100K);
+      return adjustedPersonalAllowance.isGreaterThanZero()
+                ? adjustedPersonalAllowance
+                : PERSONAL_ALLOWANCE;
     }
 
     return zero();
@@ -94,7 +104,7 @@ public class TaxCalculator {
   }
 
   private Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
-    Money halfOfTheDifference = differenceAbove100k.divideBy(2);
-    return PERSONAL_ALLOWANCE.minus(halfOfTheDifference);
+    final Money reduced1PoundForEvery2PoundsEarned = differenceAbove100k.divideBy(2);
+    return PERSONAL_ALLOWANCE.minus(reduced1PoundForEvery2PoundsEarned);
   }
 }

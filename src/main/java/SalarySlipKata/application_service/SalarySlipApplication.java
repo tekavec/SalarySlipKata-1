@@ -28,8 +28,8 @@ public class SalarySlipApplication {
     final Money monthlyNIContributions =
         monthly(nationalInsuranceCalculator.calculateContributionsFor(employee.annualSalary()));
 
-    final Money monthlyNetPayable =
-        calculateMonthlyNetPayableWith(monthlySalary, monthlyTaxDetails.taxPayable(), monthlyNIContributions);
+    final Money monthlyNetPayable = calculateMonthlyNetPayableWith(
+        monthlySalary, monthlyTaxDetails.taxPayable(), monthlyNIContributions);
 
     return new SalarySlip(
                   employee,

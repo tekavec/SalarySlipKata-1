@@ -50,9 +50,9 @@ public class NationalInsuranceCalculatorShould {
 
   @Test public void
   return_the_monthly_contribution_for_a_given_annual_salary() {
-    final Money actualAnnualContributions = nationalInsuranceCalculator.calculateContributionsFor(annualSalary);
+    final Money actualAnnualContributions =
+        nationalInsuranceCalculator.calculateContributionsFor(annualSalary);
     final Money actualMonthlyContributions = actualAnnualContributions.divideBy(TWELVE_MONTHS);
-    assertThat(actualMonthlyContributions, is(expectedMonthlyContributions)
-    );
+    assertThat(actualMonthlyContributions, is(expectedMonthlyContributions));
   } 
 }

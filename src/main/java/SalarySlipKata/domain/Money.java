@@ -19,8 +19,8 @@ public class Money {
     this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
   }
 
-  public Money(Money money) {
-    this.denomination = money.denomination;
+  public Money(Money amount) {
+    this.denomination = amount.denomination;
   }
 
   private Money(BigDecimal denomination) {
@@ -31,26 +31,27 @@ public class Money {
     return denomination.compareTo(ZERO) > 0;
   }
 
-  public Money plus(Money money) {
-    return new Money(denomination.add(money.denomination));
+  public Money plus(Money amount) {
+    return new Money(denomination.add(amount.denomination));
   }
 
-  public Money minus(Money money) {
-    if (denomination.compareTo(money.denomination) > 0) {
-      return new Money(this.denomination.subtract(money.denomination));
+  public Money minus(Money amount) {
+    if (denomination.compareTo(amount.denomination) > 0) {
+      final BigDecimal differenceBetweenTheTwoAmounts = denomination.subtract(amount.denomination);
+      return new Money(differenceBetweenTheTwoAmounts);
     }
 
     return zero();
   }
 
   public Money multiplyBy(double anotherDenomination) {
-    return new Money(denomination.multiply(valueOf(anotherDenomination)));
+    final BigDecimal anotherDenominationAsBigDecimal = valueOf(anotherDenomination);
+    return new Money(denomination.multiply(anotherDenominationAsBigDecimal));
   }
 
   public Money divideBy(int divisor) {
-    BigDecimal bdDivisor = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
-    final BigDecimal result = denomination.divide(bdDivisor, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
-    return new Money(result);
+    final BigDecimal divisorAsBigDecimal = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    return new Money(denomination.divide(divisorAsBigDecimal, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN));
   }
 
   @Override

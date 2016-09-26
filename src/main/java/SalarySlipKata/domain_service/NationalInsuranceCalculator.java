@@ -20,12 +20,13 @@ public class NationalInsuranceCalculator {
     }
   }
 
-  public Money calculateContributionsFor(Money originalSalary) {
-    Money remainingSalary = new Money(originalSalary);
+  public Money calculateContributionsFor(Money annualSalary) {
+    Money remainingSalary = new Money(annualSalary);
     Money contributions = zero();
 
     for(ContributionBands contribution: ContributionBands.values()) {
-      Money excessIncomeForBand = calculateExcessIncomeForBandWith(remainingSalary, contribution.threshold);
+      Money excessIncomeForBand =
+          calculateExcessIncomeForBandFrom(remainingSalary, contribution.threshold);
 
       contributions = contributions.plus(
           calculateContribution(contribution.rate, excessIncomeForBand)
@@ -37,11 +38,11 @@ public class NationalInsuranceCalculator {
     return contributions;
   }
 
-  private Money calculateContribution(Double contributionRate, Money difference) {
-    return difference.multiplyBy(contributionRate);
+  private Money calculateContribution(Double contributionRate, Money excessIncome) {
+    return excessIncome.multiplyBy(contributionRate);
   }
 
-  private Money calculateExcessIncomeForBandWith(Money annualSalary, Money contributionStartAmount) {
+  private Money calculateExcessIncomeForBandFrom(Money annualSalary, Money contributionStartAmount) {
     return annualSalary.minus(contributionStartAmount);
   }
 }

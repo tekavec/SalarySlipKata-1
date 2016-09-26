@@ -62,8 +62,7 @@ public class TaxCalculatorShould {
 
   private static Money taxPayable(double amount) {return new Money(amount);}
 
-  private static TaxDetails taxDetailsWith(
-      Money freeTaxAllowance, Money taxableIncome, Money taxPayable) {
+  private static TaxDetails taxDetailsWith(Money freeTaxAllowance, Money taxableIncome, Money taxPayable) {
     return new TaxDetails(freeTaxAllowance, taxableIncome, taxPayable);
   }
 
