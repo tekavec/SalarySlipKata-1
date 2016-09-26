@@ -8,13 +8,14 @@ public class NationalInsuranceCalculator {
 
   private enum ContributionBands {
     HIGHER_CONTRIBUTION(new Money(43_000.00), 0.02),
-    BASIC_CONTRIBUTION(new Money(8_060.00), 0.12);
+    BASIC_CONTRIBUTION(  new Money(8_060.00), 0.12),
+    NO_CONTRIBUTION(         new Money(0.00), 0.0);
 
-    private final Money limit;
+    private final Money threshold;
     private final double rate;
 
-    ContributionBands(Money limit, double rate) {
-      this.limit = limit;
+    ContributionBands(Money threshold, double rate) {
+      this.threshold = threshold;
       this.rate = rate;
     }
   }
@@ -30,7 +31,7 @@ public class NationalInsuranceCalculator {
     Money contributions = zero();
 
     for(ContributionBands contribution: ContributionBands.values()) {
-      Money excessIncomeForBand = calculateExcessIncomeForBandWith(annualSalary, contribution.limit);
+      Money excessIncomeForBand = calculateExcessIncomeForBandWith(annualSalary, contribution.threshold);
 
       contributions = contributions.plus(
           calculateContribution(contribution.rate, excessIncomeForBand)
