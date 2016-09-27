@@ -3,10 +3,10 @@ package SalarySlipKata.domain.bands;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain_service.PersonalAllowanceReductionOver100KRule;
 
-public class HigherTaxWithPersonalAllowanceReductionBand extends Band {
+public class HigherTaxWithPersonalAllowanceReductionRuleBand extends Band {
   private PersonalAllowanceReductionOver100KRule personalAllowanceReductionOver100KRule;
 
-  public HigherTaxWithPersonalAllowanceReductionBand(Band band, PersonalAllowanceReductionOver100KRule personalAllowanceReductionOver100KRule) {
+  public HigherTaxWithPersonalAllowanceReductionRuleBand(Band band, PersonalAllowanceReductionOver100KRule personalAllowanceReductionOver100KRule) {
     super(band.lowerLimit, band.upperLimit, band.rate);
     this.personalAllowanceReductionOver100KRule = personalAllowanceReductionOver100KRule;
   }

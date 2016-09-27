@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import SalarySlipKata.domain.bands.Band;
-import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionBand;
+import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
 
@@ -18,7 +18,7 @@ public class TaxCalculator {
   private Band higherTaxBand = new Band(new Money( 43_000.00), new Money(150_000.00), 0.40);
   private Band ADDITIONAL_TAX = new Band(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
   private Band HIGHER_TAX     =
-      new HigherTaxWithPersonalAllowanceReductionBand(higherTaxBand, personalAllowanceReductionOver100KRule);
+      new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceReductionOver100KRule);
   private Band BASIC_TAX      = new Band(new Money( 11_000.00), new Money( 43_000.00), 0.20);
   private Band ZERO_TAX       = new Band(new Money(      0.00), new Money( 11_000.00), 0.00);
 
