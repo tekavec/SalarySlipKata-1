@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import SalarySlipKata.domain.Band;
+import SalarySlipKata.domain.bands.Band;
 import SalarySlipKata.domain.Money;
 
 @RunWith(Parameterized.class)
@@ -30,28 +30,27 @@ public class BandShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { new Money(5_000.00),  new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(8_060.00),  new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(10_000.00), new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(10_000.00), new Band(new Money(   8_060.00),    new Money( 43_000.00), 0.12), new Money(19.40)  },
-            { new Money(40_000.00), new Band(new Money(   8_060.00),    new Money( 43_000.00), 0.12), new Money(319.40) },
-            { new Money(43_000.00), new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(43_000.00), new Band(new Money(   8_060.00),    new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money(45_000.00), new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(45_000.00), new Band(new Money(   8_060.00),    new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money(45_000.00), new Band(new Money(  43_000.00),    new Money( MAX_VALUE), 0.02), new Money(3.33) },
-            { new Money(50_000.00), new Band(zero(),                    new Money(  8_060.00), 0.00), zero() },
-            { new Money(50_000.00), new Band(new Money(   8_060.00),    new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money(50_000.00), new Band(new Money(  43_000.00),    new Money( MAX_VALUE), 0.02), new Money(11.67) },
+            { new Money(  5_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money(  8_060.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 10_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 10_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12),  new Money(19.40) },
+            { new Money( 40_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(319.40) },
+            { new Money( 43_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 43_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 45_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 45_000.00), new Band(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),   new Money(3.33) },
+            { new Money( 50_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 50_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 50_000.00), new Band(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),  new Money(11.67) },
 
-            { new Money(60_000.00), new Band(zero(),                   new Money( 11_000.00), 0.00), zero() },
-            { new Money(60_000.00), new Band(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
-            { new Money(60_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(566.67) },
-            { new Money(60_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40), zero() },
-            { new Money(100_000.00), new Band(zero(),                   new Money( 11_000.00), 0.00), zero() },
+            { new Money( 60_000.00), new Band(               zero(),    new Money( 11_000.00), 0.00),            zero() },
+            { new Money( 60_000.00), new Band(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
+            { new Money( 60_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(566.67) },
+            { new Money( 60_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
+            { new Money(100_000.00), new Band(              zero(),     new Money( 11_000.00), 0.00),            zero() },
             { new Money(100_000.00), new Band(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
-            { new Money(100_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(1900.00) },
-            { new Money(100_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40), zero() },
+            { new Money(100_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(1900.00)},
+            { new Money(100_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
 
         }
     );

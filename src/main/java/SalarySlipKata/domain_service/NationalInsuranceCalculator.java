@@ -6,7 +6,7 @@ import static SalarySlipKata.domain.Money.zero;
 import java.util.ArrayList;
 import java.util.List;
 
-import SalarySlipKata.domain.Band;
+import SalarySlipKata.domain.bands.Band;
 import SalarySlipKata.domain.Money;
 
 public class NationalInsuranceCalculator {
