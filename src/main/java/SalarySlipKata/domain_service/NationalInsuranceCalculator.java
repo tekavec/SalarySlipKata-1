@@ -16,11 +16,17 @@ public class NationalInsuranceCalculator {
   private Band basicContributions = new StandardBand(new Money( 8_060.00), new Money(43_000.00), 0.12);
   private Band noContributions = new StandardBand(new Money(     0.00), new Money(8_060.00 ), 0.00);
 
-  private List<Band> niContributionBands = new ArrayList<Band>() {
-    { add(higherContributions); }
-    { add(basicContributions);  }
-    { add(noContributions);     }
-  };
+  private List<Band> niContributionBands = new ArrayList<>();
+
+  public NationalInsuranceCalculator() {
+    populateNIContributionBands();
+  }
+
+  private void populateNIContributionBands() {
+    niContributionBands.add(higherContributions);
+    niContributionBands.add(basicContributions);
+    niContributionBands.add(noContributions);
+  }
 
   public Money calculateContributionsFor(Money annualSalary) {
     Money contributions = zero();

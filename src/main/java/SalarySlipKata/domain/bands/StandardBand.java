@@ -5,9 +5,9 @@ import static SalarySlipKata.domain.Money.zero;
 import SalarySlipKata.domain.Money;
 
 public class StandardBand implements Band {
-  protected final Money lowerLimit;
-  protected final Money upperLimit;
-  protected final double rate;
+  private final Money lowerLimit;
+  private final Money upperLimit;
+  private final double rate;
 
   public StandardBand(Money lowerLimit, Money upperLimit, double rate) {
     this.lowerLimit = lowerLimit;

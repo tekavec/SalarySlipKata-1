@@ -17,19 +17,19 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends StandardBan
   @Override
   public Money calculateFrom(Money annualSalary) {
     Money personalAllowanceAdjustmentForOver100K = zero();
-    if (personalAllowanceCalculator.reductionRuleAppliesBetween(lowerLimit, upperLimit)) {
+    if (personalAllowanceCalculator.reductionRuleAppliesBetween(lowerLimit(), upperLimit())) {
       personalAllowanceAdjustmentForOver100K =
-          personalAllowanceCalculator.calculateAdjustmentForExcessIn(annualSalary);
+          personalAllowanceCalculator.calculateAdjustmentForExcessOver100K(annualSalary);
     }
 
-    if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
-      final Money excessIncome = calculateExcessFrom(annualSalary, lowerLimit);
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate);
+    if (annualSalary.isBetweenAndInclusiveOf(lowerLimit(), upperLimit())) {
+      final Money excessIncome = calculateExcessFrom(annualSalary, lowerLimit());
+      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate());
     }
 
-    if (annualSalary.isGreaterThan(upperLimit)) {
-      final Money excessIncome = calculateExcessFrom(upperLimit, lowerLimit);
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate);
+    if (annualSalary.isGreaterThan(upperLimit())) {
+      final Money excessIncome = calculateExcessFrom(upperLimit(), lowerLimit());
+      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate());
     }
 
     return zero();

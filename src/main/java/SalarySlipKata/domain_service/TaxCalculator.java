@@ -26,10 +26,10 @@ public class TaxCalculator {
   public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
 
-    initialiseTaxBands();
+    populateTaxBands();
   }
 
-  private void initialiseTaxBands() {
+  private void populateTaxBands() {
     Band higherTaxWithPersonalAllowanceReductionRule =
         new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTax, personalAllowanceCalculator);
 
