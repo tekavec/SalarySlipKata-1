@@ -27,16 +27,22 @@ public class NationalInsuranceCalculatorShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            {  new Money(5_000.00),   new Money(0.00) },
-            {  new Money(8_060.00),   new Money(0.00) },
-            { new Money(10_000.00),  new Money(19.40) },
-            { new Money(40_000.00), new Money(319.40) },
-            { new Money(43_000.00), new Money(349.40) },
-            { new Money(45_000.00), new Money(352.73) },
-            { new Money(50_000.00), new Money(361.07) },
+            { annualSalaryOf( 5_000.00), contributionsOf(  0.00) },
+            { annualSalaryOf( 8_060.00), contributionsOf(  0.00) },
+            { annualSalaryOf(10_000.00), contributionsOf( 19.40) },
+            { annualSalaryOf(40_000.00), contributionsOf(319.40) },
+            { annualSalaryOf(43_000.00), contributionsOf(349.40) },
+            { annualSalaryOf(45_000.00), contributionsOf(352.73) },
+            { annualSalaryOf(50_000.00), contributionsOf(361.07) },
         }
     );
   }
+
+  private static Money contributionsOf(double amount) {
+    return new Money(amount);
+  }
+
+  private static Money annualSalaryOf(double denomination) {return new Money(denomination);}
 
   public NationalInsuranceCalculatorShould(Money annualSalary, Money expectedMonthlyContributions) {
     this.annualSalary = annualSalary;
