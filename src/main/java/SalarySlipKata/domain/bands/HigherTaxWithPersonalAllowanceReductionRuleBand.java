@@ -12,7 +12,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends Band {
   }
 
   public Money calculateFrom(Money annualSalary) {
-    if (personalAllowanceReductionOver100K.appliesToLimits(lowerLimit, upperLimit)) {
+    if (personalAllowanceReductionOver100K.appliesBetweenLimits(lowerLimit, upperLimit)) {
       Money excessOver100K = personalAllowanceReductionOver100K.calculateAdjustmentForExcessIn(annualSalary);
       lowerLimit = lowerLimit.minus(excessOver100K);
     }
