@@ -14,7 +14,6 @@ import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
-import SalarySlipKata.domain.TaxDetailsBuilder;
 
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {
@@ -37,39 +36,70 @@ public class TaxCalculatorShould {
     return asList(
         new Object[][] {
             {    new Money(5_000.00),
-                taxDetailsWith(freeTaxAllowance(916.67),      taxableIncome(0.00),     taxPayable(0.00)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(916.67))
+                    .withTaxableIncome(new Money(0.00))
+                    .withTaxPayable(new Money(0.00))
+                    .build()
+            },
             {   new Money(11_000.00),
-                taxDetailsWith(freeTaxAllowance(916.67),      taxableIncome(0.00),     taxPayable(0.00)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(916.67))
+                    .withTaxableIncome(new Money(0.00))
+                    .withTaxPayable(new Money(0.00))
+                    .build()
+            },
             {   new Money(12_000.00),
-                taxDetailsWith(freeTaxAllowance(916.67),     taxableIncome(83.33),    taxPayable(16.67)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(916.67))
+                    .withTaxableIncome(new Money(83.33))
+                    .withTaxPayable(new Money(16.67))
+                    .build()
+            },
             {   new Money(43_000.00),
-                taxDetailsWith(freeTaxAllowance(916.67),  taxableIncome(2_666.67),   taxPayable(533.33)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(916.67))
+                    .withTaxableIncome(new Money(2_666.67))
+                    .withTaxPayable(new Money(533.33))
+                    .build()
+            },
             {  new Money(100_000.00),
-                taxDetailsWith(freeTaxAllowance(916.67),  taxableIncome(7_416.67), taxPayable(2_433.33)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(916.67))
+                    .withTaxableIncome(new Money(7_416.67))
+                    .withTaxPayable(new Money(2_433.33))
+                    .build()
+            },
             {  new Money(111_000.00),
-                taxDetailsWith(freeTaxAllowance(458.33),  taxableIncome(8_791.67), taxPayable(2_983.33)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(458.33))
+                    .withTaxableIncome(new Money(8_791.67))
+                    .withTaxPayable(new Money(2_983.33))
+                    .build()
+            },
             {  new Money(122_000.00),
-                taxDetailsWith(freeTaxAllowance(  0.00), taxableIncome(10_166.67), taxPayable(3_533.33)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(0.00))
+                    .withTaxableIncome(new Money(10_166.67))
+                    .withTaxPayable(new Money(3_533.33))
+                    .build()
+            },
             {  new Money(150_000.00),
-                taxDetailsWith(freeTaxAllowance(  0.00), taxableIncome(12_500.00), taxPayable(4_466.67)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(0.00))
+                    .withTaxableIncome(new Money(12_500.00))
+                    .withTaxPayable(new Money(4_466.67))
+                    .build()
+            },
             {  new Money(160_000.00),
-                taxDetailsWith(freeTaxAllowance(  0.00), taxableIncome(13_333.33), taxPayable(4_841.67)) },
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(0.00))
+                    .withTaxableIncome(new Money(13_333.33))
+                    .withTaxPayable(new Money(4_841.67))
+                    .build()
+            },
         }
     );
-  }
-
-  private static Money freeTaxAllowance(double amount) {return new Money(amount);}
-
-  private static Money taxableIncome(double amount) {return new Money(amount);}
-
-  private static Money taxPayable(double amount) {return new Money(amount);}
-
-  private static TaxDetails taxDetailsWith(Money freeTaxAllowance, Money taxableIncome, Money taxPayable) {
-    return aTaxDetails()
-              .withTaxFreeAllowance(freeTaxAllowance)
-              .withTaxableIncome(taxableIncome)
-              .withTaxPayable(taxPayable)
-              .build();
   }
 
   public TaxCalculatorShould(Money annualSalary, TaxDetails expectedMonthlyTaxDetails) {
@@ -84,11 +114,11 @@ public class TaxCalculatorShould {
   }
 
   private TaxDetails monthly(TaxDetails actualTaxDetails) {
-    return TaxDetailsBuilder.aTaxDetails()
-        .withTaxFreeAllowance(monthly(actualTaxDetails.taxFreeAllowance()))
-        .withTaxableIncome(monthly(actualTaxDetails.taxableIncome()))
-        .withTaxPayable(monthly(actualTaxDetails.taxPayable()))
-        .build();
+    return aTaxDetails()
+              .withTaxFreeAllowance(monthly(actualTaxDetails.taxFreeAllowance()))
+              .withTaxableIncome(monthly(actualTaxDetails.taxableIncome()))
+              .withTaxPayable(monthly(actualTaxDetails.taxPayable()))
+              .build();
   }
 
   private Money monthly(Money amount) {
