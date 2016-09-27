@@ -5,7 +5,7 @@ import static SalarySlipKata.domain.Money.zero;
 import SalarySlipKata.domain.Money;
 
 public class Band {
-  protected Money lowerLimit;
+  protected final Money lowerLimit;
   protected final Money upperLimit;
   protected final double rate;
 
@@ -31,5 +31,5 @@ public class Band {
     return upperLimit.minus(lowerLimit);
   }
 
-  private Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
+  protected Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
 }
