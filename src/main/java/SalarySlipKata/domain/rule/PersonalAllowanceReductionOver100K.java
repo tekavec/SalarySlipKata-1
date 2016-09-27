@@ -1,10 +1,10 @@
-package SalarySlipKata.domain_service;
+package SalarySlipKata.domain.rule;
 
 import static SalarySlipKata.domain.Money.zero;
 
 import SalarySlipKata.domain.Money;
 
-public class PersonalAllowanceReductionOver100KRule {
+public class PersonalAllowanceReductionOver100K {
   private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
   private static final Money THRESHOLD_REDUCTION_RULE = new Money(100_000.00);
 

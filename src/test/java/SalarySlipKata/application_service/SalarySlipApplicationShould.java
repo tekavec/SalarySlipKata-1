@@ -16,6 +16,7 @@ import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.SalarySlip;
 import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain_service.NationalInsuranceCalculator;
+import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
 import SalarySlipKata.domain_service.TaxCalculator;
 
 @RunWith(Parameterized.class)
@@ -34,7 +35,9 @@ public class SalarySlipApplicationShould {
   @Before
   public void setUp() throws Exception {
     NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();
-    TaxCalculator taxCalculator = new TaxCalculator();
+    PersonalAllowanceReductionOver100K
+        personalAllowanceReductionOver100K = new PersonalAllowanceReductionOver100K();
+    TaxCalculator taxCalculator = new TaxCalculator(personalAllowanceReductionOver100K);
 
     salarySlipApplication = new SalarySlipApplication(nationalInsuranceCalculator, taxCalculator);
   }

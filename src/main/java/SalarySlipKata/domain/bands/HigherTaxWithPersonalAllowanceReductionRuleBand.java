@@ -1,20 +1,20 @@
 package SalarySlipKata.domain.bands;
 
 import SalarySlipKata.domain.Money;
-import SalarySlipKata.domain_service.PersonalAllowanceReductionOver100KRule;
+import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
 
 public class HigherTaxWithPersonalAllowanceReductionRuleBand extends Band {
-  private PersonalAllowanceReductionOver100KRule personalAllowanceReductionOver100KRule;
+  private PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K;
 
-  public HigherTaxWithPersonalAllowanceReductionRuleBand(Band band, PersonalAllowanceReductionOver100KRule personalAllowanceReductionOver100KRule) {
+  public HigherTaxWithPersonalAllowanceReductionRuleBand(Band band, PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
     super(band.lowerLimit, band.upperLimit, band.rate);
-    this.personalAllowanceReductionOver100KRule = personalAllowanceReductionOver100KRule;
+    this.personalAllowanceReductionOver100K = personalAllowanceReductionOver100K;
   }
 
   public Money calculateFrom(Money annualSalary) {
-    if (personalAllowanceReductionOver100KRule.appliesToLimits(lowerLimit, upperLimit)) {
-      Money excessOver100K = personalAllowanceReductionOver100KRule.calculateAdjustmentForExcessIn(annualSalary);
-       lowerLimit = lowerLimit.minus(excessOver100K);
+    if (personalAllowanceReductionOver100K.appliesToLimits(lowerLimit, upperLimit)) {
+      Money excessOver100K = personalAllowanceReductionOver100K.calculateAdjustmentForExcessIn(annualSalary);
+      lowerLimit = lowerLimit.minus(excessOver100K);
     }
 
     return super.calculateFrom(annualSalary);

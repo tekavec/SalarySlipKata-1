@@ -15,7 +15,7 @@ public class Band {
     this.rate = rate;
   }
 
-  protected Money differenceBetweenLimits() {
+  private Money differenceBetweenLimits() {
     return upperLimit.minus(lowerLimit);
   }
 
@@ -33,5 +33,5 @@ public class Band {
     return zero();
   }
 
-  protected Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
+  private Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
 }
