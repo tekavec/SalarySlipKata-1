@@ -18,11 +18,11 @@ public class StandardBand implements Band {
   @Override
   public Money calculateFrom(Money annualSalary) {
     if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
-      return bandValueFor(calculateExcessFrom(annualSalary, lowerLimit));
+      return calculateExcessFrom(annualSalary, lowerLimit).multiplyBy(rate);
     }
 
     if (annualSalary.isGreaterThan(upperLimit)) {
-      return bandValueFor(calculateExcessFrom(upperLimit, lowerLimit));
+      return calculateExcessFrom(upperLimit, lowerLimit).multiplyBy(rate);
     }
 
     return zero();
@@ -46,6 +46,4 @@ public class StandardBand implements Band {
   protected Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
     return upperLimit.minus(lowerLimit);
   }
-
-  protected Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
 }

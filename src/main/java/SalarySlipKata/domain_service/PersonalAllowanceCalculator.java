@@ -6,10 +6,10 @@ import SalarySlipKata.domain.Money;
 
 public class PersonalAllowanceCalculator {
   private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
-  private static final Money SALARY_THRESHOLD_FOR_RULE = new Money(100_000.00);
+  private static final Money SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
   public Money calculateDifferenceAbove100kOf(Money annualSalary) {
-    return annualSalary.minus(SALARY_THRESHOLD_FOR_RULE);
+    return annualSalary.minus(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 
   public Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
@@ -30,8 +30,8 @@ public class PersonalAllowanceCalculator {
     return zero();
   }
 
-  public boolean appliesBetweenLimits(Money lowerLimit, Money upperLimit) {
-    return SALARY_THRESHOLD_FOR_RULE.isBetweenAndInclusiveOf(lowerLimit, upperLimit);
+  public boolean reductionRuleAppliesBetween(Money lowerLimit, Money upperLimit) {
+    return SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE.isBetweenAndInclusiveOf(lowerLimit, upperLimit);
   }
 
   public Money calculateTaxFreeAllowance(Money annualSalary) {
