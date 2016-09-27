@@ -6,32 +6,33 @@ import static SalarySlipKata.domain.Money.zero;
 import java.util.ArrayList;
 import java.util.List;
 
-import SalarySlipKata.domain.bands.StandardBand;
-import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
-import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
+import SalarySlipKata.domain.bands.Band;
+import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
+import SalarySlipKata.domain.bands.StandardBand;
+import SalarySlipKata.domain.rule.PersonalAllowanceReduction;
 
 public class TaxCalculator {
 
-  private PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K;
+  private PersonalAllowanceReduction personalAllowanceReduction;
 
-  private StandardBand higherTaxBand = new StandardBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
-  private StandardBand additionalTax = new StandardBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private StandardBand basicTax      = new StandardBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
-  private StandardBand zeroTax       = new StandardBand(new Money(      0.00), new Money( 11_000.00), 0.00);
+  private Band higherTaxBand = new StandardBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
+  private Band additionalTax = new StandardBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
+  private Band basicTax      = new StandardBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
+  private Band zeroTax       = new StandardBand(new Money(      0.00), new Money( 11_000.00), 0.00);
 
-  private List<StandardBand> taxBands = new ArrayList<StandardBand>() {
+  private List<Band> taxBands = new ArrayList<Band>() {
     { add(additionalTax); }
     { add(basicTax); }
     { add(zeroTax); }
   };
 
-  public TaxCalculator(PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
-    this.personalAllowanceReductionOver100K = personalAllowanceReductionOver100K;
+  public TaxCalculator(PersonalAllowanceReduction personalAllowanceReduction) {
+    this.personalAllowanceReduction = personalAllowanceReduction;
 
-    StandardBand higherTax =
-        new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceReductionOver100K);
+    Band higherTax =
+        new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceReduction);
     taxBands.add(higherTax);
   }
 
@@ -44,7 +45,7 @@ public class TaxCalculator {
   }
 
   private Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    return personalAllowanceReductionOver100K.calculateTaxFreeAllowance(annualSalary);
+    return personalAllowanceReduction.calculateTaxFreeAllowance(annualSalary);
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
@@ -54,8 +55,8 @@ public class TaxCalculator {
   private Money calculateTaxPayableFor(Money annualSalary) {
     Money totalTaxPayable = zero();
 
-    for (StandardBand taxStandardBand : taxBands) {
-      Money taxPayableForTheBand = taxStandardBand.calculateFrom(annualSalary);
+    for (Band taxBand : taxBands) {
+      Money taxPayableForTheBand = taxBand.calculateFrom(annualSalary);
       totalTaxPayable = totalTaxPayable.plus(taxPayableForTheBand);
     }
 

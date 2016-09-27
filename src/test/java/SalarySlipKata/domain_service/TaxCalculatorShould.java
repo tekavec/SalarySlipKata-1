@@ -13,7 +13,7 @@ import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
-import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
+import SalarySlipKata.domain.rule.PersonalAllowanceReduction;
 
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {
@@ -27,9 +27,8 @@ public class TaxCalculatorShould {
 
   @Before
   public void setUp() throws Exception {
-    PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K =
-        new PersonalAllowanceReductionOver100K();
-    taxCalculator = new TaxCalculator(personalAllowanceReductionOver100K);
+    PersonalAllowanceReduction personalAllowanceReduction = new PersonalAllowanceReduction();
+    taxCalculator = new TaxCalculator(personalAllowanceReduction);
   }
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, the monthly tax details are {1}")
@@ -54,7 +53,6 @@ public class TaxCalculatorShould {
                 taxDetailsWith(freeTaxAllowance(  0.00), taxableIncome(12_500.00), taxPayable(4_466.67)) },
             {  new Money(160_000.00),
                 taxDetailsWith(freeTaxAllowance(  0.00), taxableIncome(13_333.33), taxPayable(4_841.67)) },
-
         }
     );
   }

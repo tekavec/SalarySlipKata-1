@@ -19,17 +19,17 @@ public class BandShould {
 
   private static final int TWELVE_MONTHS = 12;
 
-  private static final StandardBand NO_CONTRIBUTIONS_BAND = new StandardBand(zero(), new Money(8_060.00), 0.00);
-  private static final StandardBand BASIC_CONTRIBUTIONS_BAND = new StandardBand(new Money(8_060.00), new Money(43_000.00), 0.12);
-  private static final StandardBand HIGHER_CONTRIBUTIONS_BAND = new StandardBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
+  private static final Band NO_CONTRIBUTIONS_BAND = new StandardBand(zero(), new Money(8_060.00), 0.00);
+  private static final Band BASIC_CONTRIBUTIONS_BAND = new StandardBand(new Money(8_060.00), new Money(43_000.00), 0.12);
+  private static final Band HIGHER_CONTRIBUTIONS_BAND = new StandardBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
 
-  private static final StandardBand ZERO_TAX_BAND = new StandardBand(zero(), new Money(11_000.00), 0.00);
-  private static final StandardBand BASIC_TAX_BAND = new StandardBand(new Money(11_000.00), new Money(43_000.00), 0.20);
-  private static final StandardBand HIGHER_TAX_BAND = new StandardBand(new Money(43_000.00), new Money(150_000.00), 0.40);
-  private static final StandardBand ADDITIONAL_TAX_BAND = new StandardBand(new Money(150_000.00), new Money(MAX_VALUE), 0.40);
+  private static final Band ZERO_TAX_BAND = new StandardBand(zero(), new Money(11_000.00), 0.00);
+  private static final Band BASIC_TAX_BAND = new StandardBand(new Money(11_000.00), new Money(43_000.00), 0.20);
+  private static final Band HIGHER_TAX_BAND = new StandardBand(new Money(43_000.00), new Money(150_000.00), 0.40);
+  private static final Band ADDITIONAL_TAX_BAND = new StandardBand(new Money(150_000.00), new Money(MAX_VALUE), 0.40);
 
   private final Money annualSalary;
-  private final StandardBand standardBand;
+  private final Band band;
 
   private final Money expectedNIContributionsForABand;
 
@@ -64,16 +64,16 @@ public class BandShould {
   }
 
   public BandShould(
-      final Money annualSalary, final StandardBand standardBand, final Money expectedNIContributionsForABand) {
+      final Money annualSalary, final Band band, final Money expectedNIContributionsForABand) {
     this.annualSalary = annualSalary;
-    this.standardBand = standardBand;
+    this.band = band;
     this.expectedNIContributionsForABand = expectedNIContributionsForABand;
   }
 
   @Test
   public void
   return_the_NI_contributions_for_a_given_range_and_rate_for_a_given_annual_salary() {
-    final Money actualAnnualNIContributions = standardBand.calculateFrom(annualSalary);
+    final Money actualAnnualNIContributions = band.calculateFrom(annualSalary);
     final Money actualMonthlyNIContributions = actualAnnualNIContributions.divideBy(TWELVE_MONTHS);
     assertThat(actualMonthlyNIContributions, is(expectedNIContributionsForABand));
   }

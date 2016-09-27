@@ -4,7 +4,7 @@ import static SalarySlipKata.domain.Money.zero;
 
 import SalarySlipKata.domain.Money;
 
-public class StandardBand {
+public class StandardBand implements Band {
   protected final Money lowerLimit;
   protected final Money upperLimit;
   protected final double rate;
@@ -15,6 +15,7 @@ public class StandardBand {
     this.rate = rate;
   }
 
+  @Override
   public Money calculateFrom(Money annualSalary) {
     if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
       return bandValueFor(calculateExcessFrom(annualSalary, lowerLimit));
@@ -25,6 +26,21 @@ public class StandardBand {
     }
 
     return zero();
+  }
+
+  @Override
+  public Money lowerLimit() {
+    return new Money(lowerLimit);
+  }
+
+  @Override
+  public Money upperLimit() {
+    return new Money(upperLimit);
+  }
+
+  @Override
+  public double rate() {
+    return rate;
   }
 
   protected Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {

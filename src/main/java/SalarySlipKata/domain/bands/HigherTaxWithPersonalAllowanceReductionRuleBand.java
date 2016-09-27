@@ -3,20 +3,22 @@ package SalarySlipKata.domain.bands;
 import static SalarySlipKata.domain.Money.zero;
 
 import SalarySlipKata.domain.Money;
-import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
+import SalarySlipKata.domain.rule.PersonalAllowanceReduction;
 
 public class HigherTaxWithPersonalAllowanceReductionRuleBand extends StandardBand {
-  private PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K;
+  private PersonalAllowanceReduction personalAllowanceReduction;
 
-  public HigherTaxWithPersonalAllowanceReductionRuleBand(StandardBand standardBand, PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
-    super(standardBand.lowerLimit, standardBand.upperLimit, standardBand.rate);
-    this.personalAllowanceReductionOver100K = personalAllowanceReductionOver100K;
+  public HigherTaxWithPersonalAllowanceReductionRuleBand(
+      Band band, PersonalAllowanceReduction personalAllowanceReduction) {
+    super(band.lowerLimit(), band.upperLimit(), band.rate());
+    this.personalAllowanceReduction = personalAllowanceReduction;
   }
 
+  @Override
   public Money calculateFrom(Money annualSalary) {
     Money personalAllowanceAdjustmentForOver100K = zero();
-    if (personalAllowanceReductionOver100K.appliesBetweenLimits(lowerLimit, upperLimit)) {
-      personalAllowanceAdjustmentForOver100K = personalAllowanceReductionOver100K.calculateAdjustmentForExcessIn(annualSalary);
+    if (personalAllowanceReduction.appliesBetweenLimits(lowerLimit, upperLimit)) {
+      personalAllowanceAdjustmentForOver100K = personalAllowanceReduction.calculateAdjustmentForExcessIn(annualSalary);
     }
 
     if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
