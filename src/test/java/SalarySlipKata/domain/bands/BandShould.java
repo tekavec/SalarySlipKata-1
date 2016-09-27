@@ -1,10 +1,9 @@
-package SalarySlipKata.domain_service;
+package SalarySlipKata.domain.bands;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static java.lang.Double.MAX_VALUE;
 import static java.util.Arrays.asList;
-
 import static SalarySlipKata.domain.Money.zero;
 
 import java.util.Collection;
@@ -13,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import SalarySlipKata.domain.bands.Band;
 import SalarySlipKata.domain.Money;
 
 @RunWith(Parameterized.class)

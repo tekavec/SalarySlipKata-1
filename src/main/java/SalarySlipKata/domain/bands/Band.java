@@ -15,22 +15,20 @@ public class Band {
     this.rate = rate;
   }
 
-  private Money differenceBetweenLimits() {
-    return upperLimit.minus(lowerLimit);
-  }
-
   public Money calculateFrom(Money annualSalary) {
     if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
-      final Money excessIncomeOverLowerLimit = annualSalary.minus(lowerLimit);
-      return bandValueFor(excessIncomeOverLowerLimit);
+      return bandValueFor(calculateExcessFrom(annualSalary, lowerLimit));
     }
 
     if (annualSalary.isGreaterThan(upperLimit)) {
-      Money excessIncome = differenceBetweenLimits();
-      return bandValueFor(excessIncome);
+      return bandValueFor(calculateExcessFrom(upperLimit, lowerLimit));
     }
 
     return zero();
+  }
+
+  protected Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
+    return upperLimit.minus(lowerLimit);
   }
 
   private Money bandValueFor(Money amount) {return amount.multiplyBy(rate);}
