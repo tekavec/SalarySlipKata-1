@@ -3,6 +3,7 @@ package SalarySlipKata.domain_service;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static java.util.Arrays.asList;
+import static SalarySlipKata.domain.TaxDetailsBuilder.aTaxDetails;
 
 import java.util.Collection;
 
@@ -13,6 +14,7 @@ import org.junit.runners.Parameterized;
 
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
+import SalarySlipKata.domain.TaxDetailsBuilder;
 
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {
@@ -63,7 +65,11 @@ public class TaxCalculatorShould {
   private static Money taxPayable(double amount) {return new Money(amount);}
 
   private static TaxDetails taxDetailsWith(Money freeTaxAllowance, Money taxableIncome, Money taxPayable) {
-    return new TaxDetails(freeTaxAllowance, taxableIncome, taxPayable);
+    return aTaxDetails()
+              .withTaxFreeAllowance(freeTaxAllowance)
+              .withTaxableIncome(taxableIncome)
+              .withTaxPayable(taxPayable)
+              .build();
   }
 
   public TaxCalculatorShould(Money annualSalary, TaxDetails expectedMonthlyTaxDetails) {
@@ -78,11 +84,11 @@ public class TaxCalculatorShould {
   }
 
   private TaxDetails monthly(TaxDetails actualTaxDetails) {
-    return new TaxDetails(
-        monthly(actualTaxDetails.taxFreeAllowance()),
-        monthly(actualTaxDetails.taxableIncome()),
-        monthly(actualTaxDetails.taxPayable())
-    );
+    return TaxDetailsBuilder.aTaxDetails()
+        .withTaxFreeAllowance(monthly(actualTaxDetails.taxFreeAllowance()))
+        .withTaxableIncome(monthly(actualTaxDetails.taxableIncome()))
+        .withTaxPayable(monthly(actualTaxDetails.taxPayable()))
+        .build();
   }
 
   private Money monthly(Money amount) {
