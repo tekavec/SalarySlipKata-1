@@ -33,7 +33,6 @@ public class TaxCalculator {
     StandardBand higherTax =
         new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceReductionOver100K);
     taxBands.add(higherTax);
-
   }
 
   public TaxDetails calculateTaxDetailsFor(Money annualSalary) {
