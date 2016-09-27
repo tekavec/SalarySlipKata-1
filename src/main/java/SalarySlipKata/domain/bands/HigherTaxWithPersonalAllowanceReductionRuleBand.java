@@ -5,11 +5,11 @@ import static SalarySlipKata.domain.Money.zero;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.rule.PersonalAllowanceReductionOver100K;
 
-public class HigherTaxWithPersonalAllowanceReductionRuleBand extends Band {
+public class HigherTaxWithPersonalAllowanceReductionRuleBand extends StandardBand {
   private PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K;
 
-  public HigherTaxWithPersonalAllowanceReductionRuleBand(Band band, PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
-    super(band.lowerLimit, band.upperLimit, band.rate);
+  public HigherTaxWithPersonalAllowanceReductionRuleBand(StandardBand standardBand, PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
+    super(standardBand.lowerLimit, standardBand.upperLimit, standardBand.rate);
     this.personalAllowanceReductionOver100K = personalAllowanceReductionOver100K;
   }
 

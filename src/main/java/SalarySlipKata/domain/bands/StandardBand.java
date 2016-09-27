@@ -4,12 +4,12 @@ import static SalarySlipKata.domain.Money.zero;
 
 import SalarySlipKata.domain.Money;
 
-public class Band {
+public class StandardBand {
   protected final Money lowerLimit;
   protected final Money upperLimit;
   protected final double rate;
 
-  public Band(Money lowerLimit, Money upperLimit, double rate) {
+  public StandardBand(Money lowerLimit, Money upperLimit, double rate) {
     this.lowerLimit = lowerLimit;
     this.upperLimit = upperLimit;
     this.rate = rate;

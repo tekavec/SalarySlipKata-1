@@ -6,7 +6,7 @@ import static SalarySlipKata.domain.Money.zero;
 import java.util.ArrayList;
 import java.util.List;
 
-import SalarySlipKata.domain.bands.Band;
+import SalarySlipKata.domain.bands.StandardBand;
 import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
@@ -16,12 +16,12 @@ public class TaxCalculator {
 
   private PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K;
 
-  private Band higherTaxBand = new Band(new Money( 43_000.00), new Money(150_000.00), 0.40);
-  private Band additionalTax = new Band(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private Band basicTax      = new Band(new Money( 11_000.00), new Money( 43_000.00), 0.20);
-  private Band zeroTax       = new Band(new Money(      0.00), new Money( 11_000.00), 0.00);
+  private StandardBand higherTaxBand = new StandardBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
+  private StandardBand additionalTax = new StandardBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
+  private StandardBand basicTax      = new StandardBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
+  private StandardBand zeroTax       = new StandardBand(new Money(      0.00), new Money( 11_000.00), 0.00);
 
-  private List<Band> taxBands = new ArrayList<Band>() {
+  private List<StandardBand> taxBands = new ArrayList<StandardBand>() {
     { add(additionalTax); }
     { add(basicTax); }
     { add(zeroTax); }
@@ -30,7 +30,7 @@ public class TaxCalculator {
   public TaxCalculator(PersonalAllowanceReductionOver100K personalAllowanceReductionOver100K) {
     this.personalAllowanceReductionOver100K = personalAllowanceReductionOver100K;
 
-    Band higherTax =
+    StandardBand higherTax =
         new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceReductionOver100K);
     taxBands.add(higherTax);
 
@@ -55,8 +55,8 @@ public class TaxCalculator {
   private Money calculateTaxPayableFor(Money annualSalary) {
     Money totalTaxPayable = zero();
 
-    for (Band taxBand: taxBands) {
-      Money taxPayableForTheBand = taxBand.calculateFrom(annualSalary);
+    for (StandardBand taxStandardBand : taxBands) {
+      Money taxPayableForTheBand = taxStandardBand.calculateFrom(annualSalary);
       totalTaxPayable = totalTaxPayable.plus(taxPayableForTheBand);
     }
 

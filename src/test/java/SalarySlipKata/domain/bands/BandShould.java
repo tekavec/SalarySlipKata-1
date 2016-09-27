@@ -20,7 +20,7 @@ public class BandShould {
   private static final int TWELVE_MONTHS = 12;
 
   private final Money annualSalary;
-  private Band band;
+  private StandardBand standardBand;
 
   private final Money expectedNIContributionsForABand;
 
@@ -28,43 +28,43 @@ public class BandShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { new Money(  5_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
-            { new Money(  8_060.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
-            { new Money( 10_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
-            { new Money( 10_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12),  new Money(19.40) },
-            { new Money( 40_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(319.40) },
-            { new Money( 43_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
-            { new Money( 43_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money( 45_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money( 45_000.00), new Band(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),   new Money(3.33) },
-            { new Money( 50_000.00), new Band(                zero(),   new Money(  8_060.00), 0.00),            zero() },
-            { new Money( 50_000.00), new Band(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
-            { new Money( 50_000.00), new Band(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),  new Money(11.67) },
+            { new Money(  5_000.00), new StandardBand(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money(  8_060.00), new StandardBand(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 10_000.00), new StandardBand(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 10_000.00), new StandardBand(new Money(   8_060.00),   new Money( 43_000.00), 0.12),  new Money(19.40) },
+            { new Money( 40_000.00), new StandardBand(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(319.40) },
+            { new Money( 43_000.00), new StandardBand(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 43_000.00), new StandardBand(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 45_000.00), new StandardBand(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 45_000.00), new StandardBand(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),   new Money(3.33) },
+            { new Money( 50_000.00), new StandardBand(                zero(),   new Money(  8_060.00), 0.00),            zero() },
+            { new Money( 50_000.00), new StandardBand(new Money(   8_060.00),   new Money( 43_000.00), 0.12), new Money(349.40) },
+            { new Money( 50_000.00), new StandardBand(new Money(  43_000.00),   new Money( MAX_VALUE), 0.02),  new Money(11.67) },
 
-            { new Money( 60_000.00), new Band(               zero(),    new Money( 11_000.00), 0.00),            zero() },
-            { new Money( 60_000.00), new Band(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
-            { new Money( 60_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(566.67) },
-            { new Money( 60_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
-            { new Money(100_000.00), new Band(              zero(),     new Money( 11_000.00), 0.00),            zero() },
-            { new Money(100_000.00), new Band(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
-            { new Money(100_000.00), new Band(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(1900.00)},
-            { new Money(100_000.00), new Band(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
+            { new Money( 60_000.00), new StandardBand(               zero(),    new Money( 11_000.00), 0.00),            zero() },
+            { new Money( 60_000.00), new StandardBand(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
+            { new Money( 60_000.00), new StandardBand(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(566.67) },
+            { new Money( 60_000.00), new StandardBand(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
+            { new Money(100_000.00), new StandardBand(              zero(),     new Money( 11_000.00), 0.00),            zero() },
+            { new Money(100_000.00), new StandardBand(new Money( 11_000.00),    new Money( 43_000.00), 0.20), new Money(533.33) },
+            { new Money(100_000.00), new StandardBand(new Money( 43_000.00),    new Money(150_000.00), 0.40), new Money(1900.00)},
+            { new Money(100_000.00), new StandardBand(new Money(150_000.00),    new Money( MAX_VALUE), 0.40),            zero() },
 
         }
     );
   }
 
   public BandShould(
-      final Money annualSalary, final Band band, final Money expectedNIContributionsForABand) {
+      final Money annualSalary, final StandardBand standardBand, final Money expectedNIContributionsForABand) {
     this.annualSalary = annualSalary;
-    this.band = band;
+    this.standardBand = standardBand;
     this.expectedNIContributionsForABand = expectedNIContributionsForABand;
   }
 
   @Test
   public void
   return_the_NI_contributions_for_a_given_range_and_rate_for_a_given_annual_salary() {
-    final Money actualAnnualNIContributions = band.calculateFrom(annualSalary);
+    final Money actualAnnualNIContributions = standardBand.calculateFrom(annualSalary);
     final Money actualMonthlyNIContributions = actualAnnualNIContributions.divideBy(TWELVE_MONTHS);
     assertThat(actualMonthlyNIContributions, is(expectedNIContributionsForABand));
   }
