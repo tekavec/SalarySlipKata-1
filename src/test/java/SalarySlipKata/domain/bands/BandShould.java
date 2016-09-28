@@ -17,9 +17,9 @@ import SalarySlipKata.domain.Money;
 @RunWith(Parameterized.class)
 public class BandShould {
 
-  private static final Band NO_CONTRIBUTIONS_BAND = new StandardBand(zero(), new Money(8_060.00), 0.00);
-  private static final Band BASIC_CONTRIBUTIONS_BAND = new StandardBand(new Money(8_060.00), new Money(43_000.00), 0.12);
-  private static final Band HIGHER_CONTRIBUTIONS_BAND = new StandardBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
+  private static final Band NO_CONTRIBUTIONS_BAND = new NationalInsuranceBand(zero(), new Money(8_060.00), 0.00);
+  private static final Band BASIC_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(8_060.00), new Money(43_000.00), 0.12);
+  private static final Band HIGHER_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
 
   private static final Band ZERO_TAX_BAND = new StandardBand(zero(), new Money(11_000.00), 0.00);
   private static final Band BASIC_TAX_BAND = new StandardBand(new Money(11_000.00), new Money(43_000.00), 0.20);

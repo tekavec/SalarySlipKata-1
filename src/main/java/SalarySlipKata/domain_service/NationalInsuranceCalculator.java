@@ -8,13 +8,13 @@ import java.util.List;
 
 import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.bands.Band;
-import SalarySlipKata.domain.bands.StandardBand;
+import SalarySlipKata.domain.bands.NationalInsuranceBand;
 
 public class NationalInsuranceCalculator {
 
-  private Band higherContributions = new StandardBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
-  private Band basicContributions = new StandardBand(new Money( 8_060.00), new Money(43_000.00), 0.12);
-  private Band noContributions = new StandardBand(new Money(     0.00), new Money(8_060.00 ), 0.00);
+  private Band higherContributions = new NationalInsuranceBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
+  private Band basicContributions = new NationalInsuranceBand(new Money( 8_060.00), new Money(43_000.00), 0.12);
+  private Band noContributions = new NationalInsuranceBand(new Money(     0.00), new Money(8_060.00 ), 0.00);
 
   private List<Band> niContributionBands = new ArrayList<>();
 
