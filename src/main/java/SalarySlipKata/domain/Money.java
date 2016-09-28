@@ -16,15 +16,22 @@ public class Money {
   private BigDecimal denomination;
 
   public Money(double denomination) {
-    this.denomination = valueOf(denomination).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    this.denomination = valueOf(denomination);
+    updateScaleToTwoDecimalPlaces();
   }
 
   public Money(Money amount) {
     this.denomination = amount.denomination;
+    updateScaleToTwoDecimalPlaces();
   }
 
   private Money(BigDecimal denomination) {
     this.denomination = denomination;
+    updateScaleToTwoDecimalPlaces();
+  }
+
+  private void updateScaleToTwoDecimalPlaces() {
+    this.denomination = this.denomination.setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
   }
 
   public boolean isGreaterThanZero()  {
@@ -67,8 +74,8 @@ public class Money {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Money gbp = (Money) o;
-    return Objects.equals(denomination, gbp.denomination);
+    Money money = (Money) o;
+    return Objects.equals(denomination, money.denomination);
   }
 
   @Override

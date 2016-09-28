@@ -47,4 +47,9 @@ public class StandardBand implements Band {
   public double rate() {
     return rate;
   }
+
+  @Override
+  public String toString() {
+    return String.format("lowerLimit=%s, upperLimit=%s, rate=%s", lowerLimit, upperLimit, rate);
+  }
 }
