@@ -21,10 +21,10 @@ public class BandShould {
   private static final Band BASIC_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(8_060.00), new Money(43_000.00), 0.12);
   private static final Band HIGHER_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
 
-  private static final Band ZERO_TAX_BAND = new StandardBand(zero(), new Money(11_000.00), 0.00);
-  private static final Band BASIC_TAX_BAND = new StandardBand(new Money(11_000.00), new Money(43_000.00), 0.20);
-  private static final Band HIGHER_TAX_BAND = new StandardBand(new Money(43_000.00), new Money(150_000.00), 0.40);
-  private static final Band ADDITIONAL_TAX_BAND = new StandardBand(new Money(150_000.00), new Money(MAX_VALUE), 0.40);
+  private static final Band ZERO_TAX_BAND = new TaxBand(zero(), new Money(11_000.00), 0.00);
+  private static final Band BASIC_TAX_BAND = new TaxBand(new Money(11_000.00), new Money(43_000.00), 0.20);
+  private static final Band HIGHER_TAX_BAND = new TaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
+  private static final Band ADDITIONAL_TAX_BAND = new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.40);
 
   private final Money annualSalary;
   private final Band band;

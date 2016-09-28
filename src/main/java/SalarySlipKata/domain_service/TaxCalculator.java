@@ -10,16 +10,16 @@ import SalarySlipKata.domain.Money;
 import SalarySlipKata.domain.TaxDetails;
 import SalarySlipKata.domain.bands.Band;
 import SalarySlipKata.domain.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
-import SalarySlipKata.domain.bands.StandardBand;
+import SalarySlipKata.domain.bands.TaxBand;
 
 public class TaxCalculator {
 
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
-  private Band higherTax     = new StandardBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
-  private Band additionalTax = new StandardBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private Band basicTax      = new StandardBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
-  private Band zeroTax       = new StandardBand(new Money(      0.00), new Money( 11_000.00), 0.00);
+  private Band higherTax     = new TaxBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
+  private Band additionalTax = new TaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
+  private Band basicTax      = new TaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
+  private Band zeroTax       = new TaxBand(new Money(      0.00), new Money( 11_000.00), 0.00);
 
   private List<Band> taxBands = new ArrayList<>();
 
