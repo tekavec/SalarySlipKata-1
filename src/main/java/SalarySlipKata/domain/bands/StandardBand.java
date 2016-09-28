@@ -29,6 +29,11 @@ public class StandardBand implements Band {
   }
 
   @Override
+  public Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
+    return upperLimit.minus(lowerLimit);
+  }
+
+  @Override
   public Money lowerLimit() {
     return new Money(lowerLimit);
   }
@@ -41,9 +46,5 @@ public class StandardBand implements Band {
   @Override
   public double rate() {
     return rate;
-  }
-
-  protected Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
-    return upperLimit.minus(lowerLimit);
   }
 }

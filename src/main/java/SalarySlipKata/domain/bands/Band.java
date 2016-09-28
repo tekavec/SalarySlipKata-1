@@ -10,4 +10,6 @@ public interface Band {
   double rate();
 
   Money calculateFrom(Money annualSalary);
+
+  Money calculateExcessFrom(Money upperLimit, Money lowerLimit);
 }
