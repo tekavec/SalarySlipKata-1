@@ -7,21 +7,21 @@ import com.codurance.salaryslip.components.SalarySlip;
 import com.codurance.salaryslip.national_insurance.NationalInsuranceCalculator;
 import com.codurance.salaryslip.tax.TaxCalculator;
 
-public class SalarySlipApplication {
+public class SalarySlipGenerator {
 
   private static final int TWELVE_MONTHS = 12;
 
   private TaxCalculator taxCalculator;
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
-  public SalarySlipApplication(
+  public SalarySlipGenerator(
       NationalInsuranceCalculator nationalInsuranceCalculator,
       TaxCalculator taxCalculator) {
     this.nationalInsuranceCalculator = nationalInsuranceCalculator;
     this.taxCalculator = taxCalculator;
   }
 
-  public SalarySlip salarySlipFor(Employee employee) {
+  public SalarySlip generateFor(Employee employee) {
     final Money monthlySalary = monthly(employee.annualSalary());
     final TaxDetails monthlyTaxDetails =
         monthly(taxCalculator.calculateTaxDetailsFor(employee.annualSalary()));
