@@ -18,19 +18,19 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand implements Band {
   @Override
   public Money calculateFrom(Money annualSalary) {
     Money personalAllowanceAdjustmentForOver100K = zero();
-    if (personalAllowanceCalculator.reductionRuleAppliesBetween(taxBand.lowerLimit(), taxBand.upperLimit())) {
+    if (personalAllowanceCalculator.reductionRuleAppliesBetween(lowerLimit(), upperLimit())) {
       personalAllowanceAdjustmentForOver100K =
           personalAllowanceCalculator.calculateAdjustmentForExcessOver100K(annualSalary);
     }
 
     if (annualSalary.isBetweenAndInclusiveOf(lowerLimit(), upperLimit())) {
-      final Money excessIncome = taxBand.calculateExcessFrom(annualSalary, taxBand.lowerLimit());
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(taxBand.rate());
+      final Money excessIncome = calculateExcessFrom(annualSalary, lowerLimit());
+      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate());
     }
 
     if (annualSalary.isGreaterThan(upperLimit())) {
-      final Money excessIncome = taxBand.calculateExcessFrom(taxBand.upperLimit(), taxBand.lowerLimit());
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(taxBand.rate());
+      final Money excessIncome = calculateExcessFrom(upperLimit(), lowerLimit());
+      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(rate());
     }
 
     return zero();

@@ -36,6 +36,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
             { annualSalaryOf(111_000.00), expectedTaxPayableOf(29_400.00) },
             { annualSalaryOf(122_000.00), expectedTaxPayableOf(36_000.00) },
             { annualSalaryOf(150_000.00), expectedTaxPayableOf(47_200.00) },
+            { annualSalaryOf(160_000.00), expectedTaxPayableOf(47_200.00) }
         }
     );
   }

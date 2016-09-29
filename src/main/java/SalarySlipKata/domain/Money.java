@@ -1,7 +1,7 @@
 package SalarySlipKata.domain;
 
 import static java.lang.String.format;
-import static java.math.BigDecimal.ROUND_HALF_DOWN;
+import static java.math.BigDecimal.ROUND_HALF_UP;
 import static java.math.BigDecimal.ZERO;
 import static java.math.BigDecimal.valueOf;
 
@@ -31,7 +31,7 @@ public class Money {
   }
 
   private void updateScaleToTwoDecimalPlaces() {
-    this.denomination = this.denomination.setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
+    this.denomination = this.denomination.setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
   }
 
   public boolean isGreaterThanZero()  {
@@ -66,8 +66,8 @@ public class Money {
   }
 
   public Money divideBy(int divisor) {
-    final BigDecimal divisorAsBigDecimal = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN);
-    return new Money(denomination.divide(divisorAsBigDecimal, PLACES_AFTER_DECIMAL, ROUND_HALF_DOWN));
+    final BigDecimal divisorAsBigDecimal = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
+    return new Money(denomination.divide(divisorAsBigDecimal, PLACES_AFTER_DECIMAL, ROUND_HALF_UP));
   }
 
   @Override
