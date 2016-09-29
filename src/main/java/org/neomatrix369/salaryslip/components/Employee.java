@@ -5,6 +5,9 @@ import static java.lang.String.format;
 import java.util.Objects;
 
 public class Employee {
+
+  private static final int TWELVE_MONTHS = 12;
+
   private int id;
   private String name;
   private Money annualSalary;
@@ -17,6 +20,10 @@ public class Employee {
 
   public Money annualSalary() {
     return new Money(annualSalary);
+  }
+
+  public Money monthlySalary() {
+    return annualSalary().divideBy(TWELVE_MONTHS);
   }
 
   @Override

@@ -10,6 +10,8 @@ import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculato
 
 public class TaxCalculator {
 
+  private static final int TWELVE_MONTHS = 12;
+
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
   private TaxBand higherTax     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
@@ -35,20 +37,32 @@ public class TaxCalculator {
     taxBands.add(zeroTax);
   }
 
-  public TaxDetails calculateTaxDetailsFor(Money annualSalary) {
+  public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
     return new TaxDetails(
-        calculateTaxFreeAllowance(annualSalary),
-        calculateTaxableIncomeFor(annualSalary),
-        calculateTaxPayableFor(annualSalary)
+        calculateMonthlyTaxFreeAllowance(annualSalary),
+        calculateMonthlyTaxableIncomeFor(annualSalary),
+        calculateMonthlyTaxPayableFor(annualSalary)
     );
+  }
+
+  private Money calculateMonthlyTaxFreeAllowance(Money annualSalary) {
+    return calculateTaxFreeAllowance(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
   private Money calculateTaxFreeAllowance(Money annualSalary) {
     return personalAllowanceCalculator.calculateTaxFreeAllowanceFor(annualSalary);
   }
 
+  private Money calculateMonthlyTaxableIncomeFor(Money annualSalary) {
+    return calculateTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
+  }
+
   private Money calculateTaxableIncomeFor(Money annualSalary) {
     return annualSalary.minus(calculateTaxFreeAllowance(annualSalary));
+  }
+
+  private Money calculateMonthlyTaxPayableFor(Money annualSalary) {
+    return calculateTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
   }
 
   private Money calculateTaxPayableFor(Money annualSalary) {

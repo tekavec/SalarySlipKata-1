@@ -10,7 +10,6 @@ public class SalarySlipBuilder {
   private Money grossSalary;
   private TaxDetails taxDetails;
   private Money niContributions;
-  private Money netPayable;
 
   private SalarySlipBuilder() {}
 
@@ -38,12 +37,7 @@ public class SalarySlipBuilder {
     return this;
   }
 
-  public SalarySlipBuilder withNetPayable(Money netPayable) {
-    this.netPayable = netPayable;
-    return this;
-  }
-
   public SalarySlip build() {
-    return new SalarySlip(employee, grossSalary, taxDetails, niContributions, netPayable);
+    return new SalarySlip(employee, grossSalary, taxDetails, niContributions);
   }
 }

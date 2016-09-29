@@ -58,7 +58,6 @@ public class SalarySlipApplicationShould {
                         .build()
                     )
                     .withNIContributions(monthly(159.40))
-                    .withNetPayable(monthly(1623.93))
                     .build()
             },
             {
@@ -73,7 +72,6 @@ public class SalarySlipApplicationShould {
                       .build()
                 )
                     .withNIContributions(monthly(0.00))
-                    .withNetPayable(monthly(416.67))
                 .build()
             },
             {
@@ -88,7 +86,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(0.00))
-                    .withNetPayable(monthly(671.67))
                     .build()
             },
             {
@@ -103,7 +100,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(39.40))
-                    .withNetPayable(monthly(943.93))
                     .build()
             },
             {
@@ -118,7 +114,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(319.40))
-                    .withNetPayable(monthly(2530.60))
                     .build()
             },
             {
@@ -133,7 +128,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(349.40))
-                    .withNetPayable(monthly(2700.60))
                     .build()
             },
             {
@@ -148,7 +142,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(377.73))
-                    .withNetPayable(monthly(3522.27))
                     .build()
             },
             {
@@ -163,7 +156,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(444.40))
-                    .withNetPayable(monthly(5455.60))
                     .build()
             },
             {
@@ -178,7 +170,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(453.57))
-                    .withNetPayable(monthly(5629.77))
                     .build()
             },
             {
@@ -193,7 +184,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(462.73))
-                    .withNetPayable(monthly(5803.94))
                     .build()
             },
             {
@@ -208,7 +198,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(481.07))
-                    .withNetPayable(monthly(6152.27))
                     .build()
             },
             {
@@ -223,7 +212,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(527.73))
-                    .withNetPayable(monthly(7505.60))
                     .build()
             },
             {
@@ -238,7 +226,6 @@ public class SalarySlipApplicationShould {
                       .build()
                     )
                     .withNIContributions(monthly(544.40))
-                    .withNetPayable(monthly(7947.26))
                     .build()
             }
         }

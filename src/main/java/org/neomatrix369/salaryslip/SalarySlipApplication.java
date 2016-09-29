@@ -9,8 +9,6 @@ import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
 public class SalarySlipApplication {
 
-  private static final int TWELVE_MONTHS = 12;
-
   private TaxCalculator taxCalculator;
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
@@ -22,40 +20,15 @@ public class SalarySlipApplication {
   }
 
   public SalarySlip salarySlipFor(Employee employee) {
-    final Money monthlySalary = monthly(employee.annualSalary());
-    final TaxDetails monthlyTaxDetails =
-        monthly(taxCalculator.calculateTaxDetailsFor(employee.annualSalary()));
+    final TaxDetails monthlyTaxDetails = taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
     final Money monthlyNIContributions =
-        monthly(nationalInsuranceCalculator.calculateContributionsFor(employee.annualSalary()));
-
-    final Money monthlyNetPayable = calculateMonthlyNetPayableWith(
-        monthlySalary, monthlyTaxDetails.taxPayable(), monthlyNIContributions);
+        nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
 
     return new SalarySlip(
                   employee,
-                  monthlySalary,
+                  employee.monthlySalary(),
                   monthlyTaxDetails,
-                  monthlyNIContributions,
-                  monthlyNetPayable
+                  monthlyNIContributions
     );
-  }
-
-  private Money calculateMonthlyNetPayableWith(
-      Money monthlySalary, Money monthlyTaxPayable, Money monthlyNIContributions) {
-    return monthlySalary
-              .minus(monthlyTaxPayable)
-              .minus(monthlyNIContributions);
-  }
-
-  private TaxDetails monthly(TaxDetails taxDetails) {
-    return new TaxDetails(
-        monthly(taxDetails.taxFreeAllowance()),
-        monthly(taxDetails.taxableIncome()),
-        monthly(taxDetails.taxPayable())
-    );
-  }
-
-  private Money monthly(Money amount) {
-    return amount.divideBy(TWELVE_MONTHS);
   }
 }

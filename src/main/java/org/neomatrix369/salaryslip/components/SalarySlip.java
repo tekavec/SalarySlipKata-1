@@ -13,13 +13,20 @@ public class SalarySlip {
   private final Money niContributions;
   private final Money netPayable;
 
-  public SalarySlip(Employee employee, Money grossSalary, TaxDetails taxDetails,
-      Money niContributions, Money netPayable) {
+  public SalarySlip(
+      Employee employee, Money grossSalary, TaxDetails taxDetails, Money niContributions) {
     this.employee = employee;
     this.grossSalary = grossSalary;
     this.taxDetails = taxDetails;
     this.niContributions = niContributions;
-    this.netPayable = netPayable;
+    this.netPayable =  calculateNetPayableWith(grossSalary, taxDetails.taxPayable(), niContributions);
+  }
+
+  private Money calculateNetPayableWith(
+      Money grossSalary, Money taxPayable, Money niContributions) {
+    return grossSalary
+              .minus(taxPayable)
+              .minus(niContributions);
   }
 
   @Override
