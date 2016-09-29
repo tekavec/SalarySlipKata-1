@@ -21,14 +21,14 @@ import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
 @RunWith(Parameterized.class)
-public class SalarySlipApplicationShould {
+public class SalarySlipGeneratorShould {
 
-  private SalarySlipApplication salarySlipApplication;
+  private SalarySlipGenerator salarySlipGenerator;
 
   private Money annualSalary;
   private SalarySlip salarySlip;
 
-  public SalarySlipApplicationShould(Money annualSalary, SalarySlip salarySlip) {
+  public SalarySlipGeneratorShould(Money annualSalary, SalarySlip salarySlip) {
     this.annualSalary = annualSalary;
     this.salarySlip = salarySlip;
   }
@@ -39,7 +39,7 @@ public class SalarySlipApplicationShould {
     PersonalAllowanceCalculator personalAllowanceCalculator = new PersonalAllowanceCalculator();
     TaxCalculator taxCalculator = new TaxCalculator(personalAllowanceCalculator);
 
-    salarySlipApplication = new SalarySlipApplication(nationalInsuranceCalculator, taxCalculator);
+    salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator, taxCalculator);
   }
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, a monthly salary slip contains {1}")
@@ -256,7 +256,7 @@ public class SalarySlipApplicationShould {
                           .withAnnualSalary(new Money(annualSalary))
                           .build();
     assertThat(
-        salarySlipApplication.salarySlipFor(employee),
+        salarySlipGenerator.generateFor(employee),
         is(salarySlip)
     );
   }

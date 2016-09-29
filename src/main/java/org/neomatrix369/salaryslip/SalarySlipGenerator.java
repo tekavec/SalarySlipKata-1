@@ -7,19 +7,19 @@ import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
-public class SalarySlipApplication {
+public class SalarySlipGenerator {
 
   private TaxCalculator taxCalculator;
   private NationalInsuranceCalculator nationalInsuranceCalculator;
 
-  public SalarySlipApplication(
+  public SalarySlipGenerator(
       NationalInsuranceCalculator nationalInsuranceCalculator,
       TaxCalculator taxCalculator) {
     this.nationalInsuranceCalculator = nationalInsuranceCalculator;
     this.taxCalculator = taxCalculator;
   }
 
-  public SalarySlip salarySlipFor(Employee employee) {
+  public SalarySlip generateFor(Employee employee) {
     final TaxDetails monthlyTaxDetails = taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
     final Money monthlyNIContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
