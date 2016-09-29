@@ -29,11 +29,11 @@ public class PersonalAllowanceCalculator {
     return SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE.isBetweenAndInclusiveOf(lowerLimit, upperLimit);
   }
 
-  public Money calculateDifferenceAbove100kOf(Money annualSalary) {
+  private Money calculateDifferenceAbove100kOf(Money annualSalary) {
     return annualSalary.minus(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 
-  public Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
+  private Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
     final Money reducedEarnings = differenceAbove100k.divideBy(2);
 
     return getPersonalAllowance().isGreaterThan(reducedEarnings)
