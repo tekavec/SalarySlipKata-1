@@ -19,7 +19,6 @@ import com.codurance.salaryslip.components.SalarySlip;
 import com.codurance.salaryslip.national_insurance.NationalInsuranceCalculator;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 import com.codurance.salaryslip.tax.TaxCalculator;
-import com.codurance.salaryslip.tax.TaxDetailsBuilder;
 
 @RunWith(Parameterized.class)
 public class SalarySlipApplicationShould {

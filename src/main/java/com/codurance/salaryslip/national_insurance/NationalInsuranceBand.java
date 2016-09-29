@@ -28,7 +28,7 @@ public class NationalInsuranceBand {
     return zero();
   }
 
-  public Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
+  private Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
     return upperLimit.minus(lowerLimit);
   }
 

@@ -1,6 +1,7 @@
-package com.codurance.salaryslip.tax;
+package com.codurance.salaryslip;
 
 import com.codurance.salaryslip.components.Money;
+import com.codurance.salaryslip.tax.TaxDetails;
 
 public class TaxDetailsBuilder {
   private Money taxFreeAllowance;

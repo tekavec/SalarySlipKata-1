@@ -14,19 +14,16 @@ import org.junit.runners.Parameterized;
 
 import com.codurance.salaryslip.components.Money;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
-import com.codurance.salaryslip.tax.HigherTaxWithPersonalAllowanceReductionRuleBand;
-import com.codurance.salaryslip.tax.TaxBand;
 
 @RunWith(Parameterized.class)
 public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
   private Money expectedHigherTaxPayable;
   private Money annualSalary;
 
-  private TaxBand higherTaxBand = new TaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
+  private TaxBand higherTaxBand = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
 
   private PersonalAllowanceCalculator personalAllowanceCalculator = new PersonalAllowanceCalculator();
-  private HigherTaxWithPersonalAllowanceReductionRuleBand
-      higherTaxWithPersonalAllowanceReductionRuleBand;
+  private TaxBand higherTaxWithPersonalAllowanceReductionRuleBand;
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, the higher tax payable is {1}")
   public static Collection<Object[]> data() {

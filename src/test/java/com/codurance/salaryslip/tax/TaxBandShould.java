@@ -16,11 +16,11 @@ import com.codurance.salaryslip.components.Money;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
 @RunWith(Parameterized.class)
-public class StandardTaxBandShould {
-  private static final StandardTaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money(11_000.00),  0.00);
-  private static final StandardTaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money(11_000.00),  new Money(43_000.00),  0.20);
-  private static final StandardTaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money(43_000.00),  new Money(150_000.00), 0.40);
-  private static final StandardTaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),  0.40);
+public class TaxBandShould {
+  private static final TaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money(11_000.00),  0.00);
+  private static final TaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money(11_000.00),  new Money(43_000.00),  0.20);
+  private static final TaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money(43_000.00),  new Money(150_000.00), 0.40);
+  private static final TaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),  0.40);
 
   private static final TaxBand
       HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND = new HigherTaxWithPersonalAllowanceReductionRuleBand(HIGHER_TAX_BAND, new PersonalAllowanceCalculator());
@@ -45,6 +45,8 @@ public class StandardTaxBandShould {
                                                                expectedTaxPayableOf(29200.00) },
             { annualSalaryOf(122_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
                                                                expectedTaxPayableOf(36000.00) },
+            { annualSalaryOf(130_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
+                                                               expectedTaxPayableOf(39200.00) },
             { annualSalaryOf(150_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
                                                                expectedTaxPayableOf(47200.00) },
 
@@ -58,7 +60,7 @@ public class StandardTaxBandShould {
     return new Money(amount);
   }
 
-  public StandardTaxBandShould(
+  public TaxBandShould(
       final Money annualSalary,
       final TaxBand taxBand,
       final Money expectedTaxPayableForTheBand) {

@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import com.codurance.salaryslip.TaxDetailsBuilder;
 import com.codurance.salaryslip.components.Money;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 

@@ -7,19 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.codurance.salaryslip.components.Money;
-import com.codurance.salaryslip.tax_bands.Band;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
 public class TaxCalculator {
 
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
-  private TaxBand higherTax     = new TaxBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
-  private TaxBand additionalTax = new TaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private TaxBand basicTax      = new TaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
-  private TaxBand zeroTax       = new TaxBand(new Money(      0.00), new Money( 11_000.00), 0.00);
+  private TaxBand higherTax     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
+  private TaxBand additionalTax = new StandardTaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
+  private TaxBand basicTax      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
+  private TaxBand zeroTax       = new StandardTaxBand(new Money(      0.00), new Money( 11_000.00), 0.00);
 
-  private List<Band> taxBands = new ArrayList<>();
+  private List<TaxBand> taxBands = new ArrayList<>();
 
   public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
@@ -28,7 +27,7 @@ public class TaxCalculator {
   }
 
   private void populateTaxBands() {
-    Band higherTaxWithPersonalAllowanceReductionRule =
+    TaxBand higherTaxWithPersonalAllowanceReductionRule =
         new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTax, personalAllowanceCalculator);
 
     taxBands.add(additionalTax);
@@ -56,7 +55,7 @@ public class TaxCalculator {
   private Money calculateTaxPayableFor(Money annualSalary) {
     Money totalTaxPayable = zero();
 
-    for (Band taxBand : taxBands) {
+    for (TaxBand taxBand: taxBands) {
       Money taxPayableForTheBand = taxBand.calculateFrom(annualSalary);
       totalTaxPayable = totalTaxPayable.plus(taxPayableForTheBand);
     }
