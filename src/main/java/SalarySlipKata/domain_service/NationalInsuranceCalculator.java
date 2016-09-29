@@ -13,8 +13,8 @@ import SalarySlipKata.domain.bands.NationalInsuranceBand;
 public class NationalInsuranceCalculator {
 
   private Band higherContributions = new NationalInsuranceBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
-  private Band basicContributions = new NationalInsuranceBand(new Money( 8_060.00), new Money(43_000.00), 0.12);
-  private Band noContributions = new NationalInsuranceBand(new Money(     0.00), new Money(8_060.00 ), 0.00);
+  private Band basicContributions  = new NationalInsuranceBand(new Money( 8_060.00), new Money(43_000.00), 0.12);
+  private Band noContributions     = new NationalInsuranceBand(new Money(     0.00), new Money(8_060.00 ), 0.00);
 
   private List<Band> niContributionBands = new ArrayList<>();
 

@@ -36,11 +36,11 @@ public class NationalInsuranceCalculatorShould {
     );
   }
 
+  private static Money annualSalaryOf(double amount) {return new Money(amount);}
+
   private static Money contributionsOf(double amount) {
     return new Money(amount);
   }
-
-  private static Money annualSalaryOf(double denomination) {return new Money(denomination);}
 
   public NationalInsuranceCalculatorShould(Money annualSalary, Money expectedMonthlyContributions) {
     this.annualSalary = annualSalary;
