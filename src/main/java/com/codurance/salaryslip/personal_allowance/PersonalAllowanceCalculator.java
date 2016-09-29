@@ -40,4 +40,19 @@ public class PersonalAllowanceCalculator {
               ? reducedEarnings
               : zero();
   }
+
+  public Money calculateTaxFreeAllowanceFor(Money annualSalary) {
+    final Money differenceAbove100k = calculateDifferenceAbove100kOf(annualSalary);
+    final Money reduce1PoundForEvery2PoundsEarned = reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k);
+
+    return differenceAbove100k.isGreaterThanZero()
+              ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
+              : getPersonalAllowance();
+  }
+
+  private Money adjustedPersonalAllowance(Money amount) {
+    return amount.isGreaterThanZero()
+              ? getPersonalAllowance().minus(amount)
+              : zero();
+  }
 }

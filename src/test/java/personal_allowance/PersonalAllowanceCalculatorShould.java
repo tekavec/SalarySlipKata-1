@@ -1,4 +1,4 @@
-package SalarySlipKata.domain_service;
+package personal_allowance;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

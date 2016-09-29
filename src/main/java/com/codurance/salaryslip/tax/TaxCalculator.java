@@ -38,30 +38,18 @@ public class TaxCalculator {
 
   public TaxDetails calculateTaxDetailsFor(Money annualSalary) {
     return new TaxDetails(
-        calculateTaxFreeAllowanceFor(annualSalary),
+        calculateTaxFreeAllowance(annualSalary),
         calculateTaxableIncomeFor(annualSalary),
         calculateTaxPayableFor(annualSalary)
     );
   }
 
-  private Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    final Money differenceAbove100k = personalAllowanceCalculator.calculateDifferenceAbove100kOf(annualSalary);
-    final Money reduce1PoundForEvery2PoundsEarned =
-        personalAllowanceCalculator.reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k);
-
-    return differenceAbove100k.isGreaterThanZero()
-              ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
-              : personalAllowanceCalculator.getPersonalAllowance();
-  }
-
-  private Money adjustedPersonalAllowance(Money amount) {
-    return amount.isGreaterThanZero()
-              ? personalAllowanceCalculator.getPersonalAllowance().minus(amount)
-              : zero();
+  private Money calculateTaxFreeAllowance(Money annualSalary) {
+    return personalAllowanceCalculator.calculateTaxFreeAllowanceFor(annualSalary);
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
-    return annualSalary.minus(calculateTaxFreeAllowanceFor(annualSalary));
+    return annualSalary.minus(calculateTaxFreeAllowance(annualSalary));
   }
 
   private Money calculateTaxPayableFor(Money annualSalary) {
