@@ -1,5 +1,6 @@
 package com.codurance.salaryslip.tax;
 
+import static com.codurance.salaryslip.TaxDetailsBuilder.aTaxDetails;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static java.util.Arrays.asList;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import com.codurance.salaryslip.TaxDetailsBuilder;
 import com.codurance.salaryslip.components.Money;
 import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
@@ -34,68 +34,75 @@ public class TaxCalculatorShould {
     return asList(
         new Object[][] {
             {    new Money(5_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(11_000.00))
                     .withTaxableIncome(Money.zero())
                     .withTaxPayable(Money.zero())
                     .build()
             },
             {   new Money(11_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(11_000.00))
                     .withTaxableIncome(Money.zero())
                     .withTaxPayable(Money.zero())
                     .build()
             },
             {   new Money(12_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(11_000.00))
                     .withTaxableIncome(new Money(1_000.00))
                     .withTaxPayable(new Money(200.00))
                     .build()
             },
             {   new Money(43_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(11_000.00))
                     .withTaxableIncome(new Money(32_000.00))
                     .withTaxPayable(new Money(6400.00))
                     .build()
             },
             {  new Money(100_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(11000.00))
                     .withTaxableIncome(new Money(89_000.00))
                     .withTaxPayable(new Money(29200.00))
                     .build()
             },
+            {  new Money(105_500.00),
+                aTaxDetails()
+                    .withTaxFreeAllowance(new Money(8250.00))
+                    .withTaxableIncome(new Money(97_250.00))
+                    .withTaxPayable(new Money(32500.00))
+                    .build()
+            },
             {  new Money(111_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(5500.00))
                     .withTaxableIncome(new Money(105_500.00))
                     .withTaxPayable(new Money(35800.00))
                     .build()
             },
             {  new Money(122_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(0.00))
                     .withTaxableIncome(new Money(122_000.00))
                     .withTaxPayable(new Money(42400.00))
                     .build()
             },
             {  new Money(150_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(0.00))
                     .withTaxableIncome(new Money(150_000.00))
                     .withTaxPayable(new Money(53600.00))
                     .build()
             },
             {  new Money(160_000.00),
-                TaxDetailsBuilder.aTaxDetails()
+                aTaxDetails()
                     .withTaxFreeAllowance(new Money(0.00))
                     .withTaxableIncome(new Money(160000.00))
                     .withTaxPayable(new Money(58100.00))
                     .build()
-            },
+            }
         }
     );
   }

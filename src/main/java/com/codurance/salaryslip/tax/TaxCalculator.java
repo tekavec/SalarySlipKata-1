@@ -45,7 +45,19 @@ public class TaxCalculator {
   }
 
   private Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    return personalAllowanceCalculator.calculateTaxFreeAllowance(annualSalary);
+    final Money differenceAbove100k = personalAllowanceCalculator.calculateDifferenceAbove100kOf(annualSalary);
+    final Money reduce1PoundForEvery2PoundsEarned =
+        personalAllowanceCalculator.reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k);
+
+    return differenceAbove100k.isGreaterThanZero()
+              ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
+              : personalAllowanceCalculator.getPersonalAllowance();
+  }
+
+  private Money adjustedPersonalAllowance(Money amount) {
+    return amount.isGreaterThanZero()
+              ? personalAllowanceCalculator.getPersonalAllowance().minus(amount)
+              : zero();
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {

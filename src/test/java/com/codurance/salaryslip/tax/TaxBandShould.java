@@ -17,10 +17,10 @@ import com.codurance.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
 @RunWith(Parameterized.class)
 public class TaxBandShould {
-  private static final TaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money(11_000.00),  0.00);
-  private static final TaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money(11_000.00),  new Money(43_000.00),  0.20);
-  private static final TaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money(43_000.00),  new Money(150_000.00), 0.40);
-  private static final TaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),  0.40);
+  private static final TaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money( 11_000.00),  0.00);
+  private static final TaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
+  private static final TaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00),  0.40);
+  private static final TaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),   0.40);
 
   private static final TaxBand
       HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND = new HigherTaxWithPersonalAllowanceReductionRuleBand(HIGHER_TAX_BAND, new PersonalAllowanceCalculator());
@@ -33,22 +33,24 @@ public class TaxBandShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { annualSalaryOf( 60_000.00), ZERO_TAX_BAND,       expectedTaxPayableOf(    0.00) },
-            { annualSalaryOf( 60_000.00), BASIC_TAX_BAND,      expectedTaxPayableOf( 6400.00) },
-            { annualSalaryOf( 60_000.00), HIGHER_TAX_BAND,     expectedTaxPayableOf( 6800.00) },
-            { annualSalaryOf( 60_000.00), ADDITIONAL_TAX_BAND, expectedTaxPayableOf(    0.00) },
-            { annualSalaryOf(100_000.00), ZERO_TAX_BAND,       expectedTaxPayableOf(    0.00) },
-            { annualSalaryOf(100_000.00), BASIC_TAX_BAND,      expectedTaxPayableOf( 6400.00) },
-            { annualSalaryOf(100_000.00), HIGHER_TAX_BAND,     expectedTaxPayableOf(22800.00) },
-            { annualSalaryOf(100_000.00), ADDITIONAL_TAX_BAND, expectedTaxPayableOf(    0.00) },
-            { annualSalaryOf(110_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
-                                                               expectedTaxPayableOf(29200.00) },
+            { annualSalaryOf( 60_000.00), ZERO_TAX_BAND,       expectedTaxPayableOf(     0.00) },
+            { annualSalaryOf( 60_000.00), BASIC_TAX_BAND,      expectedTaxPayableOf( 6_400.00) },
+            { annualSalaryOf( 60_000.00), HIGHER_TAX_BAND,     expectedTaxPayableOf( 6_800.00) },
+            { annualSalaryOf( 60_000.00), ADDITIONAL_TAX_BAND, expectedTaxPayableOf(     0.00) },
+            { annualSalaryOf(100_000.00), ZERO_TAX_BAND,       expectedTaxPayableOf(     0.00) },
+            { annualSalaryOf(100_000.00), BASIC_TAX_BAND,      expectedTaxPayableOf( 6_400.00) },
+            { annualSalaryOf(100_000.00), HIGHER_TAX_BAND,     expectedTaxPayableOf(22_800.00) },
+            { annualSalaryOf(100_000.00), ADDITIONAL_TAX_BAND, expectedTaxPayableOf(     0.00) },
+            { annualSalaryOf(105_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
+                                                               expectedTaxPayableOf(25_800.00) },
+            { annualSalaryOf(111_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
+                                                               expectedTaxPayableOf(29_400.00) },
             { annualSalaryOf(122_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
-                                                               expectedTaxPayableOf(36000.00) },
+                                                               expectedTaxPayableOf(36_000.00) },
             { annualSalaryOf(130_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
-                                                               expectedTaxPayableOf(39200.00) },
+                                                               expectedTaxPayableOf(39_200.00) },
             { annualSalaryOf(150_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
-                                                               expectedTaxPayableOf(47200.00) },
+                                                               expectedTaxPayableOf(47_200.00) },
 
         }
     );

@@ -25,13 +25,14 @@ public class NationalInsuranceCalculatorShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { annualSalaryOf( 5_000.00), contributionsOf(   0.00) },
-            { annualSalaryOf( 8_060.00), contributionsOf(   0.00) },
-            { annualSalaryOf(10_000.00), contributionsOf( 232.80) },
-            { annualSalaryOf(40_000.00), contributionsOf(3832.80) },
-            { annualSalaryOf(43_000.00), contributionsOf(4192.80) },
-            { annualSalaryOf(45_000.00), contributionsOf(4232.80) },
-            { annualSalaryOf(50_000.00), contributionsOf(4332.80) },
+            { annualSalaryOf(  5_000.00), contributionsOf(   0.00) },
+            { annualSalaryOf(  8_060.00), contributionsOf(   0.00) },
+            { annualSalaryOf( 10_000.00), contributionsOf( 232.80) },
+            { annualSalaryOf( 40_000.00), contributionsOf(3832.80) },
+            { annualSalaryOf( 43_000.00), contributionsOf(4192.80) },
+            { annualSalaryOf( 45_000.00), contributionsOf(4232.80) },
+            { annualSalaryOf( 50_000.00), contributionsOf(4332.80) },
+            { annualSalaryOf(105_500.00), contributionsOf(5442.80) },
         }
     );
   }
