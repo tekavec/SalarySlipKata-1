@@ -8,11 +8,7 @@ public class PersonalAllowanceCalculator {
   private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
   private static final Money SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
-  private Money getPersonalAllowance() {
-    return PERSONAL_ALLOWANCE;
-  }
-
-  public Money calculateAdjustmentForExcessOver100K(Money annualSalary) {
+  public Money calculateAdjustmentForOver100K(Money annualSalary) {
     final Money excessOver100K = calculateExcessOver100kOf(annualSalary);
 
     if (excessOver100K.isGreaterThanZero()) {
@@ -23,10 +19,6 @@ public class PersonalAllowanceCalculator {
     }
 
     return zero();
-  }
-
-  public boolean reductionRuleAppliesBetween(Money lowerLimit, Money upperLimit) {
-    return SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE.isBetweenAndInclusiveOf(lowerLimit, upperLimit);
   }
 
   private Money calculateExcessOver100kOf(Money annualSalary) {
@@ -54,5 +46,9 @@ public class PersonalAllowanceCalculator {
     return amount.isGreaterThanZero()
               ? getPersonalAllowance().minus(amount)
               : zero();
+  }
+
+  private Money getPersonalAllowance() {
+    return PERSONAL_ALLOWANCE;
   }
 }
