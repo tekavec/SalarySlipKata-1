@@ -2,6 +2,7 @@ package org.neomatrix369.salaryslip;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.EmployeeBuilder.aEmployee;
 import static org.neomatrix369.salaryslip.SalarySlipBuilder.aSalarySlip;
 import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
 import static java.util.Arrays.asList;
@@ -22,9 +23,16 @@ import org.neomatrix369.salaryslip.tax.TaxCalculator;
 @RunWith(Parameterized.class)
 public class SalarySlipGeneratorShould {
 
-  private SalarySlipGenerator salarySlipGenerator;
+  private static EmployeeBuilder createEmployeeWith(Money annualSalary) {
+    return aEmployee()
+        .withId(12345)
+        .withName("John J Doe")
+        .withAnnualSalary(new Money(annualSalary));
+  }
 
+  private SalarySlipGenerator salarySlipGenerator;
   private Money annualSalary;
+
   private SalarySlip salarySlip;
 
   public SalarySlipGeneratorShould(Money annualSalary, SalarySlip salarySlip) {
@@ -240,20 +248,12 @@ public class SalarySlipGeneratorShould {
   }
 
   private static Employee employeeWithAnnualSalaryOf(double annualSalary) {
-    return EmployeeBuilder.aEmployee()
-                .withId(12345)
-                .withName("John J Doe")
-                .withAnnualSalary(new Money(annualSalary))
-                .build();
+    return createEmployeeWith(new Money(annualSalary)).build();
   }
 
   @Test public void
   return_a_monthly_salary_slip_for_a_given_annual_salary() {
-    Employee employee = EmployeeBuilder.aEmployee()
-                          .withId(12345)
-                          .withName("John J Doe")
-                          .withAnnualSalary(new Money(annualSalary))
-                          .build();
+    Employee employee = createEmployeeWith(annualSalary).build();
     assertThat(
         salarySlipGenerator.generateFor(employee),
         is(salarySlip)
