@@ -1,9 +1,9 @@
 package org.neomatrix369.salaryslip;
 
-import static org.neomatrix369.salaryslip.SalarySlipBuilder.aSalarySlip;
-import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.SalarySlipBuilder.aSalarySlip;
+import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -12,12 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
 import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
 import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
-
-import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
 @RunWith(Parameterized.class)
@@ -42,7 +41,7 @@ public class SalarySlipGeneratorShould {
     salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator, taxCalculator);
   }
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, a monthly salary slip contains {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, the monthly salary slip contains {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
@@ -249,7 +248,7 @@ public class SalarySlipGeneratorShould {
   }
 
   @Test public void
-  return_generated_monthly_salary_slip_for_a_given_annual_salary() {
+  return_a_monthly_salary_slip_for_a_given_annual_salary() {
     Employee employee = EmployeeBuilder.aEmployee()
                           .withId(12345)
                           .withName("John J Doe")
