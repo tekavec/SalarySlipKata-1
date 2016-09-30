@@ -35,7 +35,7 @@ public class NationalInsuranceCalculator {
     Money contributions = Money.zero();
 
     for(NationalInsuranceBand niContributionBand : niContributionBands) {
-      final Money contributionForTheBand = niContributionBand.calculateFrom(annualSalary);
+      final Money contributionForTheBand = niContributionBand.calculateContributionsFrom(annualSalary);
       contributions = contributions.plus(contributionForTheBand);
     }
 

@@ -23,7 +23,7 @@ public class NationalInsuranceBandShould {
 
   private final Money annualSalary;
   private final NationalInsuranceBand nationalInsuranceBand;
-  private final Money expectedNIContributionsForTheBand;
+  private final Money expectedAnnualNIContributionsForTheBand;
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, the NI Contribution is {2} for the band {1}")
   public static Collection<Object[]> data() {
@@ -54,16 +54,16 @@ public class NationalInsuranceBandShould {
   public NationalInsuranceBandShould(
       final Money annualSalary,
       final NationalInsuranceBand nationalInsuranceBand,
-      final Money expectedNIContributionsForTheBand) {
+      final Money expectedAnnualNIContributionsForTheBand) {
     this.annualSalary = annualSalary;
     this.nationalInsuranceBand = nationalInsuranceBand;
-    this.expectedNIContributionsForTheBand = expectedNIContributionsForTheBand;
+    this.expectedAnnualNIContributionsForTheBand = expectedAnnualNIContributionsForTheBand;
   }
 
   @Test
   public void
   return_the_NI_contributions_for_a_given_NI_contribution_band_for_a_given_annual_salary() {
-    final Money actualAnnualNIContributions = nationalInsuranceBand.calculateFrom(annualSalary);
-    assertThat(actualAnnualNIContributions, is(expectedNIContributionsForTheBand));
+    final Money actualAnnualNIContributions = nationalInsuranceBand.calculateContributionsFrom(annualSalary);
+    assertThat(actualAnnualNIContributions, is(expectedAnnualNIContributionsForTheBand));
   }
 }

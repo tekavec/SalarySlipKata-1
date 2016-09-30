@@ -16,7 +16,7 @@ public class NationalInsuranceBand {
     this.rate = rate;
   }
 
-  public Money calculateFrom(Money annualSalary) {
+  public Money calculateContributionsFrom(Money annualSalary) {
     final Money excess = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
     return excess.multiplyBy(rate);
   }
