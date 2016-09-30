@@ -4,7 +4,7 @@ import static org.neomatrix369.salaryslip.components.Money.minimum;
 
 import org.neomatrix369.salaryslip.components.Money;
 
-public class StandardTaxBand implements TaxBand {
+public class StandardTaxBand extends TaxBand {
   private final Money lowerLimit;
   private final Money upperLimit;
   private final double rate;
@@ -21,24 +21,20 @@ public class StandardTaxBand implements TaxBand {
     return excess.multiplyBy(rate);
   }
 
-  @Override
-  public Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
+  protected Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
     Money actualUpperLimit = minimum(annualSalary, upperLimit);
     return actualUpperLimit.minus(lowerLimit);
   }
 
-  @Override
-  public Money lowerLimit() {
+  protected Money lowerLimit() {
     return new Money(lowerLimit);
   }
 
-  @Override
-  public Money upperLimit() {
+  protected Money upperLimit() {
     return new Money(upperLimit);
   }
 
-  @Override
-  public double rate() {
+  protected double rate() {
     return rate;
   }
 

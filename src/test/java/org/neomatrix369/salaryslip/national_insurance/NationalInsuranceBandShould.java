@@ -29,18 +29,18 @@ public class NationalInsuranceBandShould {
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { annualSalaryOf( 5_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(   0.00) },
-            { annualSalaryOf( 8_060.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(   0.00) },
-            { annualSalaryOf(10_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(   0.00) },
-            { annualSalaryOf(10_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf( 232.80) },
-            { annualSalaryOf(40_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(3832.80) },
-            { annualSalaryOf(43_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(   0.00) },
-            { annualSalaryOf(43_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4192.80) },
-            { annualSalaryOf(45_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4192.80) },
-            { annualSalaryOf(45_000.00), HIGHER_CONTRIBUTIONS_BAND, expectedNIContributionsOf(  40.00) },
-            { annualSalaryOf(50_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(   0.00) },
-            { annualSalaryOf(50_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4192.80) },
-            { annualSalaryOf(50_000.00), HIGHER_CONTRIBUTIONS_BAND, expectedNIContributionsOf( 140.00) },
+            { annualSalaryOf( 5_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(    0.00) },
+            { annualSalaryOf( 8_060.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(    0.00) },
+            { annualSalaryOf(10_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(    0.00) },
+            { annualSalaryOf(10_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(  232.80) },
+            { annualSalaryOf(40_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(3_832.80) },
+            { annualSalaryOf(43_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(    0.00) },
+            { annualSalaryOf(43_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4_192.80) },
+            { annualSalaryOf(45_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4_192.80) },
+            { annualSalaryOf(45_000.00), HIGHER_CONTRIBUTIONS_BAND, expectedNIContributionsOf(   40.00) },
+            { annualSalaryOf(50_000.00), NO_CONTRIBUTIONS_BAND,     expectedNIContributionsOf(    0.00) },
+            { annualSalaryOf(50_000.00), BASIC_CONTRIBUTIONS_BAND,  expectedNIContributionsOf(4_192.80) },
+            { annualSalaryOf(50_000.00), HIGHER_CONTRIBUTIONS_BAND, expectedNIContributionsOf(  140.00) },
         }
     );
   }

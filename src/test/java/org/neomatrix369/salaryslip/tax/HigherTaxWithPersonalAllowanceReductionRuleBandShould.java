@@ -19,10 +19,10 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
   private Money expectedHigherTaxPayable;
   private Money annualSalary;
 
-  private TaxBand higherTaxBand = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
+  private StandardTaxBand higherTaxBand = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
 
   private PersonalAllowanceCalculator personalAllowanceCalculator = new PersonalAllowanceCalculator();
-  private TaxBand higherTaxWithPersonalAllowanceReductionRuleBand;
+  private HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRuleBand;
 
   @Parameterized.Parameters(name = "For an annual salary of {0}, the higher tax payable is {1}")
   public static Collection<Object[]> data() {

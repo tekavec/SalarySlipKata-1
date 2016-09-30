@@ -1,8 +1,8 @@
 package org.neomatrix369.salaryslip.tax;
 
-import static org.neomatrix369.salaryslip.components.Money.zero;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.components.Money.zero;
 import static java.lang.Double.MAX_VALUE;
 import static java.util.Arrays.asList;
 
@@ -11,19 +11,18 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
-
 import org.neomatrix369.salaryslip.components.Money;
+import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
 @RunWith(Parameterized.class)
 public class TaxBandShould {
-  private static final TaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money( 11_000.00),  0.00);
-  private static final TaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
-  private static final TaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00),  0.40);
-  private static final TaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),   0.40);
+  private static final StandardTaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money( 11_000.00),  0.00);
+  private static final StandardTaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
+  private static final StandardTaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00),  0.40);
+  private static final StandardTaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),   0.40);
 
-  private static final TaxBand
-      HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND = new HigherTaxWithPersonalAllowanceReductionRuleBand(HIGHER_TAX_BAND, new PersonalAllowanceCalculator());
+  private static final HigherTaxWithPersonalAllowanceReductionRuleBand HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND =
+      new HigherTaxWithPersonalAllowanceReductionRuleBand(HIGHER_TAX_BAND, new PersonalAllowanceCalculator());
 
   private final Money annualSalary;
   private final TaxBand taxBand;
