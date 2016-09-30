@@ -114,7 +114,7 @@ public class TaxCalculatorShould {
   }
   
   @Test public void
-  return_the_annual_payable_tax_for_a_given_annual_salary() {
+  return_the_monthly_tax_details_for_a_given_annual_salary() {
     final TaxDetails actualMonthlyTaxDetails = taxCalculator.calculateMonthlyTaxDetailsFor(annualSalary);
     assertThat(actualMonthlyTaxDetails, is(expectedMonthlyTaxDetails));
   }
