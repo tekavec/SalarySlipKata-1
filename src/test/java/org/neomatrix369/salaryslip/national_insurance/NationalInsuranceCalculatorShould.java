@@ -54,7 +54,7 @@ public class NationalInsuranceCalculatorShould {
   }
 
   @Test public void
-  return_the_annual_contribution_for_a_given_annual_salary() {
+  return_the_monthly_NI_contributions_for_a_given_annual_salary() {
     final Money actualMonthlyContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(annualSalary);
     assertThat(actualMonthlyContributions, is(expectedMonthlyContributions));

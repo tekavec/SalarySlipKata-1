@@ -62,7 +62,7 @@ public class NationalInsuranceBandShould {
 
   @Test
   public void
-  return_the_NI_contributions_for_a_given_NI_contribution_band_for_a_given_annual_salary() {
+  return_the_NI_contributions_for_a_given_band_for_a_given_annual_salary() {
     final Money actualAnnualNIContributions = nationalInsuranceBand.calculateContributionsFrom(annualSalary);
     assertThat(actualAnnualNIContributions, is(expectedAnnualNIContributionsForTheBand));
   }
