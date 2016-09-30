@@ -62,7 +62,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
   }
 
   @Test public void
-  return_the_tax_payable_for_an_annual_salary_applicable_for_higher_tax() {
+  return_the_annual_higher_tax_payable_for_an_annual_salary_applicable_for_higher_tax() {
     Money actualAnnualHigherTaxPayable =
         higherTaxWithPersonalAllowanceReductionRuleBand.calculateTaxFrom(annualSalary);
     assertThat(actualAnnualHigherTaxPayable, is(expectedAnnualHigherTaxPayable));
