@@ -1,5 +1,7 @@
 package org.neomatrix369.salaryslip.tax;
 
+import static org.neomatrix369.salaryslip.components.Money.minimum;
+
 import org.neomatrix369.salaryslip.components.Money;
 
 public class StandardTaxBand implements TaxBand {
@@ -15,20 +17,14 @@ public class StandardTaxBand implements TaxBand {
 
   @Override
   public Money calculateFrom(Money annualSalary) {
-    if (annualSalary.isBetweenAndInclusiveOf(lowerLimit, upperLimit)) {
-      return calculateExcessFrom(annualSalary, lowerLimit).multiplyBy(rate);
-    }
-
-    if (annualSalary.isGreaterThan(upperLimit)) {
-      return calculateExcessFrom(upperLimit, lowerLimit).multiplyBy(rate);
-    }
-
-    return Money.zero();
+    final Money excess = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
+    return excess.multiplyBy(rate);
   }
 
   @Override
-  public Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
-    return upperLimit.minus(lowerLimit);
+  public Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
+    Money actualUpperLimit = minimum(annualSalary, upperLimit);
+    return actualUpperLimit.minus(lowerLimit);
   }
 
   @Override

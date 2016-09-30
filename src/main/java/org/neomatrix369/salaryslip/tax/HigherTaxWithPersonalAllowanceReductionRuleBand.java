@@ -1,5 +1,7 @@
 package org.neomatrix369.salaryslip.tax;
 
+import static org.neomatrix369.salaryslip.components.Money.minimum;
+
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
@@ -13,6 +15,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand implements TaxBand 
     this.personalAllowanceCalculator = personalAllowanceCalculator;
   }
 
+  @Override
   public Money calculateFrom(Money annualSalary) {
     Money personalAllowanceAdjustmentForOver100K = Money.zero();
     if (personalAllowanceCalculator.reductionRuleAppliesBetween(taxBand.lowerLimit(), taxBand.upperLimit())) {
@@ -20,17 +23,16 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand implements TaxBand 
           personalAllowanceCalculator.calculateAdjustmentForExcessOver100K(annualSalary);
     }
 
-    if (annualSalary.isBetweenAndInclusiveOf(taxBand.lowerLimit(), taxBand.upperLimit())) {
-      final Money excessIncome = calculateExcessFrom(annualSalary, taxBand.lowerLimit());
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(taxBand.rate());
-    }
+    Money excess = calculateExcessFrom(annualSalary, taxBand.upperLimit(), taxBand.lowerLimit());
+    excess = excess.plus(personalAllowanceAdjustmentForOver100K);
 
-    if (annualSalary.isGreaterThan(taxBand.upperLimit())) {
-      final Money excessIncome = calculateExcessFrom(taxBand.upperLimit(), taxBand.lowerLimit());
-      return excessIncome.plus(personalAllowanceAdjustmentForOver100K).multiplyBy(taxBand.rate());
-    }
+    return excess.multiplyBy(taxBand.rate());
+  }
 
-    return Money.zero();
+  @Override
+  public Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
+    Money actualUpperLimit = minimum(annualSalary, upperLimit);
+    return actualUpperLimit.minus(lowerLimit);
   }
 
   @Override
@@ -46,10 +48,5 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand implements TaxBand 
   @Override
   public double rate() {
     return taxBand.rate();
-  }
-
-  @Override
-  public Money calculateExcessFrom(Money upperLimit, Money lowerLimit) {
-    return taxBand.calculateExcessFrom(upperLimit, lowerLimit);
   }
 }

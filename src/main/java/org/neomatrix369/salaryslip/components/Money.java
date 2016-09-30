@@ -47,6 +47,11 @@ public class Money {
     return denomination.compareTo(anotherAmount.denomination) > 0;
   }
 
+  public static Money minimum(Money firstAmount, Money secondAmount) {
+    final BigDecimal minimumOfTheTwo = firstAmount.denomination.min(secondAmount.denomination);
+    return new Money(minimumOfTheTwo);
+  }
+
   public Money plus(Money amount) {
     return new Money(denomination.add(amount.denomination));
   }
