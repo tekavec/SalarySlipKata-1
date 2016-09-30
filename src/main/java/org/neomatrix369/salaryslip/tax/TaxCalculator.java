@@ -69,7 +69,7 @@ public class TaxCalculator {
     Money totalTaxPayable = Money.zero();
 
     for (TaxBand taxBand: taxBands) {
-      Money taxPayableForTheBand = taxBand.calculateFrom(annualSalary);
+      Money taxPayableForTheBand = taxBand.calculateTaxFrom(annualSalary);
       totalTaxPayable = totalTaxPayable.plus(taxPayableForTheBand);
     }
 
