@@ -38,11 +38,6 @@ public class Money {
     return denomination.compareTo(ZERO) > 0;
   }
 
-  public boolean isBetweenAndInclusiveOf(Money lowerLimit, Money upperLimit) {
-    return (lowerLimit.denomination.compareTo(denomination) <= 0) &&
-        (upperLimit.denomination.compareTo(denomination) >= 0);
-  }
-
   public boolean isGreaterThan(Money anotherAmount) {
     return denomination.compareTo(anotherAmount.denomination) > 0;
   }
