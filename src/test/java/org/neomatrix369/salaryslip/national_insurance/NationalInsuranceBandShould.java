@@ -25,7 +25,7 @@ public class NationalInsuranceBandShould {
   private final NationalInsuranceBand nationalInsuranceBand;
   private final Money expectedAnnualNIContributionsForTheBand;
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, the NI Contribution is {2} for the band {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, the NI Contributions is {2} for the band {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
