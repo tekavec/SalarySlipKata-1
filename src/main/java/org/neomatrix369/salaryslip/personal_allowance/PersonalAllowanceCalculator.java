@@ -13,10 +13,10 @@ public class PersonalAllowanceCalculator {
   }
 
   public Money calculateAdjustmentForExcessOver100K(Money annualSalary) {
-    final Money differenceAbove100K = calculateDifferenceAbove100kOf(annualSalary);
+    final Money excessOver100K = calculateExcessOver100kOf(annualSalary);
 
-    if (differenceAbove100K.isGreaterThanZero()) {
-      final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100K);
+    if (excessOver100K.isGreaterThanZero()) {
+      final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(excessOver100K);
       return adjustmentForPersonalAllowance.isGreaterThanZero()
                 ? adjustmentForPersonalAllowance
                 : getPersonalAllowance();
@@ -29,21 +29,21 @@ public class PersonalAllowanceCalculator {
     return SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE.isBetweenAndInclusiveOf(lowerLimit, upperLimit);
   }
 
-  private Money calculateDifferenceAbove100kOf(Money annualSalary) {
+  private Money calculateExcessOver100kOf(Money annualSalary) {
     return annualSalary.minus(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 
   public Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    final Money differenceAbove100k = calculateDifferenceAbove100kOf(annualSalary);
-    final Money reduce1PoundForEvery2PoundsEarned = reduce1PoundForEvery2PoundsEarnedOn(differenceAbove100k);
+    final Money excessOver100k = calculateExcessOver100kOf(annualSalary);
+    final Money reduce1PoundForEvery2PoundsEarned = reduce1PoundForEvery2PoundsEarnedOn(excessOver100k);
 
-    return differenceAbove100k.isGreaterThanZero()
+    return excessOver100k.isGreaterThanZero()
               ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
               : getPersonalAllowance();
   }
 
-  private Money reduce1PoundForEvery2PoundsEarnedOn(Money differenceAbove100k) {
-    final Money reducedEarnings = differenceAbove100k.divideBy(2);
+  private Money reduce1PoundForEvery2PoundsEarnedOn(Money excessOver100k) {
+    final Money reducedEarnings = excessOver100k.divideBy(2);
 
     return getPersonalAllowance().isGreaterThan(reducedEarnings)
         ? reducedEarnings

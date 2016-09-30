@@ -1,5 +1,7 @@
 package org.neomatrix369.salaryslip.tax;
 
+import static org.neomatrix369.salaryslip.components.Money.zero;
+
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
@@ -15,7 +17,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
 
   @Override
   public Money calculateFrom(Money annualSalary) {
-    Money personalAllowanceAdjustmentForOver100K = Money.zero();
+    Money personalAllowanceAdjustmentForOver100K = zero();
     if (personalAllowanceCalculator.reductionRuleAppliesBetween(
         standardTaxBand.lowerLimit(), standardTaxBand.upperLimit())) {
       personalAllowanceAdjustmentForOver100K =
