@@ -16,26 +16,26 @@ import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculato
 
 @RunWith(Parameterized.class)
 public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
-  private Money expectedHigherTaxPayable;
   private Money annualSalary;
+  private Money expectedAnnualHigherTaxPayable;
 
   private StandardTaxBand higherTaxBand = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
 
   private PersonalAllowanceCalculator personalAllowanceCalculator = new PersonalAllowanceCalculator();
   private HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRuleBand;
 
-  @Parameterized.Parameters(name = "For an annual salary of {0}, the higher tax payable is {1}")
+  @Parameterized.Parameters(name = "For an annual salary of {0}, the annual higher tax payable is {1}")
   public static Collection<Object[]> data() {
     return asList(
         new Object[][] {
-            { annualSalaryOf( 40_000.00), expectedTaxPayableOf(     0.00) },
-            { annualSalaryOf( 43_000.00), expectedTaxPayableOf(     0.00) },
-            { annualSalaryOf( 50_000.00), expectedTaxPayableOf( 2_800.00) },
-            { annualSalaryOf(100_000.00), expectedTaxPayableOf(22_800.00) },
-            { annualSalaryOf(111_000.00), expectedTaxPayableOf(29_400.00) },
-            { annualSalaryOf(122_000.00), expectedTaxPayableOf(36_000.00) },
-            { annualSalaryOf(150_000.00), expectedTaxPayableOf(47_200.00) },
-            { annualSalaryOf(160_000.00), expectedTaxPayableOf(47_200.00) }
+            { annualSalaryOf( 40_000.00), expectedAnnualHigherTaxPayableOf(     0.00) },
+            { annualSalaryOf( 43_000.00), expectedAnnualHigherTaxPayableOf(     0.00) },
+            { annualSalaryOf( 50_000.00), expectedAnnualHigherTaxPayableOf( 2_800.00) },
+            { annualSalaryOf(100_000.00), expectedAnnualHigherTaxPayableOf(22_800.00) },
+            { annualSalaryOf(111_000.00), expectedAnnualHigherTaxPayableOf(29_400.00) },
+            { annualSalaryOf(122_000.00), expectedAnnualHigherTaxPayableOf(36_000.00) },
+            { annualSalaryOf(150_000.00), expectedAnnualHigherTaxPayableOf(47_200.00) },
+            { annualSalaryOf(160_000.00), expectedAnnualHigherTaxPayableOf(47_200.00) }
         }
     );
   }
@@ -50,21 +50,21 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
     return new Money(amount);
   }
 
-  private static Money expectedTaxPayableOf(double amount) {
+  private static Money expectedAnnualHigherTaxPayableOf(double amount) {
     return new Money(amount);
   }
 
   public HigherTaxWithPersonalAllowanceReductionRuleBandShould(
       Money annualSalary,
-      Money expectedHigherTaxPayable) {
+      Money expectedAnnualHigherTaxPayable) {
     this.annualSalary = annualSalary;
-    this.expectedHigherTaxPayable = expectedHigherTaxPayable;
+    this.expectedAnnualHigherTaxPayable = expectedAnnualHigherTaxPayable;
   }
 
   @Test public void
   return_the_tax_payable_for_an_annual_salary_applicable_for_higher_tax() {
     Money actualHigherTaxPayable =
         higherTaxWithPersonalAllowanceReductionRuleBand.calculateFrom(annualSalary);
-    assertThat(actualHigherTaxPayable, is(expectedHigherTaxPayable));
+    assertThat(actualHigherTaxPayable, is(expectedAnnualHigherTaxPayable));
   } 
 }
