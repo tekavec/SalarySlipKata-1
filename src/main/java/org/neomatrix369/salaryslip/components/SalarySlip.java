@@ -9,7 +9,7 @@ import org.neomatrix369.salaryslip.tax.TaxDetails;
 public class SalarySlip {
   private final Employee employee;
   private final Money grossSalary;
-  private TaxDetails taxDetails;
+  private final TaxDetails taxDetails;
   private final Money niContributions;
   private final Money netPayable;
 
@@ -19,7 +19,7 @@ public class SalarySlip {
     this.grossSalary = grossSalary;
     this.taxDetails = taxDetails;
     this.niContributions = niContributions;
-    this.netPayable =  calculateNetPayableWith(grossSalary, taxDetails.taxPayable(), niContributions);
+    this.netPayable = calculateNetPayableWith(grossSalary, taxDetails.taxPayable(), niContributions);
   }
 
   private Money calculateNetPayableWith(
