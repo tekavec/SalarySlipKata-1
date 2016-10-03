@@ -46,7 +46,7 @@ public class TaxCalculator {
   }
 
   private Money calculateMonthlyTaxFreeAllowance(Money annualSalary) {
-    return calculateTaxFreeAllowance(annualSalary).divideBy(TWELVE_MONTHS);
+    return convertToMonthly(calculateTaxFreeAllowance(annualSalary));
   }
 
   private Money calculateTaxFreeAllowance(Money annualSalary) {
@@ -54,7 +54,7 @@ public class TaxCalculator {
   }
 
   private Money calculateMonthlyTaxableIncomeFor(Money annualSalary) {
-    return calculateTaxableIncomeFor(annualSalary).divideBy(TWELVE_MONTHS);
+    return convertToMonthly(calculateTaxableIncomeFor(annualSalary));
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
@@ -62,7 +62,7 @@ public class TaxCalculator {
   }
 
   private Money calculateMonthlyTaxPayableFor(Money annualSalary) {
-    return calculateTaxPayableFor(annualSalary).divideBy(TWELVE_MONTHS);
+    return convertToMonthly(calculateTaxPayableFor(annualSalary));
   }
 
   private Money calculateTaxPayableFor(Money annualSalary) {
@@ -75,4 +75,6 @@ public class TaxCalculator {
 
     return totalTaxPayable;
   }
+
+  private Money convertToMonthly(Money amount) {return amount.divideBy(TWELVE_MONTHS);}
 }
