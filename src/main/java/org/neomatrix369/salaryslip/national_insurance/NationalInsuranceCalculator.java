@@ -29,7 +29,7 @@ public class NationalInsuranceCalculator {
   }
 
   public Money calculateMonthlyContributionsFor(Money annualSalary) {
-    return calculateContributionsFor(annualSalary).divideBy(TWELVE_MONTHS);
+    return convertToMonthly(calculateContributionsFor(annualSalary));
   }
 
   private Money calculateContributionsFor(Money annualSalary) {
@@ -42,4 +42,6 @@ public class NationalInsuranceCalculator {
 
     return contributions;
   }
+
+  private Money convertToMonthly(Money amount) {return amount.divideBy(TWELVE_MONTHS);}
 }
