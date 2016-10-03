@@ -1,6 +1,6 @@
 package org.neomatrix369.salaryslip.national_insurance;
 
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.minimumOf;
 
 import org.neomatrix369.salaryslip.components.Money;
 
@@ -17,13 +17,13 @@ public class NationalInsuranceBand {
   }
 
   public Money calculateContributionsFrom(Money annualSalary) {
-    final Money excess = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
-    return excess.multiplyBy(rate);
+    final Money excessIncomeForThisBand = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
+    return excessIncomeForThisBand.multiplyBy(rate);
   }
 
   private Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
-    Money actualUpperLimit = minimum(annualSalary, upperLimit);
-    return actualUpperLimit.minus(lowerLimit);
+    Money minimumOfTheTwoLimits = minimumOf(annualSalary, upperLimit);
+    return minimumOfTheTwoLimits.minus(lowerLimit);
   }
 
   @Override

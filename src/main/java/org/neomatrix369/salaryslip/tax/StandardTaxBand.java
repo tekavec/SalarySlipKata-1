@@ -1,6 +1,6 @@
 package org.neomatrix369.salaryslip.tax;
 
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.minimumOf;
 
 import org.neomatrix369.salaryslip.components.Money;
 
@@ -17,13 +17,13 @@ public class StandardTaxBand extends TaxBand {
 
   @Override
   public Money calculateTaxFrom(Money annualSalary) {
-    final Money excess = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
-    return excess.multiplyBy(rate);
+    final Money excessIncomeForThisBand = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
+    return excessIncomeForThisBand.multiplyBy(rate);
   }
 
   protected Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
-    Money actualUpperLimit = minimum(annualSalary, upperLimit);
-    return actualUpperLimit.minus(lowerLimit);
+    Money minimumOfTheTwoLimits = minimumOf(annualSalary, upperLimit);
+    return minimumOfTheTwoLimits.minus(lowerLimit);
   }
 
   protected Money lowerLimit() {

@@ -2,7 +2,7 @@ package org.neomatrix369.salaryslip.components;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.minimumOf;
 import static org.neomatrix369.salaryslip.components.Money.zero;
 
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class MoneyShould {
     Money firstAmount = new Money(40.00);
     Money secondAmount = new Money(25.00);
 
-    assertThat(minimum(firstAmount, secondAmount), is(secondAmount));
+    assertThat(minimumOf(firstAmount, secondAmount), is(secondAmount));
   }
 
   @Test public void

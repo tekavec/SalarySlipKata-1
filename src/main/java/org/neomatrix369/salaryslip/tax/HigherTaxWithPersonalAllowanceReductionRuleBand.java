@@ -18,11 +18,11 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
     Money personalAllowanceAdjustmentForOver100K =
         personalAllowanceCalculator.calculateAdjustmentForOver100K(annualSalary);
 
-    Money excess = standardTaxBand.calculateExcessFrom(
+    Money excessIncome = standardTaxBand.calculateExcessFrom(
             annualSalary, standardTaxBand.upperLimit(), standardTaxBand.lowerLimit());
 
-    Money newExcess = excess.plus(personalAllowanceAdjustmentForOver100K);
+    Money taxableIncomeForThisBand = excessIncome.plus(personalAllowanceAdjustmentForOver100K);
 
-    return newExcess.multiplyBy(standardTaxBand.rate());
+    return taxableIncomeForThisBand.multiplyBy(standardTaxBand.rate());
   }
 }
