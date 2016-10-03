@@ -1,5 +1,6 @@
 package org.neomatrix369.salaryslip.personal_allowance;
 
+import static org.neomatrix369.salaryslip.components.Money.minimumOf;
 import static org.neomatrix369.salaryslip.components.Money.zero;
 
 import org.neomatrix369.salaryslip.components.Money;
@@ -12,7 +13,9 @@ public class PersonalAllowanceCalculator {
     final Money excessIncomeOver100K = calculateExcessIncomeOver100kFrom(annualSalary);
 
     if (excessIncomeOver100K.isGreaterThanZero()) {
-      final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(excessIncomeOver100K);
+      final Money adjustmentForPersonalAllowance =
+          reduce1PoundForEvery2PoundsEarnedOn(excessIncomeOver100K);
+
       return adjustmentForPersonalAllowance.isGreaterThanZero()
                 ? adjustmentForPersonalAllowance
                 : PERSONAL_ALLOWANCE;
@@ -26,25 +29,22 @@ public class PersonalAllowanceCalculator {
   }
 
   public Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    final Money excessOver100k = calculateExcessIncomeOver100kFrom(annualSalary);
-    final Money reduce1PoundForEvery2PoundsEarned = reduce1PoundForEvery2PoundsEarnedOn(excessOver100k);
+    final Money excessIncomeOver100K = calculateExcessIncomeOver100kFrom(annualSalary);
 
-    return excessOver100k.isGreaterThanZero()
-              ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
-              : PERSONAL_ALLOWANCE;
+    if (excessIncomeOver100K.isGreaterThanZero()) {
+      final Money adjustmentForPersonalAllowance =
+          reduce1PoundForEvery2PoundsEarnedOn(excessIncomeOver100K);
+
+      return adjustmentForPersonalAllowance.isGreaterThanZero()
+                ? PERSONAL_ALLOWANCE.minus(adjustmentForPersonalAllowance)
+                : adjustmentForPersonalAllowance;
+    }
+
+    return PERSONAL_ALLOWANCE;
   }
 
-  private Money reduce1PoundForEvery2PoundsEarnedOn(Money excessOver100k) {
-    final Money reducedEarnings = excessOver100k.divideBy(2);
-
-    return PERSONAL_ALLOWANCE.isGreaterThan(reducedEarnings)
-        ? reducedEarnings
-        : zero();
-  }
-
-  private Money adjustedPersonalAllowance(Money amount) {
-    return amount.isGreaterThanZero()
-              ? PERSONAL_ALLOWANCE.minus(amount)
-              : zero();
+  private Money reduce1PoundForEvery2PoundsEarnedOn(Money excessIncomeOver100K) {
+    final Money reducedEarnings = excessIncomeOver100K.divideBy(2);
+    return minimumOf(PERSONAL_ALLOWANCE, reducedEarnings);
   }
 }
