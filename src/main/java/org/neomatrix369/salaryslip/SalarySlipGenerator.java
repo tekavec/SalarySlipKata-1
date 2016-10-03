@@ -20,7 +20,8 @@ public class SalarySlipGenerator {
   }
 
   public SalarySlip generateFor(Employee employee) {
-    final TaxDetails monthlyTaxDetails = taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
+    final TaxDetails monthlyTaxDetails =
+        taxCalculator.calculateMonthlyTaxDetailsFor(employee.annualSalary());
     final Money monthlyNIContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
 
