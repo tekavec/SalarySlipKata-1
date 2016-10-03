@@ -37,11 +37,11 @@ public class NationalInsuranceCalculator {
 
     for(NationalInsuranceBand niContributionBand : niContributionBands) {
       final Money contributionForTheBand = niContributionBand.calculateContributionsFrom(annualSalary);
-      contributions = contributions.plus(contributionForTheBand);
+      contributions = contributions.add(contributionForTheBand);
     }
 
     return contributions;
   }
 
-  private Money convertToMonthly(Money amount) {return amount.divideBy(TWELVE_MONTHS);}
+  private Money convertToMonthly(Money amount) {return amount.divisionBy(TWELVE_MONTHS);}
 }

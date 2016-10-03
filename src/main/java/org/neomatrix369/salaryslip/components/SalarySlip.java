@@ -25,8 +25,8 @@ public class SalarySlip {
   private Money calculateNetPayableWith(
       Money grossSalary, Money taxPayable, Money niContributions) {
     return grossSalary
-              .minus(taxPayable)
-              .minus(niContributions);
+              .subtract(taxPayable)
+              .subtract(niContributions);
   }
 
   @Override

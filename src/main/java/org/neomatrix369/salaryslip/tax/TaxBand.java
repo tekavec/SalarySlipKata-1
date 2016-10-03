@@ -13,6 +13,6 @@ public abstract class TaxBand {
 
   protected Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
     Money minimumOfTheTwoLimits = minimumOf(annualSalary, upperLimit);
-    return minimumOfTheTwoLimits.minus(lowerLimit);
+    return minimumOfTheTwoLimits.subtract(lowerLimit);
   }
 }

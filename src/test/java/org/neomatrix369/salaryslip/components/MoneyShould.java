@@ -37,7 +37,7 @@ public class MoneyShould {
     Money secondAmount = new Money(25.00);
 
     Money sumOfTheTwoAmounts = new Money(75.00);
-    assertThat(firstAmount.plus(secondAmount), is(sumOfTheTwoAmounts));
+    assertThat(firstAmount.add(secondAmount), is(sumOfTheTwoAmounts));
   }
   
   @Test public void
@@ -46,7 +46,7 @@ public class MoneyShould {
     Money secondAmount = new Money(15.00);
 
     Money differenceOfTheTwoAmounts = new Money(20.00);
-    assertThat(firstAmount.minus(secondAmount), is(differenceOfTheTwoAmounts));
+    assertThat(firstAmount.subtract(secondAmount), is(differenceOfTheTwoAmounts));
   }
 
   @Test public void
@@ -54,7 +54,7 @@ public class MoneyShould {
     Money firstAmount = new Money(25.00);
     Money secondAmount = new Money(40.00);
 
-    assertThat(firstAmount.minus(secondAmount), is(zero()));
+    assertThat(firstAmount.subtract(secondAmount), is(zero()));
   }
   
   @Test public void
@@ -63,7 +63,7 @@ public class MoneyShould {
     double someMultiplicant = 0.45;
 
     Money productOfTheOperation = new Money(09.23);
-    assertThat(someAmount.multiplyBy(someMultiplicant), is(productOfTheOperation));
+    assertThat(someAmount.times(someMultiplicant), is(productOfTheOperation));
   } 
   
   @Test public void
@@ -72,6 +72,6 @@ public class MoneyShould {
     int someDivisor = 5;
 
     Money resultOfOperation = new Money(5.07);
-    assertThat(someAmount.divideBy(someDivisor), is(resultOfOperation));
+    assertThat(someAmount.divisionBy(someDivisor), is(resultOfOperation));
   } 
 }

@@ -59,7 +59,7 @@ public class TaxCalculator {
   }
 
   private Money calculateTaxableIncomeFor(Money annualSalary) {
-    return annualSalary.minus(calculateTaxFreeAllowance(annualSalary));
+    return annualSalary.subtract(calculateTaxFreeAllowance(annualSalary));
   }
 
   private Money calculateMonthlyTaxPayableFor(Money annualSalary) {
@@ -71,11 +71,11 @@ public class TaxCalculator {
 
     for (TaxBand taxBand: taxBands) {
       Money taxPayableForTheBand = taxBand.calculateTaxFrom(annualSalary);
-      totalTaxPayable = totalTaxPayable.plus(taxPayableForTheBand);
+      totalTaxPayable = totalTaxPayable.add(taxPayableForTheBand);
     }
 
     return totalTaxPayable;
   }
 
-  private Money convertToMonthly(Money amount) {return amount.divideBy(TWELVE_MONTHS);}
+  private Money convertToMonthly(Money amount) {return amount.divisionBy(TWELVE_MONTHS);}
 }

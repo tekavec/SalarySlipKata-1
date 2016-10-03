@@ -25,16 +25,16 @@ public class PersonalAllowanceCalculator {
   }
 
   private Money reduce1PoundForEvery2PoundsEarnedOn(Money excessIncomeOver100K) {
-    Money reducedEarnings = excessIncomeOver100K.divideBy(2);
+    Money reducedEarnings = excessIncomeOver100K.divisionBy(2);
     return minimumOf(PERSONAL_ALLOWANCE, reducedEarnings);
   }
 
   public Money calculateTaxFreeAllowanceFor(Money annualSalary) {
     Money adjustmentForExcessIncomeOver100K = calculateAdjustmentForExcessIncomeOver100KFrom(annualSalary);
-    return PERSONAL_ALLOWANCE.minus(adjustmentForExcessIncomeOver100K);
+    return PERSONAL_ALLOWANCE.subtract(adjustmentForExcessIncomeOver100K);
   }
 
   private Money calculateExcessIncomeOver100KFrom(Money annualSalary) {
-    return annualSalary.minus(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
+    return annualSalary.subtract(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 }

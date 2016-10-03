@@ -23,7 +23,7 @@ public class Employee {
   }
 
   public Money monthlySalary() {
-    return annualSalary().divideBy(TWELVE_MONTHS);
+    return annualSalary().divisionBy(TWELVE_MONTHS);
   }
 
   @Override

@@ -12,7 +12,7 @@ public class StandardTaxBand extends TaxBand {
   @Override
   public Money calculateTaxFrom(Money annualSalary) {
     final Money excessIncomeForThisBand = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
-    return excessIncomeForThisBand.multiplyBy(rate);
+    return excessIncomeForThisBand.times(rate);
   }
 
   @Override

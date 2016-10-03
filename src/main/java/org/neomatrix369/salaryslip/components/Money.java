@@ -47,11 +47,11 @@ public class Money {
     return new Money(minimumOfTheTwo);
   }
 
-  public Money plus(Money amount) {
+  public Money add(Money amount) {
     return new Money(denomination.add(amount.denomination));
   }
 
-  public Money minus(Money amount) {
+  public Money subtract(Money amount) {
     if (denomination.compareTo(amount.denomination) > 0) {
       final BigDecimal differenceBetweenTheTwoAmounts = denomination.subtract(amount.denomination);
       return new Money(differenceBetweenTheTwoAmounts);
@@ -60,12 +60,12 @@ public class Money {
     return zero();
   }
 
-  public Money multiplyBy(double anotherDenomination) {
+  public Money times(double anotherDenomination) {
     final BigDecimal anotherDenominationAsBigDecimal = valueOf(anotherDenomination);
     return new Money(denomination.multiply(anotherDenominationAsBigDecimal));
   }
 
-  public Money divideBy(int divisor) {
+  public Money divisionBy(int divisor) {
     final BigDecimal divisorAsBigDecimal = valueOf(divisor).setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
     return new Money(denomination.divide(divisorAsBigDecimal, PLACES_AFTER_DECIMAL, ROUND_HALF_UP));
   }
