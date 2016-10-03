@@ -50,7 +50,7 @@ public class MoneyShould {
   }
 
   @Test public void
-  return_zero_if_the_difference_of_two_given_amounts_is_negative() {
+  return_zero_if_the_difference_of_two_given_amounts_is_less_than_zero() {
     Money firstAmount = new Money(25.00);
     Money secondAmount = new Money(40.00);
 
@@ -58,7 +58,7 @@ public class MoneyShould {
   }
   
   @Test public void
-  return_the_product_of_an_amount_and_another_multiplicant() {
+  return_the_product_of_an_amount_and_a_multiplicant() {
     Money someAmount = new Money(20.50);
     double someMultiplicant = 0.45;
 
