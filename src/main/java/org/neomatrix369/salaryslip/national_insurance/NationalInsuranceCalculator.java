@@ -1,5 +1,6 @@
 package org.neomatrix369.salaryslip.national_insurance;
 
+import static org.neomatrix369.salaryslip.components.Money.zero;
 import static java.lang.Double.MAX_VALUE;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class NationalInsuranceCalculator {
   }
 
   private Money calculateContributionsFor(Money annualSalary) {
-    Money contributions = Money.zero();
+    Money contributions = zero();
 
     for(NationalInsuranceBand niContributionBand : niContributionBands) {
       final Money contributionForTheBand = niContributionBand.calculateContributionsFrom(annualSalary);
