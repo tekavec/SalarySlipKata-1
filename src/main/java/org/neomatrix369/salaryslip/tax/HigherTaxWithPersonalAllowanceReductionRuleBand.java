@@ -4,12 +4,13 @@ import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculator;
 
 public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
-  private StandardTaxBand standardTaxBand;
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
   public HigherTaxWithPersonalAllowanceReductionRuleBand(
-      StandardTaxBand standardTaxBand, PersonalAllowanceCalculator personalAllowanceCalculator) {
-    this.standardTaxBand = standardTaxBand;
+      Money lowerLimit, Money upperLimit, double rate, PersonalAllowanceCalculator personalAllowanceCalculator) {
+    this.lowerLimit = lowerLimit;
+    this.upperLimit = upperLimit;
+    this.rate = rate;
     this.personalAllowanceCalculator = personalAllowanceCalculator;
   }
 
@@ -18,11 +19,10 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
     Money personalAllowanceAdjustmentForOver100K =
         personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100KFrom(annualSalary);
 
-    Money excessIncome = standardTaxBand.calculateExcessFrom(
-            annualSalary, standardTaxBand.upperLimit(), standardTaxBand.lowerLimit());
+    Money excessIncome = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
 
     Money taxableIncomeForThisBand = excessIncome.plus(personalAllowanceAdjustmentForOver100K);
 
-    return taxableIncomeForThisBand.multiplyBy(standardTaxBand.rate());
+    return taxableIncomeForThisBand.multiplyBy(rate);
   }
 }

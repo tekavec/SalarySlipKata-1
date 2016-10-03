@@ -19,8 +19,6 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
   private Money annualSalary;
   private Money expectedAnnualHigherTaxPayable;
 
-  private StandardTaxBand higherTaxBand = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
-
   private PersonalAllowanceCalculator personalAllowanceCalculator = new PersonalAllowanceCalculator();
   private HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRuleBand;
 
@@ -43,7 +41,8 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBandShould {
   @Before
   public void initialise() {
     higherTaxWithPersonalAllowanceReductionRuleBand =
-          new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTaxBand, personalAllowanceCalculator);
+          new HigherTaxWithPersonalAllowanceReductionRuleBand(
+              new Money(43_000.00), new Money(150_000.00), 0.40, personalAllowanceCalculator);
   }
 
   private static Money annualSalaryOf(double amount) {

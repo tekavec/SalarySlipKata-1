@@ -16,13 +16,12 @@ import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculato
 
 @RunWith(Parameterized.class)
 public class TaxBandShould {
-  private static final StandardTaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money( 11_000.00),  0.00);
-  private static final StandardTaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
-  private static final StandardTaxBand HIGHER_TAX_BAND     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00),  0.40);
   private static final StandardTaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),   0.40);
-
+  private static final StandardTaxBand HIGHER_TAX_BAND = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
   private static final HigherTaxWithPersonalAllowanceReductionRuleBand HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND =
-      new HigherTaxWithPersonalAllowanceReductionRuleBand(HIGHER_TAX_BAND, new PersonalAllowanceCalculator());
+      new HigherTaxWithPersonalAllowanceReductionRuleBand(new Money( 43_000.00), new Money(150_000.00),  0.40, new PersonalAllowanceCalculator());
+  private static final StandardTaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
+  private static final StandardTaxBand ZERO_TAX_BAND       = new StandardTaxBand(zero(),                new Money( 11_000.00),  0.00);
 
   private final Money annualSalary;
   private final TaxBand taxBand;

@@ -16,7 +16,6 @@ public class TaxCalculator {
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
   private StandardTaxBand additionalTax = new StandardTaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private StandardTaxBand higherTax     = new StandardTaxBand(new Money( 43_000.00), new Money(150_000.00), 0.40);
   private StandardTaxBand basicTax      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
   private StandardTaxBand zeroTax       = new StandardTaxBand(new Money(      0.00), new Money( 11_000.00), 0.00);
 
@@ -30,7 +29,8 @@ public class TaxCalculator {
 
   private void populateTaxBands() {
     HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRule =
-        new HigherTaxWithPersonalAllowanceReductionRuleBand(higherTax, personalAllowanceCalculator);
+        new HigherTaxWithPersonalAllowanceReductionRuleBand(
+            new Money( 43_000.00), new Money(150_000.00), 0.40, personalAllowanceCalculator);
 
     taxBands.add(additionalTax);
     taxBands.add(higherTaxWithPersonalAllowanceReductionRule);
