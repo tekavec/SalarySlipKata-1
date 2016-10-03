@@ -17,8 +17,8 @@ public class PersonalAllowanceCalculator {
           reduce1PoundForEvery2PoundsEarnedOn(excessIncomeOver100K);
 
       return adjustmentForPersonalAllowance.isGreaterThanZero()
-          ? adjustmentForPersonalAllowance
-          : PERSONAL_ALLOWANCE;
+                ? adjustmentForPersonalAllowance
+                : PERSONAL_ALLOWANCE;
     }
 
     return zero();
