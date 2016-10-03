@@ -11,8 +11,6 @@ import java.util.Objects;
 public class Money {
   private static final int PLACES_AFTER_DECIMAL = 2;
 
-  public static Money zero() {return new Money(0.0);}
-
   private BigDecimal denomination;
 
   public Money(double denomination) {
@@ -29,6 +27,8 @@ public class Money {
     this.denomination = denomination;
     updateScaleToTwoDecimalPlaces();
   }
+
+  public static Money zero() {return new Money(0.0);}
 
   private void updateScaleToTwoDecimalPlaces() {
     this.denomination = this.denomination.setScale(PLACES_AFTER_DECIMAL, ROUND_HALF_UP);
