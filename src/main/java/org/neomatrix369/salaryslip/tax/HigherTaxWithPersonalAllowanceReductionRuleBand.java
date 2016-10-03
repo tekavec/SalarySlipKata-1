@@ -16,7 +16,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
   @Override
   public Money calculateTaxFrom(Money annualSalary) {
     Money personalAllowanceAdjustmentForOver100K =
-        personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100K(annualSalary);
+        personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100KFrom(annualSalary);
 
     Money excessIncome = standardTaxBand.calculateExcessFrom(
             annualSalary, standardTaxBand.upperLimit(), standardTaxBand.lowerLimit());

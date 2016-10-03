@@ -64,7 +64,7 @@ public class PersonalAllowanceCalculatorShould {
   @Test public void
   return_the_adjustment_to_the_personal_allowance_for_a_given_annual_salary() {
     Money actualAvailableAnnualPersonalAllowance =
-        personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100K(annualSalary);
+        personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100KFrom(annualSalary);
     assertThat(actualAvailableAnnualPersonalAllowance, is(expectedAdjustmentToAnnualPersonalAllowance));
   }
 
