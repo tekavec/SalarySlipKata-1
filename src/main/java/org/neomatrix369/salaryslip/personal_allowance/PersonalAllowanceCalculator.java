@@ -8,11 +8,11 @@ public class PersonalAllowanceCalculator {
   private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
   private static final Money SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE = new Money(100_000.00);
 
-  public Money calculateAdjustmentForOver100K(Money annualSalary) {
-    final Money excessOver100K = calculateExcessOver100kOf(annualSalary);
+  public Money calculateAdjustmentForExcessIncomeOver100K(Money annualSalary) {
+    final Money excessIncomeOver100K = calculateExcessIncomeOver100kFrom(annualSalary);
 
-    if (excessOver100K.isGreaterThanZero()) {
-      final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(excessOver100K);
+    if (excessIncomeOver100K.isGreaterThanZero()) {
+      final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(excessIncomeOver100K);
       return adjustmentForPersonalAllowance.isGreaterThanZero()
                 ? adjustmentForPersonalAllowance
                 : PERSONAL_ALLOWANCE;
@@ -21,12 +21,12 @@ public class PersonalAllowanceCalculator {
     return zero();
   }
 
-  private Money calculateExcessOver100kOf(Money annualSalary) {
+  private Money calculateExcessIncomeOver100kFrom(Money annualSalary) {
     return annualSalary.minus(SALARY_THRESHOLD_FOR_PERSONAL_ALLOWANCE_REDUCTION_RULE);
   }
 
   public Money calculateTaxFreeAllowanceFor(Money annualSalary) {
-    final Money excessOver100k = calculateExcessOver100kOf(annualSalary);
+    final Money excessOver100k = calculateExcessIncomeOver100kFrom(annualSalary);
     final Money reduce1PoundForEvery2PoundsEarned = reduce1PoundForEvery2PoundsEarnedOn(excessOver100k);
 
     return excessOver100k.isGreaterThanZero()

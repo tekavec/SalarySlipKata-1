@@ -63,13 +63,15 @@ public class PersonalAllowanceCalculatorShould {
 
   @Test public void
   return_the_adjustment_to_the_personal_allowance_for_a_given_annual_salary() {
-    Money actualAvailableAnnualPersonalAllowance = personalAllowanceCalculator.calculateAdjustmentForOver100K(annualSalary);
+    Money actualAvailableAnnualPersonalAllowance =
+        personalAllowanceCalculator.calculateAdjustmentForExcessIncomeOver100K(annualSalary);
     assertThat(actualAvailableAnnualPersonalAllowance, is(expectedAdjustmentToAnnualPersonalAllowance));
   }
 
   @Test public void
   return_the_tax_free_allowance_for_a_given_annual_salary() {
-    Money actualAnnualTaxFreeAllowance = personalAllowanceCalculator.calculateTaxFreeAllowanceFor(annualSalary);
+    Money actualAnnualTaxFreeAllowance =
+        personalAllowanceCalculator.calculateTaxFreeAllowanceFor(annualSalary);
     assertThat(actualAnnualTaxFreeAllowance, is(expectedAnnualTaxFreeAllowance));
   }
 }
