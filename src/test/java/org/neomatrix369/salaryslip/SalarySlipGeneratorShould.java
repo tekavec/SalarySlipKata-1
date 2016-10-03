@@ -252,7 +252,7 @@ public class SalarySlipGeneratorShould {
   }
 
   @Test public void
-  return_a_monthly_salary_slip_for_a_given_annual_salary() {
+  return_a_monthly_salary_slip_of_an_employee_with_a_given_annual_salary() {
     Employee employee = createEmployeeWith(annualSalary).build();
     assertThat(
         salarySlipGenerator.generateFor(employee),
