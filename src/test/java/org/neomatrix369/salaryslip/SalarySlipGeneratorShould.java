@@ -57,190 +57,186 @@ public class SalarySlipGeneratorShould {
                 annualSalaryOf(24_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(24_000.00))
-                    .withGrossSalary(monthly(2_000.00))
+                    .withGrossSalary(monthlyOf(2_000.00))
                     .withTaxDetails(aTaxDetails()
-                        .withTaxFreeAllowance(monthly(916.67))
-                        .withTaxableIncome(monthly(1_083.33))
-                        .withTaxPayable(monthly(216.67))
+                        .withTaxFreeAllowance(monthlyOf(916.67))
+                        .withTaxableIncome(monthlyOf(1_083.33))
+                        .withTaxPayable(monthlyOf(216.67))
                         .build()
                     )
-                    .withNIContributions(monthly(159.40))
+                    .withNIContributions(monthlyOf(159.40))
                     .build()
             },
             {
                 annualSalaryOf(5_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(5_000.00))
-                    .withGrossSalary(monthly(416.67))
+                    .withGrossSalary(monthlyOf(416.67))
                     .withTaxDetails(aTaxDetails()
-                        .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(0.00))
-                      .withTaxPayable(monthly(0.00))
+                        .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(0.00))
+                      .withTaxPayable(monthlyOf(0.00))
                       .build()
                 )
-                    .withNIContributions(monthly(0.00))
+                    .withNIContributions(monthlyOf(0.00))
                 .build()
             },
             {
                 annualSalaryOf(8_060.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(8_060.00))
-                    .withGrossSalary(monthly(671.67))
+                    .withGrossSalary(monthlyOf(671.67))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(0.00))
-                      .withTaxPayable(monthly(0.00))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(0.00))
+                      .withTaxPayable(monthlyOf(0.00))
                       .build()
                     )
-                    .withNIContributions(monthly(0.00))
+                    .withNIContributions(monthlyOf(0.00))
                     .build()
             },
             {
                 annualSalaryOf(12_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(12_000.00))
-                    .withGrossSalary(monthly(1_000.00))
+                    .withGrossSalary(monthlyOf(1_000.00))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(83.33))
-                      .withTaxPayable(monthly(16.67))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(83.33))
+                      .withTaxPayable(monthlyOf(16.67))
                       .build()
                     )
-                    .withNIContributions(monthly(39.40))
+                    .withNIContributions(monthlyOf(39.40))
                     .build()
             },
             {
                 annualSalaryOf(40_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(40_000.00))
-                    .withGrossSalary(monthly(3_333.33))
+                    .withGrossSalary(monthlyOf(3_333.33))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(2_416.67))
-                      .withTaxPayable(monthly(483.33))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(2_416.67))
+                      .withTaxPayable(monthlyOf(483.33))
                       .build()
                     )
-                    .withNIContributions(monthly(319.40))
+                    .withNIContributions(monthlyOf(319.40))
                     .build()
             },
             {
                 annualSalaryOf(43_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(43_000.00))
-                    .withGrossSalary(monthly(3_583.33))
+                    .withGrossSalary(monthlyOf(3_583.33))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(2_666.67))
-                      .withTaxPayable(monthly(533.33))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(2_666.67))
+                      .withTaxPayable(monthlyOf(533.33))
                       .build()
                     )
-                    .withNIContributions(monthly(349.40))
+                    .withNIContributions(monthlyOf(349.40))
                     .build()
             },
             {
                 annualSalaryOf(60_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(60_000.00))
-                    .withGrossSalary(monthly(5_000.00))
+                    .withGrossSalary(monthlyOf(5_000.00))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(4_083.33))
-                      .withTaxPayable(monthly(1_100.00))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(4_083.33))
+                      .withTaxPayable(monthlyOf(1_100.00))
                       .build()
                     )
-                    .withNIContributions(monthly(377.73))
+                    .withNIContributions(monthlyOf(377.73))
                     .build()
             },
             {
                 annualSalaryOf(100_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(100_000.00))
-                    .withGrossSalary(monthly(8_333.33))
+                    .withGrossSalary(monthlyOf(8_333.33))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(916.67))
-                      .withTaxableIncome(monthly(7_416.67))
-                      .withTaxPayable(monthly(2_433.33))
+                      .withTaxFreeAllowance(monthlyOf(916.67))
+                      .withTaxableIncome(monthlyOf(7_416.67))
+                      .withTaxPayable(monthlyOf(2_433.33))
                       .build()
                     )
-                    .withNIContributions(monthly(444.40))
+                    .withNIContributions(monthlyOf(444.40))
                     .build()
             },
             {
                 annualSalaryOf(105_500.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(105_500.00))
-                    .withGrossSalary(monthly(8_791.67))
+                    .withGrossSalary(monthlyOf(8_791.67))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(687.50))
-                      .withTaxableIncome(monthly(8_104.17))
-                      .withTaxPayable(monthly(2_708.33))
+                      .withTaxFreeAllowance(monthlyOf(687.50))
+                      .withTaxableIncome(monthlyOf(8_104.17))
+                      .withTaxPayable(monthlyOf(2_708.33))
                       .build()
                     )
-                    .withNIContributions(monthly(453.57))
+                    .withNIContributions(monthlyOf(453.57))
                     .build()
             },
             {
                 annualSalaryOf(111_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(111_000.00))
-                    .withGrossSalary(monthly(9_250.00))
+                    .withGrossSalary(monthlyOf(9_250.00))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(458.33))
-                      .withTaxableIncome(monthly(8_791.67))
-                      .withTaxPayable(monthly(2_983.33))
+                      .withTaxFreeAllowance(monthlyOf(458.33))
+                      .withTaxableIncome(monthlyOf(8_791.67))
+                      .withTaxPayable(monthlyOf(2_983.33))
                       .build()
                     )
-                    .withNIContributions(monthly(462.73))
+                    .withNIContributions(monthlyOf(462.73))
                     .build()
             },
             {
                 annualSalaryOf(122_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(122_000.00))
-                    .withGrossSalary(monthly(10_166.67))
+                    .withGrossSalary(monthlyOf(10_166.67))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(0.00))
-                      .withTaxableIncome(monthly(10_166.67))
-                      .withTaxPayable(monthly(3_533.33))
+                      .withTaxFreeAllowance(monthlyOf(0.00))
+                      .withTaxableIncome(monthlyOf(10_166.67))
+                      .withTaxPayable(monthlyOf(3_533.33))
                       .build()
                     )
-                    .withNIContributions(monthly(481.07))
+                    .withNIContributions(monthlyOf(481.07))
                     .build()
             },
             {
                 annualSalaryOf(150_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(150_000.00))
-                    .withGrossSalary(monthly(12_500.00))
+                    .withGrossSalary(monthlyOf(12_500.00))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(0.00))
-                      .withTaxableIncome(monthly(12_500.00))
-                      .withTaxPayable(monthly(4_466.67))
+                      .withTaxFreeAllowance(monthlyOf(0.00))
+                      .withTaxableIncome(monthlyOf(12_500.00))
+                      .withTaxPayable(monthlyOf(4_466.67))
                       .build()
                     )
-                    .withNIContributions(monthly(527.73))
+                    .withNIContributions(monthlyOf(527.73))
                     .build()
             },
             {
                 annualSalaryOf(160_000.00),
                 aSalarySlip()
                     .withEmployee(employeeWithAnnualSalaryOf(160_000.00))
-                    .withGrossSalary(monthly(13_333.33))
+                    .withGrossSalary(monthlyOf(13_333.33))
                     .withTaxDetails(aTaxDetails()
-                      .withTaxFreeAllowance(monthly(0.00))
-                      .withTaxableIncome(monthly(13_333.33))
-                      .withTaxPayable(monthly(4_841.67))
+                      .withTaxFreeAllowance(monthlyOf(0.00))
+                      .withTaxableIncome(monthlyOf(13_333.33))
+                      .withTaxPayable(monthlyOf(4_841.67))
                       .build()
                     )
-                    .withNIContributions(monthly(544.40))
+                    .withNIContributions(monthlyOf(544.40))
                     .build()
             }
         }
     );
-  }
-
-  private static Money monthly(double amount) {
-    return new Money(amount);
   }
 
   private static Money annualSalaryOf(double amount) {
@@ -249,6 +245,10 @@ public class SalarySlipGeneratorShould {
 
   private static Employee employeeWithAnnualSalaryOf(double annualSalary) {
     return createEmployeeWith(new Money(annualSalary)).build();
+  }
+
+  private static Money monthlyOf(double amount) {
+    return new Money(amount);
   }
 
   @Test public void
