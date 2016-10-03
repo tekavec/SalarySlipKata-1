@@ -15,7 +15,7 @@ public class PersonalAllowanceCalculator {
       final Money adjustmentForPersonalAllowance = reduce1PoundForEvery2PoundsEarnedOn(excessOver100K);
       return adjustmentForPersonalAllowance.isGreaterThanZero()
                 ? adjustmentForPersonalAllowance
-                : getPersonalAllowance();
+                : PERSONAL_ALLOWANCE;
     }
 
     return zero();
@@ -31,24 +31,20 @@ public class PersonalAllowanceCalculator {
 
     return excessOver100k.isGreaterThanZero()
               ? adjustedPersonalAllowance(reduce1PoundForEvery2PoundsEarned)
-              : getPersonalAllowance();
+              : PERSONAL_ALLOWANCE;
   }
 
   private Money reduce1PoundForEvery2PoundsEarnedOn(Money excessOver100k) {
     final Money reducedEarnings = excessOver100k.divideBy(2);
 
-    return getPersonalAllowance().isGreaterThan(reducedEarnings)
+    return PERSONAL_ALLOWANCE.isGreaterThan(reducedEarnings)
         ? reducedEarnings
         : zero();
   }
 
   private Money adjustedPersonalAllowance(Money amount) {
     return amount.isGreaterThanZero()
-              ? getPersonalAllowance().minus(amount)
+              ? PERSONAL_ALLOWANCE.minus(amount)
               : zero();
-  }
-
-  private Money getPersonalAllowance() {
-    return PERSONAL_ALLOWANCE;
   }
 }
