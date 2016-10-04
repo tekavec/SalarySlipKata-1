@@ -1,6 +1,7 @@
 package org.neomatrix369.salaryslip.components;
 
 import static java.math.BigDecimal.ROUND_HALF_UP;
+import static java.math.BigDecimal.ZERO;
 import static java.math.BigDecimal.valueOf;
 
 import java.math.BigDecimal;
@@ -29,7 +30,11 @@ public class Money {
 
   public Money subtract(Money anotherAmount) {
     final BigDecimal difference = denomination.subtract(anotherAmount.denomination);
-    return new Money(difference);
+    if (difference.compareTo(ZERO) > 0) {
+      return new Money(difference);
+    }
+
+    return zero();
   }
 
   public Money times(double rate) {
