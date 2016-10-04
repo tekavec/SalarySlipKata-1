@@ -23,10 +23,8 @@ public class Money {
 
   public static Money zero() {return new Money(0.00);}
 
-  public Money divisionBy(int dividedBy) {
-    BigDecimal dividedByAsBigDecimal = updateWithDefaultScale(valueOf(dividedBy));
-    final BigDecimal result = denomination.divide(dividedByAsBigDecimal, 2, ROUND_HALF_UP);
-    return new Money(result);
+  public Money add(Money anotherAmount) {
+    return new Money(denomination.add(anotherAmount.denomination));
   }
 
   public Money subtract(Money anotherAmount) {
@@ -34,8 +32,31 @@ public class Money {
     return new Money(difference);
   }
 
+  public Money times(double rate) {
+    BigDecimal rateAsBigDecimal = updateWithDefaultScale(valueOf(rate));
+    BigDecimal result = denomination.multiply(rateAsBigDecimal);
+    result = updateWithDefaultScale(result);
+    return new Money(result);
+  }
+
+  public Money divisionBy(int dividedBy) {
+    BigDecimal dividedByAsBigDecimal = updateWithDefaultScale(valueOf(dividedBy));
+    final BigDecimal result = denomination.divide(dividedByAsBigDecimal, 2, ROUND_HALF_UP);
+    return new Money(result);
+  }
+
   public boolean isGreaterThanZero() {
     return denomination.compareTo(valueOf(0.00)) > 0;
+  }
+
+  public static Money minimum(Money firstAmount, Money secondAmount) {
+    Money difference = firstAmount.subtract(secondAmount);
+
+    if (difference.isGreaterThanZero()) {
+      return secondAmount;
+    }
+
+    return firstAmount;
   }
 
   private BigDecimal updateWithDefaultScale(BigDecimal value) {
@@ -58,12 +79,5 @@ public class Money {
   @Override
   public String toString() {
     return "£" + denomination;
-  }
-
-  public Money times(double rate) {
-    BigDecimal rateAsBigDecimal = updateWithDefaultScale(valueOf(rate));
-    BigDecimal result = denomination.multiply(rateAsBigDecimal);
-    result = updateWithDefaultScale(result);
-    return new Money(result);
   }
 }

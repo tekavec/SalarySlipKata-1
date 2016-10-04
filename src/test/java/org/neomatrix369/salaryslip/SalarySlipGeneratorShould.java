@@ -71,6 +71,19 @@ public class SalarySlipGeneratorShould {
                         )
                     )
             },
+            {
+                    45_000.00,
+                    createSalarySlip(
+                        createEmployee(45_000.00),
+                        withMonthlyGrossSalaryOf(3_750.00),
+                        withMonthlyNIContributions(352.73),
+                        createTaxDetailsWith(
+                          withMonthlyTaxFreeAllowance(916.67),
+                          withMonthlyTaxableIncome(2_833.33),
+                          withMonthlyTaxPayable(600.00)
+                        )
+                    )
+            },
         }
     );
   }

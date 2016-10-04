@@ -34,7 +34,7 @@ public class TaxDetails {
 
   @Override
   public String toString() {
-    return format("taxFreeAllowance=%s, taxableIncome=%s, taxPayable=%s",
+    return format("taxFreeAllowance=%s \n taxableIncome=%s \n taxPayable=%s \n",
         taxFreeAllowance, taxableIncome, taxPayable);
   }
 }
