@@ -1,8 +1,7 @@
 package org.neomatrix369.salaryslip.national_insurance;
 
 import static org.neomatrix369.salaryslip.components.Money.minimum;
-
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 import org.neomatrix369.salaryslip.components.Money;
 
@@ -21,11 +20,7 @@ public class NationalInsuranceBand {
     final Money actualUpperLimit = minimum(annualSalary, upperLimit);
     final Money excessIncome = actualUpperLimit.subtract(lowerLimit);
 
-    if (excessIncome.isGreaterThanZero()) {
-      return excessIncome.times(rate);
-    }
-
-    return lowerLimit.zero();
+    return excessIncome.times(rate);
   }
 
   @Override

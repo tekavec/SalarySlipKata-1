@@ -14,7 +14,7 @@ public class Money {
     this.denomination = updateWithDefaultScale(valueOf(denomination));
   }
 
-  public Money(BigDecimal denomination) {
+  private Money(BigDecimal denomination) {
     this.denomination = updateWithDefaultScale(denomination);
   }
 

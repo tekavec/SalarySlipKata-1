@@ -19,7 +19,7 @@ public class TaxCalculator {
     );
   }
 
-  public Money monthlyTaxPayable(Money annualSalary) {
+  private Money monthlyTaxPayable(Money annualSalary) {
     final Money taxPayable =
         basicTaxRateBand.calculateTaxPayable(annualSalary)
         .add(
