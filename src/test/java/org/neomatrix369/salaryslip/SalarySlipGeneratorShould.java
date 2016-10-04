@@ -2,6 +2,8 @@ package org.neomatrix369.salaryslip;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.components.SalarySlipBuilder.aSalarySlip;
+import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -15,7 +17,6 @@ import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
 import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
-import org.neomatrix369.salaryslip.tax.TaxDetails;
 
 @RunWith(Parameterized.class)
 public class SalarySlipGeneratorShould {
@@ -40,55 +41,63 @@ public class SalarySlipGeneratorShould {
         new Object[][] {
             {
                     5_000.00,
-                    createSalarySlip(
-                        createEmployee(5_000.00),
-                        withMonthlyGrossSalaryOf(416.67),
-                        withMonthlyNIContributions(0.00),
-                        createTaxDetailsWith(
-                          withMonthlyTaxFreeAllowance(916.67),
-                          withMonthlyTaxableIncome(0.00),
-                          withMonthlyTaxPayable(0.00)
+                    aSalarySlip()
+                        .withEmployee(createEmployee(5_000.00))
+                        .withGrossSalary(monthly(416.67))
+                        .withNiContributions(monthly(0.00))
+                        .withTaxDetails(
+                            aTaxDetails()
+                            .withTaxFreeAllowance(monthly(916.67))
+                            .withTaxableIncome(monthly(0.00))
+                            .withTaxPayable(monthly(0.00))
+                            .build()
                         )
-                    )
+                        .build()
             },
             {
                     8_060.00,
-                    createSalarySlip(
-                        createEmployee(8_060.00),
-                        withMonthlyGrossSalaryOf(671.67),
-                        withMonthlyNIContributions(0.00),
-                        createTaxDetailsWith(
-                          withMonthlyTaxFreeAllowance(916.67),
-                          withMonthlyTaxableIncome(0.00),
-                          withMonthlyTaxPayable(0.00)
+                    aSalarySlip()
+                        .withEmployee(createEmployee(8_060.00))
+                        .withGrossSalary(monthly(671.67))
+                        .withNiContributions(monthly(0.00))
+                        .withTaxDetails(
+                            aTaxDetails()
+                            .withTaxFreeAllowance(monthly(916.67))
+                            .withTaxableIncome(monthly(0.00))
+                            .withTaxPayable(monthly(0.00))
+                          .build()
                         )
-                    )
+                        .build()
             },
             {
                     9_060.00,
-                    createSalarySlip(
-                        createEmployee(9_060.00),
-                        withMonthlyGrossSalaryOf(755.00),
-                        withMonthlyNIContributions(10.00),
-                        createTaxDetailsWith(
-                          withMonthlyTaxFreeAllowance(916.67),
-                          withMonthlyTaxableIncome(0.00),
-                          withMonthlyTaxPayable(0.00)
+                    aSalarySlip()
+                        .withEmployee(createEmployee(9_060.00))
+                        .withGrossSalary(monthly(755.00))
+                        .withNiContributions(monthly(10.00))
+                        .withTaxDetails(
+                            aTaxDetails()
+                            .withTaxFreeAllowance(monthly(916.67))
+                            .withTaxableIncome(monthly(0.00))
+                            .withTaxPayable(monthly(0.00))
+                          .build()
                         )
-                    )
+                        .build()
             },
             {
                     45_000.00,
-                    createSalarySlip(
-                        createEmployee(45_000.00),
-                        withMonthlyGrossSalaryOf(3_750.00),
-                        withMonthlyNIContributions(352.73),
-                        createTaxDetailsWith(
-                          withMonthlyTaxFreeAllowance(916.67),
-                          withMonthlyTaxableIncome(2_833.33),
-                          withMonthlyTaxPayable(600.00)
+                    aSalarySlip()
+                        .withEmployee(createEmployee(45_000.00))
+                        .withGrossSalary(monthly(3_750.00))
+                        .withNiContributions(monthly(352.73))
+                        .withTaxDetails(
+                            aTaxDetails()
+                            .withTaxFreeAllowance(monthly(916.67))
+                            .withTaxableIncome(monthly(2_833.33))
+                            .withTaxPayable(monthly(600.00))
+                          .build()
                         )
-                    )
+                        .build()
             },
         }
     );
@@ -105,51 +114,11 @@ public class SalarySlipGeneratorShould {
     assertThat(salarySlipGenerator.generateFor(employee), is(expectedSalarySlip));
   }
 
-  private static SalarySlip createSalarySlip(
-      Employee employee,
-      Money grossSalary,
-      Money niContributions,
-      TaxDetails taxDetails) {
-      return new SalarySlip(
-          employee,
-          grossSalary,
-          niContributions,
-          taxDetails
-      );
-  }
-
-  private static TaxDetails createTaxDetailsWith(
-      Money taxFreeAllowance,
-      Money taxableIncome,
-      Money taxPayable) {
-    return new TaxDetails(
-        taxFreeAllowance,
-        taxableIncome,
-        taxPayable
-    );
-  }
-
   private static Employee createEmployee(double annualSalary) {
     return new Employee(12345, "John J Doe", new Money(annualSalary));
   }
 
-  private static Money withMonthlyGrossSalaryOf(double salary) {
-    return new Money(salary);
-  }
-
-  private static Money withMonthlyNIContributions(double amount) {
-    return new Money(amount);
-  }
-
-  private static Money withMonthlyTaxFreeAllowance(double amount) {
-    return new Money(amount);
-  }
-
-  private static Money withMonthlyTaxableIncome(double amount) {
-    return new Money(amount);
-  }
-
-  private static Money withMonthlyTaxPayable(double amount) {
+  private static Money monthly(double amount) {
     return new Money(amount);
   }
 }

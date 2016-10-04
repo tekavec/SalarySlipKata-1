@@ -2,6 +2,7 @@ package org.neomatrix369.salaryslip.tax;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
 
 import static java.util.Arrays.asList;
 
@@ -28,17 +29,21 @@ public class TaxCalculatorShould {
             {
                 annualSalaryOf(12_000.00),
                 expectedMonthlyTaxDetailsOf(
-                      monthlyTaxFreeAllowanceOf(916.67),
-                      monthlyTaxableIncomeOf(83.33),
-                      monthlyTaxPayableOf(16.67)
+                    aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(83.33))
+                        .withTaxPayable(monthly(16.67))
+                    .build()
                 )
             },
             {
                 annualSalaryOf(45_000.00),
                 expectedMonthlyTaxDetailsOf(
-                    monthlyTaxFreeAllowanceOf(916.67),
-                    monthlyTaxableIncomeOf(2_833.33),
-                    monthlyTaxPayableOf(600.00)
+                    aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(2_833.33))
+                        .withTaxPayable(monthly(600.00))
+                    .build()
                 )
             }
         }
@@ -64,24 +69,11 @@ public class TaxCalculatorShould {
     return new Money(amount);
   }
 
-  private static Money monthlyTaxFreeAllowanceOf(double amount) {
-    return new Money(amount);
+  private static TaxDetails expectedMonthlyTaxDetailsOf(TaxDetails taxDetails) {
+    return taxDetails;
   }
 
-  private static Money monthlyTaxableIncomeOf(double amount) {
+  private static Money monthly(double amount) {
     return new Money(amount);
-  }
-
-  private static Money monthlyTaxPayableOf(double amount) {
-    return new Money(amount);
-  }
-
-  private static TaxDetails expectedMonthlyTaxDetailsOf(
-      Money taxFreeAllowance, Money taxableIncome, Money taxPayable) {
-    return new TaxDetails(
-        taxFreeAllowance,
-        taxableIncome,
-        taxPayable
-    );
   }
 }

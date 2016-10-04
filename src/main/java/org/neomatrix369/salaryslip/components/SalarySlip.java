@@ -12,7 +12,11 @@ public class SalarySlip {
   private final Money niContributions;
   private final TaxDetails taxDetails;
 
-  public SalarySlip(Employee employee, Money grossSalary, Money niContributions, TaxDetails taxDetails) {
+  public SalarySlip(
+      Employee employee,
+      Money grossSalary,
+      Money niContributions,
+      TaxDetails taxDetails) {
     this.employee = employee;
     this.grossSalary = grossSalary;
     this.niContributions = niContributions;
