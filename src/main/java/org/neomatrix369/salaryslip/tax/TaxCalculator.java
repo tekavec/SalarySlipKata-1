@@ -15,28 +15,17 @@ public class TaxCalculator {
 
   private PersonalAllowanceCalculator personalAllowanceCalculator;
 
-  private StandardTaxBand additionalTax = new StandardTaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45);
-  private StandardTaxBand basicTax      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
-  private StandardTaxBand zeroTax       = new StandardTaxBand(new Money(      0.00), new Money( 11_000.00), 0.00);
-
   private List<TaxBand> taxBands = new ArrayList<>();
 
   public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
 
-    populateTaxBands();
-  }
-
-  private void populateTaxBands() {
-    HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRule =
-        new HigherTaxWithPersonalAllowanceReductionRuleBand(
-            new Money( 43_000.00), new Money(150_000.00), 0.40, personalAllowanceCalculator
-        );
-
-    taxBands.add(additionalTax);
-    taxBands.add(higherTaxWithPersonalAllowanceReductionRule);
-    taxBands.add(basicTax);
-    taxBands.add(zeroTax);
+    taxBands.add(new StandardTaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45));
+    taxBands.add(new HigherTaxWithPersonalAllowanceReductionRuleBand(
+        new Money( 43_000.00), new Money(150_000.00), 0.40, this.personalAllowanceCalculator)
+    );
+    taxBands.add(new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20));
+    taxBands.add(new StandardTaxBand(new Money(      0.00), new Money( 11_000.00), 0.00));
   }
 
   public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
