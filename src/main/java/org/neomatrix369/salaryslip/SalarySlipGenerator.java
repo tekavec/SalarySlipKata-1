@@ -23,12 +23,7 @@ public class SalarySlipGenerator {
     Money monthlyNIContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
 
-    Money monthlyTaxFreeAllowance = convertToMonthly(PERSONAL_ALLOWANCE);
-    TaxDetails monthlyTaxDetails = new TaxDetails(
-        monthlyTaxFreeAllowance,
-        zero(),
-        zero()
-    );
+    TaxDetails monthlyTaxDetails = calculateMonthlyTaxDetails(employee.annualSalary());
 
     return new SalarySlip(
         employee,
@@ -36,6 +31,21 @@ public class SalarySlipGenerator {
         monthlyNIContributions,
         monthlyTaxDetails
     );
+  }
+
+  private TaxDetails calculateMonthlyTaxDetails(Money annualSalary) {
+    return new TaxDetails(
+                monthlyTaxFreeAllowance(),
+                monthlyTaxableIncome(annualSalary),
+                zero()
+      );
+  }
+
+  private Money monthlyTaxFreeAllowance() {return convertToMonthly(PERSONAL_ALLOWANCE);}
+
+  private Money monthlyTaxableIncome(Money annualSalary) {
+    final Money taxableIncome = annualSalary.subtract(PERSONAL_ALLOWANCE);
+    return convertToMonthly(taxableIncome);
   }
 
   private Money convertToMonthly(Money amount) {return amount.divisionBy(TWELVE_MONTHS);}
