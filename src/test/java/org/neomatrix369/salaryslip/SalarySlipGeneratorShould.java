@@ -13,6 +13,7 @@ import org.junit.runners.Parameterized;
 import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
+import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
 import org.neomatrix369.salaryslip.tax.TaxDetails;
 
 @RunWith(Parameterized.class)
@@ -25,7 +26,9 @@ public class SalarySlipGeneratorShould {
 
   @Before
   public void initialise() {
-    salarySlipGenerator = new SalarySlipGenerator();
+    final NationalInsuranceCalculator nationalInsuranceCalculator =
+        new NationalInsuranceCalculator();
+    salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator);
   }
 
   @Parameterized.Parameters(name="For an annual salary of £{0}, the employee salary slip should look like {1}")
