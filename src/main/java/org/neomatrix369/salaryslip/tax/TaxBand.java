@@ -6,12 +6,21 @@ import static java.lang.String.format;
 
 import org.neomatrix369.salaryslip.components.Money;
 
-public abstract class TaxBand {
+public class TaxBand {
   protected Money lowerLimit;
   protected Money upperLimit;
   protected double rate;
 
-  abstract Money calculateTaxFrom(Money annualSalary);
+  public TaxBand(Money lowerLimit, Money upperLimit, double rate) {
+    this.lowerLimit = lowerLimit;
+    this.upperLimit = upperLimit;
+    this.rate = rate;
+  }
+
+  public Money calculateTaxFrom(Money annualSalary) {
+    final Money excessIncomeForThisBand = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
+    return excessIncomeForThisBand.times(rate);
+  }
 
   protected Money calculateExcessFrom(Money annualSalary, Money upperLimit, Money lowerLimit) {
     Money minimumOfTheTwoLimits = minimumOf(annualSalary, upperLimit);

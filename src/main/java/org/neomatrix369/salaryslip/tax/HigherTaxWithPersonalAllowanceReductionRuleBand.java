@@ -8,9 +8,7 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
 
   public HigherTaxWithPersonalAllowanceReductionRuleBand(
       Money lowerLimit, Money upperLimit, double rate, PersonalAllowanceCalculator personalAllowanceCalculator) {
-    this.lowerLimit = lowerLimit;
-    this.upperLimit = upperLimit;
-    this.rate = rate;
+    super(lowerLimit, upperLimit, rate);
     this.personalAllowanceCalculator = personalAllowanceCalculator;
   }
 

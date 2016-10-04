@@ -20,12 +20,12 @@ public class TaxCalculator {
   public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
 
-    taxBands.add(new StandardTaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45));
+    taxBands.add(new TaxBand(new Money(150_000.00), new Money( MAX_VALUE), 0.45));
     taxBands.add(new HigherTaxWithPersonalAllowanceReductionRuleBand(
         new Money( 43_000.00), new Money(150_000.00), 0.40, this.personalAllowanceCalculator)
     );
-    taxBands.add(new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20));
-    taxBands.add(new StandardTaxBand(new Money(      0.00), new Money( 11_000.00), 0.00));
+    taxBands.add(new TaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20));
+    taxBands.add(new TaxBand(new Money(      0.00), new Money( 11_000.00), 0.00));
   }
 
   public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
