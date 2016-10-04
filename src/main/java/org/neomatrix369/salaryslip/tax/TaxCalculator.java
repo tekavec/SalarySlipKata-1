@@ -30,7 +30,8 @@ public class TaxCalculator {
   private void populateTaxBands() {
     HigherTaxWithPersonalAllowanceReductionRuleBand higherTaxWithPersonalAllowanceReductionRule =
         new HigherTaxWithPersonalAllowanceReductionRuleBand(
-            new Money( 43_000.00), new Money(150_000.00), 0.40, personalAllowanceCalculator);
+            new Money( 43_000.00), new Money(150_000.00), 0.40, personalAllowanceCalculator
+        );
 
     taxBands.add(additionalTax);
     taxBands.add(higherTaxWithPersonalAllowanceReductionRule);

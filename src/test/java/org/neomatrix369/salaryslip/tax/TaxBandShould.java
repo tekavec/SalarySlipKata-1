@@ -17,7 +17,6 @@ import org.neomatrix369.salaryslip.personal_allowance.PersonalAllowanceCalculato
 @RunWith(Parameterized.class)
 public class TaxBandShould {
   private static final StandardTaxBand ADDITIONAL_TAX_BAND = new StandardTaxBand(new Money(150_000.00), new Money(MAX_VALUE),   0.40);
-  private static final StandardTaxBand HIGHER_TAX_BAND = new StandardTaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
   private static final HigherTaxWithPersonalAllowanceReductionRuleBand HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND =
       new HigherTaxWithPersonalAllowanceReductionRuleBand(new Money( 43_000.00), new Money(150_000.00),  0.40, new PersonalAllowanceCalculator());
   private static final StandardTaxBand BASIC_TAX_BAND      = new StandardTaxBand(new Money( 11_000.00), new Money( 43_000.00),  0.20);
@@ -33,11 +32,9 @@ public class TaxBandShould {
         new Object[][] {
             { annualSalaryOf( 60_000.00), ZERO_TAX_BAND,       expectedAnnualTaxPayableOf(     0.00) },
             { annualSalaryOf( 60_000.00), BASIC_TAX_BAND,      expectedAnnualTaxPayableOf( 6_400.00) },
-            { annualSalaryOf( 60_000.00), HIGHER_TAX_BAND,     expectedAnnualTaxPayableOf( 6_800.00) },
             { annualSalaryOf( 60_000.00), ADDITIONAL_TAX_BAND, expectedAnnualTaxPayableOf(     0.00) },
             { annualSalaryOf(100_000.00), ZERO_TAX_BAND,       expectedAnnualTaxPayableOf(     0.00) },
             { annualSalaryOf(100_000.00), BASIC_TAX_BAND,      expectedAnnualTaxPayableOf( 6_400.00) },
-            { annualSalaryOf(100_000.00), HIGHER_TAX_BAND,     expectedAnnualTaxPayableOf(22_800.00) },
             { annualSalaryOf(100_000.00), ADDITIONAL_TAX_BAND, expectedAnnualTaxPayableOf(     0.00) },
             { annualSalaryOf(105_000.00), HIGHER_TAX_WITH_PA_REDUCTION_RULE_BAND,
                                                                expectedAnnualTaxPayableOf(25_800.00) },

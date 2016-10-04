@@ -2,6 +2,8 @@ package org.neomatrix369.salaryslip.national_insurance;
 
 import static org.neomatrix369.salaryslip.components.Money.minimumOf;
 
+import static java.lang.String.format;
+
 import org.neomatrix369.salaryslip.components.Money;
 
 public class NationalInsuranceBand {
@@ -28,6 +30,6 @@ public class NationalInsuranceBand {
 
   @Override
   public String toString() {
-    return String.format("lowerLimit=%s, upperLimit=%s, rate=%s", lowerLimit, upperLimit, rate);
+    return format("lowerLimit=%s, upperLimit=%s, rate=%s", lowerLimit, upperLimit, rate);
   }
 }

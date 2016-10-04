@@ -14,9 +14,4 @@ public class StandardTaxBand extends TaxBand {
     final Money excessIncomeForThisBand = calculateExcessFrom(annualSalary, upperLimit, lowerLimit);
     return excessIncomeForThisBand.times(rate);
   }
-
-  @Override
-  public String toString() {
-    return String.format("lowerLimit=%s, upperLimit=%s, rate=%s", lowerLimit, upperLimit, rate);
-  }
 }
