@@ -17,8 +17,9 @@ public class NationalInsuranceBand {
   }
 
   public Money calculateContributionsFor(Money annualSalary) {
-    final Money actualUpperLimit = minimum(annualSalary, upperLimit);
-    final Money excessIncome = actualUpperLimit.subtract(lowerLimit);
+    final Money smallerOfTheTwo = minimum(annualSalary, upperLimit);
+
+    final Money excessIncome = smallerOfTheTwo.subtract(lowerLimit);
 
     return excessIncome.times(rate);
   }
