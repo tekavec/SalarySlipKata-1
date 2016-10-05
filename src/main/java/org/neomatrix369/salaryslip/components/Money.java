@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
+  private static final int DEFAULT_SCALE = 2;
+
   private BigDecimal denomination;
 
   public Money(double denomination) {
@@ -46,7 +48,7 @@ public class Money {
 
   public Money divisionBy(int dividedBy) {
     BigDecimal dividedByAsBigDecimal = updateWithDefaultScale(valueOf(dividedBy));
-    final BigDecimal result = denomination.divide(dividedByAsBigDecimal, 2, ROUND_HALF_UP);
+    final BigDecimal result = denomination.divide(dividedByAsBigDecimal, DEFAULT_SCALE, ROUND_HALF_UP);
     return new Money(result);
   }
 
@@ -55,17 +57,12 @@ public class Money {
   }
 
   public static Money minimum(Money firstAmount, Money secondAmount) {
-    Money difference = firstAmount.subtract(secondAmount);
-
-    if (difference.isGreaterThanZero()) {
-      return secondAmount;
-    }
-
-    return firstAmount;
+    final BigDecimal minimumOfTheTwo = firstAmount.denomination.min(secondAmount.denomination);
+    return new Money(minimumOfTheTwo);
   }
 
   private BigDecimal updateWithDefaultScale(BigDecimal value) {
-    return value.setScale(2, ROUND_HALF_UP);
+    return value.setScale(DEFAULT_SCALE, ROUND_HALF_UP);
   }
 
   @Override
