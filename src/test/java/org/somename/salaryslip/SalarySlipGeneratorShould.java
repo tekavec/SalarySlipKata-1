@@ -1,4 +1,4 @@
-package org.neomatrix369.salaryslip;
+package org.somename.salaryslip;
 
 public class SalarySlipGeneratorShould {
 
