@@ -22,6 +22,8 @@ public class TaxCalculatorShould {
   private Money annualSalary;
   private TaxDetails expectedMonthlyTaxDetails;
 
+  private PersonalAllowanceCalculator personalAllowanceCalculator;
+
   @Parameters(name = "For an annual salary of {0}, the monthly tax details are {1}")
   public static Collection<Object[]> data() {
     return asList(
@@ -52,7 +54,8 @@ public class TaxCalculatorShould {
 
   @Before
   public void setUp() throws Exception {
-    taxCalculator = new TaxCalculator();
+    personalAllowanceCalculator = new PersonalAllowanceCalculator();
+    taxCalculator = new TaxCalculator(personalAllowanceCalculator);
   }
 
   public TaxCalculatorShould(Money annualSalary, TaxDetails expectedMonthlyTaxDetails) {

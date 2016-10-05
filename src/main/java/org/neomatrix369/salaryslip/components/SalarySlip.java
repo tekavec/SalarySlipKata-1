@@ -46,7 +46,7 @@ public class SalarySlip {
 
   @Override
   public String toString() {
-    return format("employee=%s\n grossSalary=%s\n niContributions=%s\n taxDetails=%s\n netPayable=%s}",
+    return format("employee=%s\n grossSalary=%s\n niContributions=%s\n %s\n netPayable=%s\n",
         employee, grossSalary, niContributions, taxDetails, netPayable);
   }
 }

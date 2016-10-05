@@ -15,10 +15,18 @@ public class TaxBand {
     this.rate = rate;
   }
 
-  public Money calculateTaxPayable(Money annualSalary) {
-    Money actualUpperLimit = minimum(annualSalary, upperLimit);
-    Money excessIncome = actualUpperLimit.subtract(lowerLimit);
+  public Money calculateTaxPayableFor(Money annualSalary) {
+    Money excessIncome = calculateExcessIncomeFrom(annualSalary);
 
     return excessIncome.times(rate);
+  }
+
+  protected Money calculateExcessIncomeFrom(Money annualSalary) {
+    Money actualUpperLimit = minimum(annualSalary, upperLimit);
+    return actualUpperLimit.subtract(lowerLimit);
+  }
+
+  protected double rate() {
+    return rate;
   }
 }

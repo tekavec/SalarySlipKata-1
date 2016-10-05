@@ -42,7 +42,7 @@ public class TaxBandShould {
 
   @Test public void
   return_the_tax_payable_for_this_band_for_a_given_annual_salary() {
-    assertThat(taxBand.calculateTaxPayable(annualSalary), is(expectedAnnualTaxPayable));
+    assertThat(taxBand.calculateTaxPayableFor(annualSalary), is(expectedAnnualTaxPayable));
   }
 
   private static Money annualSalaryOf(double amount) {

@@ -16,6 +16,7 @@ import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
 import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
+import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
 @RunWith(Parameterized.class)
@@ -30,7 +31,10 @@ public class SalarySlipGeneratorShould {
   public void initialise() {
     final NationalInsuranceCalculator nationalInsuranceCalculator =
         new NationalInsuranceCalculator();
-    final TaxCalculator taxCalculator = new TaxCalculator();
+    final PersonalAllowanceCalculator personalAllowanceCalculator =
+        new PersonalAllowanceCalculator();
+
+    final TaxCalculator taxCalculator = new TaxCalculator(personalAllowanceCalculator);
 
     salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator, taxCalculator);
   }
@@ -99,6 +103,21 @@ public class SalarySlipGeneratorShould {
                         )
                         .build()
             },
+            {
+                    101_000.00,
+                    aSalarySlip()
+                        .withEmployee(createEmployee(101_000.00))
+                        .withGrossSalary(monthly(8_416.67))
+                        .withNiContributions(monthly(446.07))
+                        .withTaxDetails(
+                            aTaxDetails()
+                            .withTaxFreeAllowance(monthly(875.00))
+                            .withTaxableIncome(monthly(7_541.67))
+                            .withTaxPayable(monthly(2_483.33))
+                          .build()
+                        )
+                        .build()
+            }
         }
     );
   }
