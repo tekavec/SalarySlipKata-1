@@ -1,4 +1,4 @@
-package org.neomatrix369.salaryslip;
+package org.neomatrix369.salaryslip.tax;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
