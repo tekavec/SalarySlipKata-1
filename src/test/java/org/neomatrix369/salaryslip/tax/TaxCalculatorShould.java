@@ -47,6 +47,16 @@ public class TaxCalculatorShould {
                         .withTaxPayable(monthly(600.00))
                     .build()
                 )
+            },
+            {
+                annualSalaryOf(160_000.00),
+                expectedMonthlyTaxDetailsOf(
+                    aTaxDetails()
+                        .withTaxFreeAllowance(monthly(0.00))
+                        .withTaxableIncome(monthly(13_333.33))
+                        .withTaxPayable(monthly(4_841.67))
+                        .build()
+                )
             }
         }
     );

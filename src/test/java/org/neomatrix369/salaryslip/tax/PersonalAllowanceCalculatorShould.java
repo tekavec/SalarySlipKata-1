@@ -37,8 +37,11 @@ public class PersonalAllowanceCalculatorShould {
   public static Collection<Object[]> data() {
     return asList(
       new Object[][] {
-          { annualSalaryOf( 50_000.00), expectedTaxFreeAllowanceOf(11_000.00), expectedAdjustmentDueToReductionRuleOf(  0.00) },
-          { annualSalaryOf(101_000.00), expectedTaxFreeAllowanceOf(10_500.00), expectedAdjustmentDueToReductionRuleOf(500.00) }
+          { annualSalaryOf( 50_000.00), expectedTaxFreeAllowanceOf(11_000.00), expectedAdjustmentDueToReductionRuleOf(     0.00) },
+          { annualSalaryOf(101_000.00), expectedTaxFreeAllowanceOf(10_500.00), expectedAdjustmentDueToReductionRuleOf(   500.00) },
+          { annualSalaryOf(111_000.00), expectedTaxFreeAllowanceOf( 5_500.00), expectedAdjustmentDueToReductionRuleOf( 5_500.00) },
+          { annualSalaryOf(122_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedAdjustmentDueToReductionRuleOf(11_000.00) },
+          { annualSalaryOf(150_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedAdjustmentDueToReductionRuleOf(11_000.00) }
       }
     );
   }

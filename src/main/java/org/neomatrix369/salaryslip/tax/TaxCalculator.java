@@ -1,13 +1,17 @@
 package org.neomatrix369.salaryslip.tax;
 
+import static java.lang.Double.MAX_VALUE;
+
 import org.neomatrix369.salaryslip.components.Money;
 
 public class TaxCalculator {
   private static final int TWELVE_MONTHS = 12;
 
+  private final TaxBand additionalTaxRateBand =
+      new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.45);
+  private TaxBand higherTaxRateBand;
   private final TaxBand basicTaxRateBand =
       new TaxBand(new Money(11_000.00), new Money(43_000.00), 0.20);
-  private TaxBand higherTaxRateBand;
 
   private final PersonalAllowanceCalculator personalAllowanceCalculator;
 
@@ -42,6 +46,9 @@ public class TaxCalculator {
         basicTaxRateBand.calculateTaxPayableFor(annualSalary)
             .add(
                 higherTaxRateBand.calculateTaxPayableFor(annualSalary)
+            )
+            .add(
+                additionalTaxRateBand.calculateTaxPayableFor(annualSalary)
             );
     return convertToMonthly(taxPayable);
   }
