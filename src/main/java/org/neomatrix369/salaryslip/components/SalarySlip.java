@@ -11,7 +11,6 @@ public class SalarySlip {
   private final Money grossSalary;
   private final Money niContributions;
   private final TaxDetails taxDetails;
-  private final Money netPayable;
 
   public SalarySlip(
       Employee employee,
@@ -22,9 +21,6 @@ public class SalarySlip {
     this.grossSalary = grossSalary;
     this.niContributions = niContributions;
     this.taxDetails = taxDetails;
-    this.netPayable = grossSalary
-                        .subtract(niContributions)
-                        .subtract(taxDetails.taxPayable());
   }
 
   @Override
@@ -35,18 +31,17 @@ public class SalarySlip {
     return Objects.equals(employee, that.employee) &&
         Objects.equals(grossSalary, that.grossSalary) &&
         Objects.equals(niContributions, that.niContributions) &&
-        Objects.equals(taxDetails, that.taxDetails) &&
-        Objects.equals(netPayable, that.netPayable);
+        Objects.equals(taxDetails, that.taxDetails);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(employee, grossSalary, niContributions, taxDetails, netPayable);
+    return Objects.hash(employee, grossSalary, niContributions, taxDetails);
   }
 
   @Override
   public String toString() {
-    return format("employee=%s\n grossSalary=%s\n niContributions=%s\n %s\n netPayable=%s\n",
-        employee, grossSalary, niContributions, taxDetails, netPayable);
+    return format("employee=%s\n grossSalary=%s\n niContributions=%s\n %s",
+        employee, grossSalary, niContributions, taxDetails);
   }
 }
