@@ -44,79 +44,79 @@ public class SalarySlipGeneratorShould {
     return asList(
         new Object[][] {
             {
-                    5_000.00,
-                    aSalarySlip()
-                        .withEmployee(createEmployee(5_000.00))
-                        .withGrossSalary(monthly(416.67))
-                        .withNiContributions(monthly(0.00))
-                        .withTaxDetails(
-                            aTaxDetails()
-                            .withTaxFreeAllowance(monthly(916.67))
-                            .withTaxableIncome(monthly(0.00))
-                            .withTaxPayable(monthly(0.00))
-                            .build()
-                        )
+                5_000.00,
+                aSalarySlip()
+                    .withEmployee(createEmployee(5_000.00))
+                    .withGrossSalary(monthly(416.67))
+                    .withNiContributions(monthly(0.00))
+                    .withTaxDetails(
+                        aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(0.00))
+                        .withTaxPayable(monthly(0.00))
                         .build()
+                    )
+                    .build()
             },
             {
-                    8_060.00,
-                    aSalarySlip()
-                        .withEmployee(createEmployee(8_060.00))
-                        .withGrossSalary(monthly(671.67))
-                        .withNiContributions(monthly(0.00))
-                        .withTaxDetails(
-                            aTaxDetails()
-                            .withTaxFreeAllowance(monthly(916.67))
-                            .withTaxableIncome(monthly(0.00))
-                            .withTaxPayable(monthly(0.00))
-                          .build()
-                        )
-                        .build()
+                8_060.00,
+                aSalarySlip()
+                    .withEmployee(createEmployee(8_060.00))
+                    .withGrossSalary(monthly(671.67))
+                    .withNiContributions(monthly(0.00))
+                    .withTaxDetails(
+                        aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(0.00))
+                        .withTaxPayable(monthly(0.00))
+                      .build()
+                    )
+                    .build()
             },
             {
-                    9_060.00,
-                    aSalarySlip()
-                        .withEmployee(createEmployee(9_060.00))
-                        .withGrossSalary(monthly(755.00))
-                        .withNiContributions(monthly(10.00))
-                        .withTaxDetails(
-                            aTaxDetails()
-                            .withTaxFreeAllowance(monthly(916.67))
-                            .withTaxableIncome(monthly(0.00))
-                            .withTaxPayable(monthly(0.00))
-                          .build()
-                        )
-                        .build()
+                9_060.00,
+                aSalarySlip()
+                    .withEmployee(createEmployee(9_060.00))
+                    .withGrossSalary(monthly(755.00))
+                    .withNiContributions(monthly(10.00))
+                    .withTaxDetails(
+                        aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(0.00))
+                        .withTaxPayable(monthly(0.00))
+                      .build()
+                    )
+                    .build()
             },
             {
-                    45_000.00,
-                    aSalarySlip()
-                        .withEmployee(createEmployee(45_000.00))
-                        .withGrossSalary(monthly(3_750.00))
-                        .withNiContributions(monthly(352.73))
-                        .withTaxDetails(
-                            aTaxDetails()
-                            .withTaxFreeAllowance(monthly(916.67))
-                            .withTaxableIncome(monthly(2_833.33))
-                            .withTaxPayable(monthly(600.00))
-                          .build()
-                        )
-                        .build()
+                45_000.00,
+                aSalarySlip()
+                    .withEmployee(createEmployee(45_000.00))
+                    .withGrossSalary(monthly(3_750.00))
+                    .withNiContributions(monthly(352.73))
+                    .withTaxDetails(
+                        aTaxDetails()
+                        .withTaxFreeAllowance(monthly(916.67))
+                        .withTaxableIncome(monthly(2_833.33))
+                        .withTaxPayable(monthly(600.00))
+                      .build()
+                    )
+                    .build()
             },
             {
-                    101_000.00,
-                    aSalarySlip()
-                        .withEmployee(createEmployee(101_000.00))
-                        .withGrossSalary(monthly(8_416.67))
-                        .withNiContributions(monthly(446.07))
-                        .withTaxDetails(
-                            aTaxDetails()
-                            .withTaxFreeAllowance(monthly(875.00))
-                            .withTaxableIncome(monthly(7_541.67))
-                            .withTaxPayable(monthly(2_483.33))
-                          .build()
-                        )
-                        .build()
+                101_000.00,
+                aSalarySlip()
+                    .withEmployee(createEmployee(101_000.00))
+                    .withGrossSalary(monthly(8_416.67))
+                    .withNiContributions(monthly(446.07))
+                    .withTaxDetails(
+                        aTaxDetails()
+                        .withTaxFreeAllowance(monthly(875.00))
+                        .withTaxableIncome(monthly(7_541.67))
+                        .withTaxPayable(monthly(2_483.33))
+                      .build()
+                    )
+                    .build()
             },
             {
                 105_500.00,
