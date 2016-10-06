@@ -20,7 +20,7 @@ public class SalarySlipGenerator {
   }
 
   public SalarySlip generateFor(Employee employee) {
-    Money monthlyNIContributions =
+    Money monthlyNationalInsuranceContributions =
         nationalInsuranceCalculator.calculateMonthlyContributionsFor(employee.annualSalary());
 
     TaxDetails monthlyTaxDetails =
@@ -29,7 +29,7 @@ public class SalarySlipGenerator {
     return new SalarySlip(
         employee,
         employee.monthlySalary(),
-        monthlyNIContributions,
+        monthlyNationalInsuranceContributions,
         monthlyTaxDetails
     );
   }
