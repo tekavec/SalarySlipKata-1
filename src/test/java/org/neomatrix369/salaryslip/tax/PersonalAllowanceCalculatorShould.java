@@ -33,7 +33,7 @@ public class PersonalAllowanceCalculatorShould {
     personalAllowanceCalculator = new PersonalAllowanceCalculator();
   }
 
-  @Parameters(name = "For an annual salary of {0}, then the tax-free allowance is {1}")
+  @Parameters(name = "For an annual salary of {0}, then the tax-free allowance is {1}, and the reduced excess due to rule is {2}")
   public static Collection<Object[]> data() {
     return asList(
       new Object[][] {
