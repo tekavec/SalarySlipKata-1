@@ -18,7 +18,7 @@ public class TaxBand {
   public Money calculateTaxPayableFor(Money annualSalary) {
     Money excessIncome = calculateExcessIncomeFrom(annualSalary);
 
-    return excessIncome.times(rate);
+    return applyTheBandRateTo(excessIncome);
   }
 
   protected Money calculateExcessIncomeFrom(Money annualSalary) {
@@ -27,7 +27,7 @@ public class TaxBand {
     return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
   }
 
-  protected double rate() {
-    return rate;
+  protected Money applyTheBandRateTo(Money amount) {
+    return amount.times(rate);
   }
 }

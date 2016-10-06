@@ -20,6 +20,6 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
 
     Money newExcessIncome = excessIncome.add(adjustmentForSalaryOver100K);
 
-    return newExcessIncome.times(rate());
+    return applyTheBandRateTo(newExcessIncome);
   }
 }
