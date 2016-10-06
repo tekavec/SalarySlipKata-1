@@ -17,12 +17,12 @@ public class PersonalAllowanceCalculator {
   public Money calculateReducedExcessForSalaryOver100KFrom(Money annualSalary) {
     Money excessOver100K = calculateExcessOver100K(annualSalary);
 
-    final Money reducedExcess = reduceBy1PoundForEveryTwoPoundsEarned(excessOver100K);
+    final Money reducedExcess = reduceBy_1_PoundForEvery_2_PoundsEarned(excessOver100K);
 
     return minimum(reducedExcess, PERSONAL_ALLOWANCE);
   }
 
-  private Money reduceBy1PoundForEveryTwoPoundsEarned(Money excessOver100K) {
+  private Money reduceBy_1_PoundForEvery_2_PoundsEarned(Money excessOver100K) {
     return excessOver100K.divisionBy(2);
   }
 
