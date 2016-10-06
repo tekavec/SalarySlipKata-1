@@ -20,12 +20,12 @@ public class PersonalAllowanceCalculatorShould {
 
   private Money annualSalary;
   private Money expectedAnnualTaxFreeAllowance;
-  private Money expectedAdjustmentDueToReductionRule;
+  private Money expectedReducedExcessDueToRule;
 
-  public PersonalAllowanceCalculatorShould(Money annualSalary, Money expectedAnnualTaxFreeAllowance, Money expectedAdjustmentDueToReductionRule) {
+  public PersonalAllowanceCalculatorShould(Money annualSalary, Money expectedAnnualTaxFreeAllowance, Money expectedReducedExcessDueToRule) {
     this.annualSalary = annualSalary;
     this.expectedAnnualTaxFreeAllowance = expectedAnnualTaxFreeAllowance;
-    this.expectedAdjustmentDueToReductionRule = expectedAdjustmentDueToReductionRule;
+    this.expectedReducedExcessDueToRule = expectedReducedExcessDueToRule;
   }
 
   @Before
@@ -37,11 +37,11 @@ public class PersonalAllowanceCalculatorShould {
   public static Collection<Object[]> data() {
     return asList(
       new Object[][] {
-          { annualSalaryOf( 50_000.00), expectedTaxFreeAllowanceOf(11_000.00), expectedAdjustmentDueToReductionRuleOf(     0.00) },
-          { annualSalaryOf(101_000.00), expectedTaxFreeAllowanceOf(10_500.00), expectedAdjustmentDueToReductionRuleOf(   500.00) },
-          { annualSalaryOf(111_000.00), expectedTaxFreeAllowanceOf( 5_500.00), expectedAdjustmentDueToReductionRuleOf( 5_500.00) },
-          { annualSalaryOf(122_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedAdjustmentDueToReductionRuleOf(11_000.00) },
-          { annualSalaryOf(150_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedAdjustmentDueToReductionRuleOf(11_000.00) }
+          { annualSalaryOf( 50_000.00), expectedTaxFreeAllowanceOf(11_000.00), expectedReducedExcessDueToRuleOf(     0.00) },
+          { annualSalaryOf(101_000.00), expectedTaxFreeAllowanceOf(10_500.00), expectedReducedExcessDueToRuleOf(   500.00) },
+          { annualSalaryOf(111_000.00), expectedTaxFreeAllowanceOf( 5_500.00), expectedReducedExcessDueToRuleOf( 5_500.00) },
+          { annualSalaryOf(122_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedReducedExcessDueToRuleOf(11_000.00) },
+          { annualSalaryOf(150_000.00), expectedTaxFreeAllowanceOf(     0.00), expectedReducedExcessDueToRuleOf(11_000.00) }
       }
     );
   }
@@ -53,9 +53,9 @@ public class PersonalAllowanceCalculatorShould {
   }
   
   @Test public void
-  return_the_expected_adjustment_due_to_reduction_rule() {
+  return_the_expected_reduced_excess_due_to_reduction_rule() {
     assertThat(personalAllowanceCalculator.calculateReducedExcessForSalaryOver100KFrom(annualSalary),
-        is(expectedAdjustmentDueToReductionRule));
+        is(expectedReducedExcessDueToRule));
   } 
 
   private static Money annualSalaryOf(double amount) {
@@ -66,7 +66,7 @@ public class PersonalAllowanceCalculatorShould {
     return new Money(amount);
   }
 
-  private static Money expectedAdjustmentDueToReductionRuleOf(double amount) {
+  private static Money expectedReducedExcessDueToRuleOf(double amount) {
     return new Money(amount);
   }
 }
