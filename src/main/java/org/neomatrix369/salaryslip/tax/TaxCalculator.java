@@ -8,19 +8,19 @@ import org.neomatrix369.salaryslip.components.TaxDetails;
 public class TaxCalculator {
   private static final int TWELVE_MONTHS = 12;
 
-  private final TaxBand additionalTaxRateBand =
-      new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.45);
+  private TaxBand additionalTaxRateBand;
   private TaxBand higherTaxRateBand;
-  private final TaxBand basicTaxRateBand =
-      new TaxBand(new Money(11_000.00), new Money(43_000.00), 0.20);
+  private TaxBand basicTaxRateBand;
 
   private final PersonalAllowanceCalculator personalAllowanceCalculator;
 
   public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
-    higherTaxRateBand =
-        new HigherTaxWithPersonalAllowanceReductionRuleBand(
-            new Money(43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceCalculator());
+
+    additionalTaxRateBand = new TaxBand(new Money(150_000.00), new Money(MAX_VALUE),  0.45);
+    higherTaxRateBand     = new HigherTaxWithPersonalAllowanceReductionRuleBand(
+                                        new Money( 43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceCalculator());
+    basicTaxRateBand      = new TaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
   }
 
   public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
