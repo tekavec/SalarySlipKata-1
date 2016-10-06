@@ -27,7 +27,7 @@ public class TaxBand {
     return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
   }
 
-  protected Money taxPayableFor(Money amount) {
+  private Money taxPayableFor(Money amount) {
     return amount.times(rate);
   }
 }

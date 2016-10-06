@@ -13,14 +13,13 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
     this.personalAllowanceCalculator = personalAllowanceCalculator;
   }
 
-  public Money calculateTaxPayableFor(Money annualSalary) {
-    Money excessIncome = calculateExcessIncomeFrom(annualSalary);
+  @Override
+  protected Money calculateExcessIncomeFrom(Money annualSalary) {
+    Money excessIncome = super.calculateExcessIncomeFrom(annualSalary);
 
-    Money adjustmentForSalaryOver100K =
-        personalAllowanceCalculator.calculateAdjustmentForSalaryOver100KFrom(annualSalary);
+    Money reducedExcess =
+        personalAllowanceCalculator.calculateReducedExcessForSalaryOver100KFrom(annualSalary);
 
-    Money newExcessIncome = excessIncome.add(adjustmentForSalaryOver100K);
-
-    return taxPayableFor(newExcessIncome);
+    return excessIncome.add(reducedExcess);
   }
 }
