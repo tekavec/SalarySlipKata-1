@@ -3,7 +3,7 @@ package org.neomatrix369.salaryslip;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.neomatrix369.salaryslip.components.SalarySlipBuilder.aSalarySlip;
-import static org.neomatrix369.salaryslip.tax.TaxDetailsBuilder.aTaxDetails;
+import static org.neomatrix369.salaryslip.components.TaxDetailsBuilder.aTaxDetails;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;

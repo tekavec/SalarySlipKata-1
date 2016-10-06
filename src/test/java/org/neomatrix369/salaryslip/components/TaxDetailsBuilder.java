@@ -1,7 +1,4 @@
-package org.neomatrix369.salaryslip.tax;
-
-import org.neomatrix369.salaryslip.components.Money;
-import org.neomatrix369.salaryslip.components.TaxDetails;
+package org.neomatrix369.salaryslip.components;
 
 public class TaxDetailsBuilder {
   private Money taxFreeAllowance;
