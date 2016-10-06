@@ -22,8 +22,9 @@ public class TaxBand {
   }
 
   protected Money calculateExcessIncomeFrom(Money annualSalary) {
-    Money smallerOfTheTwo = minimum(annualSalary, upperLimit);
-    return smallerOfTheTwo.subtract(lowerLimit);
+    Money lessOrEqualToTheUpperLimit = minimum(annualSalary, upperLimit);
+
+    return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
   }
 
   protected double rate() {
