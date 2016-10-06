@@ -17,12 +17,18 @@ public class NationalInsuranceBand {
   }
 
   public Money calculateContributionsFor(Money annualSalary) {
+    final Money excessIncome = calculateExcessFrom(annualSalary);
+
+    return contributionsOn(excessIncome);
+  }
+
+  private Money calculateExcessFrom(Money annualSalary) {
     final Money lessOrEqualToTheUpperLimit = minimum(annualSalary, upperLimit);
 
-    final Money excessIncome = lessOrEqualToTheUpperLimit.subtract(lowerLimit);
-
-    return excessIncome.times(rate);
+    return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
   }
+
+  private Money contributionsOn(Money excessIncome) {return excessIncome.times(rate);}
 
   @Override
   public String toString() {
