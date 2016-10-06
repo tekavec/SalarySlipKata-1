@@ -44,13 +44,10 @@ public class TaxCalculator {
 
   private Money monthlyTaxPayable(Money annualSalary) {
     final Money taxPayable =
-        basicTaxRateBand.calculateTaxPayableFor(annualSalary)
-            .add(
-                higherTaxRateBand.calculateTaxPayableFor(annualSalary)
-            )
-            .add(
-                additionalTaxRateBand.calculateTaxPayableFor(annualSalary)
-            );
+                    additionalTaxRateBand.calculateTaxPayableFor(annualSalary)
+                        .add(higherTaxRateBand.calculateTaxPayableFor(annualSalary))
+                        .add(basicTaxRateBand.calculateTaxPayableFor(annualSalary));
+
     return convertToMonthly(taxPayable);
   }
 

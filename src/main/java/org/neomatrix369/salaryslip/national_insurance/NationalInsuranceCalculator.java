@@ -7,8 +7,8 @@ import org.neomatrix369.salaryslip.components.Money;
 public class NationalInsuranceCalculator {
   private static final int TWELVE_MONTHS = 12;
 
-  private NationalInsuranceBand basicContributions;
   private NationalInsuranceBand higherContributions;
+  private NationalInsuranceBand basicContributions;
 
   public NationalInsuranceCalculator() {
     higherContributions =
@@ -18,11 +18,14 @@ public class NationalInsuranceCalculator {
   }
 
   public Money calculateMonthlyContributionsFor(Money annualSalary) {
-    final Money totalContributions = basicContributions.calculateContributionsFor(annualSalary)
-        .add(higherContributions.calculateContributionsFor(annualSalary));
+    final Money totalContributions =
+                    higherContributions.calculateContributionsFor(annualSalary)
+                        .add(basicContributions.calculateContributionsFor(annualSalary));
 
     return convertToMonthly(totalContributions);
   }
 
-  private Money convertToMonthly(Money amount) {return amount.divisionBy(TWELVE_MONTHS);}
+  private Money convertToMonthly(Money amount) {
+    return amount.divisionBy(TWELVE_MONTHS);
+  }
 }

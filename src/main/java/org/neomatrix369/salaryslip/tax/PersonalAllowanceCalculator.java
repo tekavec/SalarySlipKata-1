@@ -22,7 +22,9 @@ public class PersonalAllowanceCalculator {
     return minimum(reducedExcess, PERSONAL_ALLOWANCE);
   }
 
-  private Money reduceBy1PoundForEveryTwoPoundsEarned(Money excessOver100K) {return excessOver100K.divisionBy(2);}
+  private Money reduceBy1PoundForEveryTwoPoundsEarned(Money excessOver100K) {
+    return excessOver100K.divisionBy(2);
+  }
 
   private Money calculateExcessOver100K(Money annualSalary) {
     return annualSalary.subtract(PERSONAL_ALLOWANCE_REDUCTION_THRESHOLD);
