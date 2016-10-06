@@ -15,10 +15,10 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
   public Money calculateTaxPayableFor(Money annualSalary) {
     Money excessIncome = calculateExcessIncomeFrom(annualSalary);
 
-    Money adjustmentDueToReductionRule =
-        personalAllowanceCalculator.calculateAdjustmentDueToReductionRule(annualSalary);
+    Money adjustmentForSalaryOver100K =
+        personalAllowanceCalculator.calculateAdjustmentForSalaryOver100KFrom(annualSalary);
 
-    Money newExcessIncome = excessIncome.add(adjustmentDueToReductionRule);
+    Money newExcessIncome = excessIncome.add(adjustmentForSalaryOver100K);
 
     return newExcessIncome.times(rate());
   }

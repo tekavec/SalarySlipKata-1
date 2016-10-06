@@ -9,12 +9,12 @@ public class PersonalAllowanceCalculator {
   private static final Money PERSONAL_ALLOWANCE_REDUCTION_THRESHOLD = new Money(100_000.00);
 
   public Money calculateTaxFreeAllowance(Money annualSalary) {
-    Money reducedExcess = calculateAdjustmentDueToReductionRule(annualSalary);
+    Money reducedExcess = calculateAdjustmentForSalaryOver100KFrom(annualSalary);
 
     return PERSONAL_ALLOWANCE.subtract(reducedExcess);
   }
 
-  public Money calculateAdjustmentDueToReductionRule(Money annualSalary) {
+  public Money calculateAdjustmentForSalaryOver100KFrom(Money annualSalary) {
     Money excessOver100K = calculateExcessOver100K(annualSalary);
 
     final Money reducedExcess = reduceBy1PoundForEveryTwoPoundsEarned(excessOver100K);
