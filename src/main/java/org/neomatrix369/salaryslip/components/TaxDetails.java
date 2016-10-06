@@ -1,10 +1,8 @@
-package org.neomatrix369.salaryslip.tax;
+package org.neomatrix369.salaryslip.components;
 
 import static java.lang.String.*;
 
 import java.util.Objects;
-
-import org.neomatrix369.salaryslip.components.Money;
 
 public class TaxDetails {
   private final Money taxFreeAllowance;

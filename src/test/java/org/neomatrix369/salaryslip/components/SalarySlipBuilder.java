@@ -1,7 +1,5 @@
 package org.neomatrix369.salaryslip.components;
 
-import org.neomatrix369.salaryslip.tax.TaxDetails;
-
 public class SalarySlipBuilder {
   private Employee employee;
   private Money grossSalary;

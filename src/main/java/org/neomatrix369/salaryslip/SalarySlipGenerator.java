@@ -5,7 +5,7 @@ import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
 import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
-import org.neomatrix369.salaryslip.tax.TaxDetails;
+import org.neomatrix369.salaryslip.components.TaxDetails;
 
 public class SalarySlipGenerator {
 

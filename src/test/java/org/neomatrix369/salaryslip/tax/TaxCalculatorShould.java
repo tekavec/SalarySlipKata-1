@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.neomatrix369.salaryslip.components.Money;
+import org.neomatrix369.salaryslip.components.TaxDetails;
 
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {

@@ -4,8 +4,6 @@ import static java.lang.String.*;
 
 import java.util.Objects;
 
-import org.neomatrix369.salaryslip.tax.TaxDetails;
-
 public class SalarySlip {
   private final Employee employee;
   private final Money grossSalary;
