@@ -1,4 +1,4 @@
-package org.neomatrix369.salaryslip.tax;
+package org.neomatrix369.salaryslip.tax.bands;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.neomatrix369.salaryslip.components.Money;
-import org.neomatrix369.salaryslip.tax.HigherTaxWithPersonalAllowanceReductionRuleBand;
 import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
 
 @RunWith(Parameterized.class)

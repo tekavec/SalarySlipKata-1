@@ -1,4 +1,4 @@
-package org.neomatrix369.salaryslip.tax;
+package org.neomatrix369.salaryslip.tax.bands;
 
 import static org.neomatrix369.salaryslip.components.Money.minimum;
 

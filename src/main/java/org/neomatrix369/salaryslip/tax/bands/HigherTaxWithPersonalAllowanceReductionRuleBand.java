@@ -1,6 +1,7 @@
-package org.neomatrix369.salaryslip.tax;
+package org.neomatrix369.salaryslip.tax.bands;
 
 import org.neomatrix369.salaryslip.components.Money;
+import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
 
 public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
   private PersonalAllowanceCalculator personalAllowanceCalculator;

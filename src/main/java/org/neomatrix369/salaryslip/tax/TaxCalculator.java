@@ -4,6 +4,8 @@ import static java.lang.Double.MAX_VALUE;
 
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.TaxDetails;
+import org.neomatrix369.salaryslip.tax.bands.HigherTaxWithPersonalAllowanceReductionRuleBand;
+import org.neomatrix369.salaryslip.tax.bands.TaxBand;
 
 public class TaxCalculator {
   private static final int TWELVE_MONTHS = 12;
