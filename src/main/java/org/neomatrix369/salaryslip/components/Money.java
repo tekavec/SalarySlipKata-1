@@ -53,7 +53,11 @@ public class Money {
   }
 
   public boolean isGreaterThanZero() {
-    return denomination.compareTo(valueOf(0.00)) > 0;
+    return isGreaterThan(zero());
+  }
+
+  public boolean isGreaterThan(Money amount) {
+    return denomination.compareTo(amount.denomination) > 0;
   }
 
   public static Money minimum(Money firstAmount, Money secondAmount) {

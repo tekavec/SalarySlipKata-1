@@ -34,12 +34,12 @@ public class TaxCalculator {
   }
 
   private Money monthlyTaxFreeAllowance(Money annualSalary) {
-    return convertToMonthly(personalAllowanceCalculator.calculateTaxFreeAllowance(annualSalary));
+    return convertToMonthly(personalAllowanceCalculator.taxFreeAllowance(annualSalary));
   }
 
   private Money monthlyTaxableIncome(Money annualSalary) {
     final Money taxableIncome = annualSalary.subtract(
-        personalAllowanceCalculator.calculateTaxFreeAllowance(annualSalary)
+        personalAllowanceCalculator.taxFreeAllowance(annualSalary)
     );
     return convertToMonthly(taxableIncome);
   }

@@ -40,6 +40,14 @@ public class MoneyShould {
 
     assertThat(someAmount.isGreaterThanZero(), is(true));
   }
+  
+  @Test public void
+  validate_if_amount_is_greater_than_another_amount() {
+    Money someAmount = new Money(10.00);
+    Money anotherAmount = new Money(5.00);
+
+    assertThat(someAmount.isGreaterThan(anotherAmount), is(true));
+  } 
 
   @Test public void
   return_the_lower_of_the_two_amounts() {

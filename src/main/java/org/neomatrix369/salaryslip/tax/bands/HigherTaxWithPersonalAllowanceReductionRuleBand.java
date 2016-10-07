@@ -17,9 +17,9 @@ public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
   protected Money calculateExcessIncomeFrom(Money annualSalary) {
     Money excessIncome = super.calculateExcessIncomeFrom(annualSalary);
 
-    Money reducedExcess =
-        personalAllowanceCalculator.personalAllowanceReductionFor(annualSalary);
+    Money taxableExcessAfterReduction =
+        personalAllowanceCalculator.taxableExcessAfterReductionFor(annualSalary);
 
-    return excessIncome.add(reducedExcess);
+    return excessIncome.add(taxableExcessAfterReduction);
   }
 }
