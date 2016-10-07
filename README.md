@@ -39,7 +39,7 @@ Salary slip kata
       
       ```    
 
-  *Note: The term 'Tax-free allowance' is interchangeable used with the term 'Personal Allowance' and Tax-free Personal Allowance' in this domain.
+  *Note: The term 'Tax-free allowance' is interchangeably used with the term 'Personal Allowance' and Tax-free Personal Allowance' in this domain.
   
 ### Calculations: National Insurance contributions and Tax
  
