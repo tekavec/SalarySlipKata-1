@@ -1,25 +1,23 @@
 package org.neomatrix369.salaryslip.tax.bands;
 
 import org.neomatrix369.salaryslip.components.Money;
-import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
+import org.neomatrix369.salaryslip.tax.PersonalAllowanceReductionCalculator;
 
 public class HigherTaxWithPersonalAllowanceReductionRuleBand extends TaxBand {
-  private PersonalAllowanceCalculator personalAllowanceCalculator;
+  private PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator;
 
   public HigherTaxWithPersonalAllowanceReductionRuleBand(
-      Money lowerLimit, Money upperLimit, double rate,
-      PersonalAllowanceCalculator personalAllowanceCalculator) {
+      Money lowerLimit, Money upperLimit, double rate, PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator) {
     super(lowerLimit, upperLimit, rate);
-    this.personalAllowanceCalculator = personalAllowanceCalculator;
+    this.personalAllowanceReductionCalculator = personalAllowanceReductionCalculator;
   }
 
   @Override
   protected Money calculateExcessIncomeFrom(Money annualSalary) {
     Money excessIncome = super.calculateExcessIncomeFrom(annualSalary);
 
-    Money taxableExcessAfterReduction =
-        personalAllowanceCalculator.taxableExcessAfterReductionFor(annualSalary);
+    Money taxableReduction = personalAllowanceReductionCalculator.reductionFor(annualSalary);
 
-    return excessIncome.add(taxableExcessAfterReduction);
+    return excessIncome.add(taxableReduction);
   }
 }

@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.neomatrix369.salaryslip.components.Money;
-import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
+import org.neomatrix369.salaryslip.tax.PersonalAllowanceReductionCalculator;
 
 @RunWith(Parameterized.class)
 public class TaxBandShould {
@@ -26,7 +26,7 @@ public class TaxBandShould {
       new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.45);
   private static final TaxBand HIGHER_RATE_TAX_BAND      =
       new HigherTaxWithPersonalAllowanceReductionRuleBand(
-                  new Money(43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceCalculator());
+                  new Money(43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceReductionCalculator());
   private static final TaxBand BASIC_RATE_TAX_BAND       =
       new TaxBand(new Money(11_000.00), new Money( 43_000.00), 0.20);
 

@@ -3,12 +3,10 @@ package org.neomatrix369.salaryslip.tax;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.neomatrix369.salaryslip.components.TaxDetailsBuilder.aTaxDetails;
-
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -18,12 +16,10 @@ import org.neomatrix369.salaryslip.components.TaxDetails;
 
 @RunWith(Parameterized.class)
 public class TaxCalculatorShould {
-  private TaxCalculator taxCalculator;
+  private TaxCalculator taxCalculator = new TaxCalculator(new PersonalAllowanceReductionCalculator());
 
   private Money annualSalary;
   private TaxDetails expectedMonthlyTaxDetails;
-
-  private PersonalAllowanceCalculator personalAllowanceCalculator;
 
   @Parameters(name = "For an annual salary of {0}, the monthly tax details are {1}")
   public static Collection<Object[]> data() {
@@ -61,12 +57,6 @@ public class TaxCalculatorShould {
             }
         }
     );
-  }
-
-  @Before
-  public void setUp() throws Exception {
-    personalAllowanceCalculator = new PersonalAllowanceCalculator();
-    taxCalculator = new TaxCalculator(personalAllowanceCalculator);
   }
 
   public TaxCalculatorShould(Money annualSalary, TaxDetails expectedMonthlyTaxDetails) {

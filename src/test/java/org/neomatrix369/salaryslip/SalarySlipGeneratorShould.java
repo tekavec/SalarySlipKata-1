@@ -16,7 +16,7 @@ import org.neomatrix369.salaryslip.components.Employee;
 import org.neomatrix369.salaryslip.components.Money;
 import org.neomatrix369.salaryslip.components.SalarySlip;
 import org.neomatrix369.salaryslip.national_insurance.NationalInsuranceCalculator;
-import org.neomatrix369.salaryslip.tax.PersonalAllowanceCalculator;
+import org.neomatrix369.salaryslip.tax.PersonalAllowanceReductionCalculator;
 import org.neomatrix369.salaryslip.tax.TaxCalculator;
 
 @RunWith(Parameterized.class)
@@ -29,12 +29,8 @@ public class SalarySlipGeneratorShould {
 
   @Before
   public void initialise() {
-    final NationalInsuranceCalculator nationalInsuranceCalculator =
-        new NationalInsuranceCalculator();
-    final PersonalAllowanceCalculator personalAllowanceCalculator =
-        new PersonalAllowanceCalculator();
-
-    final TaxCalculator taxCalculator = new TaxCalculator(personalAllowanceCalculator);
+    NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();;
+    TaxCalculator taxCalculator = new TaxCalculator(new PersonalAllowanceReductionCalculator());
 
     salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator, taxCalculator);
   }

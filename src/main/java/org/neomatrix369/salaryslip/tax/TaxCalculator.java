@@ -8,20 +8,21 @@ import org.neomatrix369.salaryslip.tax.bands.HigherTaxWithPersonalAllowanceReduc
 import org.neomatrix369.salaryslip.tax.bands.TaxBand;
 
 public class TaxCalculator {
+  private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
   private static final int TWELVE_MONTHS = 12;
 
   private TaxBand additionalTaxRateBand;
   private TaxBand higherTaxRateBand;
   private TaxBand basicTaxRateBand;
 
-  private final PersonalAllowanceCalculator personalAllowanceCalculator;
+  private PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator;
 
-  public TaxCalculator(PersonalAllowanceCalculator personalAllowanceCalculator) {
-    this.personalAllowanceCalculator = personalAllowanceCalculator;
+  public TaxCalculator(PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator) {
+    this.personalAllowanceReductionCalculator = personalAllowanceReductionCalculator;
 
     additionalTaxRateBand = new TaxBand(new Money(150_000.00), new Money(MAX_VALUE),  0.45);
     higherTaxRateBand     = new HigherTaxWithPersonalAllowanceReductionRuleBand(
-                                        new Money( 43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceCalculator());
+                                        new Money( 43_000.00), new Money(150_000.00), 0.40, personalAllowanceReductionCalculator);
     basicTaxRateBand      = new TaxBand(new Money( 11_000.00), new Money( 43_000.00), 0.20);
   }
 
@@ -34,13 +35,17 @@ public class TaxCalculator {
   }
 
   private Money monthlyTaxFreeAllowance(Money annualSalary) {
-    return convertToMonthly(personalAllowanceCalculator.taxFreeAllowance(annualSalary));
+    return convertToMonthly(taxFreeAllowance(annualSalary));
+  }
+
+  private Money taxFreeAllowance(Money annualSalary) {
+    Money reduction = personalAllowanceReductionCalculator.reductionFor(annualSalary);
+
+    return PERSONAL_ALLOWANCE.subtract(reduction);
   }
 
   private Money monthlyTaxableIncome(Money annualSalary) {
-    final Money taxableIncome = annualSalary.subtract(
-        personalAllowanceCalculator.taxFreeAllowance(annualSalary)
-    );
+    final Money taxableIncome = annualSalary.subtract(taxFreeAllowance(annualSalary));
     return convertToMonthly(taxableIncome);
   }
 
