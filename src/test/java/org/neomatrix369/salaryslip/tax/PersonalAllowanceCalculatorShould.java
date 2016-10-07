@@ -54,7 +54,7 @@ public class PersonalAllowanceCalculatorShould {
   
   @Test public void
   return_the_expected_reduced_excess_due_to_reduction_rule() {
-    assertThat(personalAllowanceCalculator.calculateReducedExcessForSalaryOver100KFrom(annualSalary),
+    assertThat(personalAllowanceCalculator.personalAllowanceReductionFor(annualSalary),
         is(expectedReducedExcessDueToRule));
   } 
 

@@ -5,25 +5,25 @@ import static org.neomatrix369.salaryslip.components.Money.minimum;
 import org.neomatrix369.salaryslip.components.Money;
 
 public class PersonalAllowanceCalculator {
-  private static final Money PERSONAL_ALLOWANCE = new Money(11_000.00);
+  private static final Money FULL_PERSONAL_ALLOWANCE = new Money(11_000.00);
   private static final Money PERSONAL_ALLOWANCE_REDUCTION_THRESHOLD = new Money(100_000.00);
 
   public Money calculateTaxFreeAllowance(Money annualSalary) {
-    Money reducedExcess = calculateReducedExcessForSalaryOver100KFrom(annualSalary);
+    Money personalAllowanceReduction = personalAllowanceReductionFor(annualSalary);
 
-    return PERSONAL_ALLOWANCE.subtract(reducedExcess);
+    return FULL_PERSONAL_ALLOWANCE.subtract(personalAllowanceReduction);
   }
 
-  public Money calculateReducedExcessForSalaryOver100KFrom(Money annualSalary) {
+  public Money personalAllowanceReductionFor(Money annualSalary) {
     Money excessOver100K = calculateExcessOver100K(annualSalary);
 
-    final Money reducedExcess = reduceBy_1_PoundForEvery_2_PoundsEarned(excessOver100K);
+    final Money personalAllowanceReduction = reduceBy_1_PoundForEvery_2_PoundsEarned(excessOver100K);
 
-    return minimum(reducedExcess, PERSONAL_ALLOWANCE);
+    return minimum(personalAllowanceReduction, FULL_PERSONAL_ALLOWANCE);
   }
 
-  private Money reduceBy_1_PoundForEvery_2_PoundsEarned(Money excessOver100K) {
-    return excessOver100K.divisionBy(2);
+  private Money reduceBy_1_PoundForEvery_2_PoundsEarned(Money amount) {
+    return amount.divisionBy(2);
   }
 
   private Money calculateExcessOver100K(Money annualSalary) {
