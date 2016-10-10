@@ -179,8 +179,8 @@ public class SalarySlipGeneratorShould {
 
     salarySlipGenerator = new SalarySlipGenerator(
         nationalInsuranceCalculator,
-        taxCalculator,
-        personalAllowanceReductionCalculator);
+        taxCalculator
+    );
   }
 
   @Test public void
