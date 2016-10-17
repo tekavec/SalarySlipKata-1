@@ -89,8 +89,8 @@ This employee pays a higher band of National Insurance and Income Tax.
            Tax Payable: £600.00
 
 Calculation rules:
- * Taxable income (higher rate): Any amount of money earned above a gross annual salary of £43,000.00 is taxed at 40% instead of 20%
- * National Insurance (higher contributions): Any amount of money earned above a gross annual salary of £43,000.00 is subject to a 2% NI contribution instead of 12%
+ * Taxable income (higher rate): Any amount of money earned above a gross annual salary of £43,000.00 is taxed at 40%
+ * National Insurance (higher contributions): Any amount of money earned above a gross annual salary of £43,000.00 is only subject to a 2% NI contribution
 
 #### Iteration 5: for annual salaries of £101,000.00; £111,000.00; £122,000.00 and £150,000.00
 
