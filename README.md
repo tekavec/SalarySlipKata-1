@@ -2,14 +2,14 @@ Salary slip kata
 ================
 ## Problem description: Salary slip generator for UK companies.
 
-  A typical salary slip contains employee details like employee id, employee name and their salary details like their gross salary, national insurance contributions, taxable income, tax-free allowance and taxes payable.
+  A typical salary slip contains employee details like employee id, employee name and their salary details like their gross salary, national insurance contributions, tax-free allowance, taxable income and taxes payable.
 
   Salary slips are generated each month for every employee.
 
 
 ### Acceptance criteria:
 - Salary slip generator should pass an employee with its Employee Id, Employee Name and Annual Salary
-- Salary slip should contain the Employee ID, Employee Name, Gross Salary, National Insurance contributions, Taxable income, Tax-free allowance and Tax payable for the month
+- Salary slip should contain the Employee ID, Employee Name, Gross Salary, National Insurance contributions, Tax-free allowance, Taxable income and Tax payable for the month
 - The entry point should be the following interface, which you can not change:
   ```java
 
