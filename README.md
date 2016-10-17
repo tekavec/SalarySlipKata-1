@@ -134,7 +134,7 @@ For high earners, the tax-free allowance decreases.
            Tax Payable: £4,466.67
 
 Calculation rules:
- * Tax-free allowance: When the Gross Salary exceeds £100,000.00, the tax-free allowance starts decreasing. It decreases by £1 for every £2 earned over £100,000.00. And this adjusted excess is taxed at the Higher rate tax.
+ * Tax-free allowance: When the Gross Salary exceeds £100,000.00, the tax-free allowance starts decreasing. It decreases by £1 for every £2 earned over £100,000.00. And this excess is taxed at the Higher rate tax.
 
 #### Iteration 9: for an annual salary of £160,000.00
 
