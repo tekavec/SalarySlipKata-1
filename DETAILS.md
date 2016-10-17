@@ -162,7 +162,7 @@ Salary slip kata : Additional examples and resources
          ---------------------+-------------+-------------+------------+------------+-------------+-------------+-----------+------------+---------------
 
          * - past a Gross Salary of £100,000.00, personal allowance rules change - for every extra £2 earned, the personal allowance reduces by £1.
-         Past a salary of £122,000.00, no personal allowance is applicable. And this adjusted excess is taxed at the Higher rate tax.
+         Past a salary of £122,000.00, no personal allowance is applicable. And this excess is taxed at the Higher rate tax.
 
 ### Resources
     - [Sample Salary Slip](http://1.bp.blogspot.com/-lJXMuMQCGtE/Udm8dlTIeSI/AAAAAAAAA1Q/jLxBZndJTAA/s1600/Pay+Slip+Format.JPG)
