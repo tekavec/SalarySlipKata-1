@@ -1,6 +1,6 @@
 package org.neomatrix369.salaryslip.tax.bands;
 
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.smallerOf;
 
 import org.neomatrix369.salaryslip.components.Money;
 
@@ -16,18 +16,11 @@ public class TaxBand {
   }
 
   public Money calculateTaxPayableFor(Money annualSalary) {
-    Money excessIncome = calculateExcessIncomeFrom(annualSalary);
-
-    return taxPayableFor(excessIncome);
+    return amountWithinBandFor(annualSalary).times(rate);
   }
 
-  protected Money calculateExcessIncomeFrom(Money annualSalary) {
-    Money lessOrEqualToTheUpperLimit = minimum(annualSalary, upperLimit);
-
-    return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
+  protected Money amountWithinBandFor(Money annualSalary) {
+    return smallerOf(annualSalary, upperLimit).subtract(lowerLimit);
   }
 
-  private Money taxPayableFor(Money amount) {
-    return amount.times(rate);
-  }
 }

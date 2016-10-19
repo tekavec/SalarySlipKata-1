@@ -46,7 +46,7 @@ public class Money {
     return new Money(result);
   }
 
-  public Money divisionBy(int dividedBy) {
+  public Money divideBy(int dividedBy) {
     BigDecimal dividedByAsBigDecimal = updateWithDefaultScale(valueOf(dividedBy));
     final BigDecimal result = denomination.divide(dividedByAsBigDecimal, DEFAULT_SCALE, ROUND_HALF_UP);
     return new Money(result);
@@ -60,7 +60,7 @@ public class Money {
     return denomination.compareTo(amount.denomination) > 0;
   }
 
-  public static Money minimum(Money firstAmount, Money secondAmount) {
+  public static Money smallerOf(Money firstAmount, Money secondAmount) {
     final BigDecimal minimumOfTheTwo = firstAmount.denomination.min(secondAmount.denomination);
     return new Money(minimumOfTheTwo);
   }

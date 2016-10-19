@@ -2,7 +2,7 @@ package org.neomatrix369.salaryslip.components;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.smallerOf;
 import static org.neomatrix369.salaryslip.components.Money.zero;
 
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class MoneyShould {
     int someDivisor = 5;
 
     final Money expectedResult = new Money(2.47);
-    assertThat(someMoney.divisionBy(someDivisor), is(expectedResult));
+    assertThat(someMoney.divideBy(someDivisor), is(expectedResult));
   }
 
   @Test public void
@@ -54,6 +54,6 @@ public class MoneyShould {
     Money firstAmount = new Money(100.00);
     Money secondAmount = new Money(15.00);
 
-    assertThat(minimum(firstAmount, secondAmount), is(secondAmount));
+    assertThat(smallerOf(firstAmount, secondAmount), is(secondAmount));
   }
 }

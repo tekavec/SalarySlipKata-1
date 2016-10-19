@@ -18,7 +18,7 @@ public class Employee {
   }
 
   public Money monthlySalary() {
-    return annualSalary.divisionBy(TWELVE_MONTHS);
+    return annualSalary.divideBy(TWELVE_MONTHS);
   }
 
   public Money annualSalary() {

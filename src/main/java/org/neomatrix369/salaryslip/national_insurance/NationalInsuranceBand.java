@@ -1,6 +1,6 @@
 package org.neomatrix369.salaryslip.national_insurance;
 
-import static org.neomatrix369.salaryslip.components.Money.minimum;
+import static org.neomatrix369.salaryslip.components.Money.smallerOf;
 import static java.lang.String.format;
 
 import org.neomatrix369.salaryslip.components.Money;
@@ -17,18 +17,12 @@ public class NationalInsuranceBand {
   }
 
   public Money calculateContributionsFor(Money annualSalary) {
-    final Money excessIncome = calculateExcessFrom(annualSalary);
-
-    return contributionsOn(excessIncome);
+    return amountWithinBandFor(annualSalary).times(rate);
   }
 
-  private Money calculateExcessFrom(Money annualSalary) {
-    final Money lessOrEqualToTheUpperLimit = minimum(annualSalary, upperLimit);
-
-    return lessOrEqualToTheUpperLimit.subtract(lowerLimit);
+  private Money amountWithinBandFor(Money annualSalary) {
+    return smallerOf(annualSalary, upperLimit).subtract(lowerLimit);
   }
-
-  private Money contributionsOn(Money excessIncome) {return excessIncome.times(rate);}
 
   @Override
   public String toString() {
