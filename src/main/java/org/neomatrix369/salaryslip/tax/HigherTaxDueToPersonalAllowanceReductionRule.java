@@ -1,19 +1,20 @@
 package org.neomatrix369.salaryslip.tax;
 
 import org.neomatrix369.salaryslip.components.Money;
+import org.neomatrix369.salaryslip.tax.bands.TaxBand;
 
 public class HigherTaxDueToPersonalAllowanceReductionRule {
-  private final double rate;
+
+  private final TaxBand higherTaxBand;
   private final PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator;
 
   public HigherTaxDueToPersonalAllowanceReductionRule(
-      double rate, PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator) {
-    this.rate = rate;
+      TaxBand higherTaxBand, PersonalAllowanceReductionCalculator personalAllowanceReductionCalculator) {
+    this.higherTaxBand = higherTaxBand;
     this.personalAllowanceReductionCalculator = personalAllowanceReductionCalculator;
   }
 
   public Money calculateTaxPayableFor(Money annualSalary) {
-    final Money reduction = personalAllowanceReductionCalculator.reductionFor(annualSalary);
-    return reduction.times(rate);
+    return personalAllowanceReductionCalculator.reductionFor(annualSalary).times(higherTaxBand.rate());
   }
 }
