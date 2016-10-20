@@ -17,11 +17,11 @@ import org.neomatrix369.salaryslip.tax.PersonalAllowanceReductionCalculator;
 import org.neomatrix369.salaryslip.tax.HigherTaxDueToPersonalAllowanceReductionRule;
 
 @RunWith(Parameterized.class)
-public class TaxWithPersonalAllowanceReductionRuleShould {
+public class HigherTaxDueToPersonalAllowanceReductionRuleShould {
   private HigherTaxDueToPersonalAllowanceReductionRule higherTaxDueToPersonalAllowanceReductionRule;
 
   private Money annualSalary;
-  private Money expectedTaxPayableDueToRule;
+  private Money expectedHigherTaxPayableDueToRule;
 
   @Parameters(name = "For an annual salary of {0}, the annual tax payable due to rule is {1}")
   public static Collection<Object[]> data() {
@@ -39,9 +39,9 @@ public class TaxWithPersonalAllowanceReductionRuleShould {
     );
   }
 
-  public TaxWithPersonalAllowanceReductionRuleShould(Money annualSalary, Money expectedTaxPayableDueToRule) {
+  public HigherTaxDueToPersonalAllowanceReductionRuleShould(Money annualSalary, Money expectedHigherTaxPayableDueToRule) {
     this.annualSalary = annualSalary;
-    this.expectedTaxPayableDueToRule = expectedTaxPayableDueToRule;
+    this.expectedHigherTaxPayableDueToRule = expectedHigherTaxPayableDueToRule;
   }
 
   @Before
@@ -52,7 +52,7 @@ public class TaxWithPersonalAllowanceReductionRuleShould {
 
   @Test public void
   return_the_annual_higher_tax_payable_for_a_given_annual_salary_above_100K() {
-    assertThat(higherTaxDueToPersonalAllowanceReductionRule.calculateTaxPayableFor(annualSalary), is(expectedTaxPayableDueToRule));
+    assertThat(higherTaxDueToPersonalAllowanceReductionRule.calculateTaxPayableFor(annualSalary), is(expectedHigherTaxPayableDueToRule));
   }
 
   private static Money annualSalaryOf(double amount) {
