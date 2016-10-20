@@ -29,7 +29,7 @@ public class SalarySlipGeneratorShould {
 
   @Before
   public void initialise() {
-    NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();;
+    NationalInsuranceCalculator nationalInsuranceCalculator = new NationalInsuranceCalculator();
     TaxCalculator taxCalculator = new TaxCalculator(new PersonalAllowanceReductionCalculator());
 
     salarySlipGenerator = new SalarySlipGenerator(nationalInsuranceCalculator, taxCalculator);

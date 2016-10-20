@@ -2,7 +2,6 @@ package org.neomatrix369.salaryslip.tax.bands;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
 import static java.lang.Double.MAX_VALUE;
 import static java.util.Arrays.asList;
 
@@ -13,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.neomatrix369.salaryslip.components.Money;
-import org.neomatrix369.salaryslip.tax.PersonalAllowanceReductionCalculator;
 
 @RunWith(Parameterized.class)
 public class TaxBandShould {
@@ -25,8 +23,7 @@ public class TaxBandShould {
   private static final TaxBand ADDITIONAL_RATE_TAX_BAND  =
       new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.45);
   private static final TaxBand HIGHER_RATE_TAX_BAND      =
-      new HigherTaxWithPersonalAllowanceReductionRuleBand(
-                  new Money(43_000.00), new Money(150_000.00), 0.40, new PersonalAllowanceReductionCalculator());
+      new TaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
   private static final TaxBand BASIC_RATE_TAX_BAND       =
       new TaxBand(new Money(11_000.00), new Money( 43_000.00), 0.20);
 
@@ -37,7 +34,7 @@ public class TaxBandShould {
             { annualSalaryOf( 40_000.00), BASIC_RATE_TAX_BAND,      expectedTaxPayableOf( 5_800.00) },
             { annualSalaryOf( 45_000.00), BASIC_RATE_TAX_BAND,      expectedTaxPayableOf( 6_400.00) },
             { annualSalaryOf( 45_000.00), HIGHER_RATE_TAX_BAND,     expectedTaxPayableOf(   800.00) },
-            { annualSalaryOf(150_000.00), HIGHER_RATE_TAX_BAND,     expectedTaxPayableOf(47_200.00) },
+            { annualSalaryOf(150_000.00), HIGHER_RATE_TAX_BAND,     expectedTaxPayableOf(42_800.00) },
             { annualSalaryOf(160_000.00), ADDITIONAL_RATE_TAX_BAND, expectedTaxPayableOf( 4_500.00) }
         }
     );
