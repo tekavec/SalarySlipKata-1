@@ -29,6 +29,10 @@ public enum TaxBand {
     return smallerOf(annualSalary, upperLimit).subtract(lowerLimit);
   }
 
+  public double rate() {
+    return rate;
+  }
+
   private static class Rate {
     private static final double FORTY_FIVE_PERCENT = 0.45;
     private static final double FORTY_PERCENT = 0.40;

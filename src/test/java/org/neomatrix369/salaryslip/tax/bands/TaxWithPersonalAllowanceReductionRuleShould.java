@@ -2,6 +2,7 @@ package org.neomatrix369.salaryslip.tax.bands;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.neomatrix369.salaryslip.tax.bands.TaxBand.*;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -17,8 +18,6 @@ import org.neomatrix369.salaryslip.tax.HigherTaxDueToPersonalAllowanceReductionR
 
 @RunWith(Parameterized.class)
 public class TaxWithPersonalAllowanceReductionRuleShould {
-  private static final double HIGHER_TAX_RATE = 0.40;
-
   private HigherTaxDueToPersonalAllowanceReductionRule higherTaxDueToPersonalAllowanceReductionRule;
 
   private Money annualSalary;
@@ -48,7 +47,7 @@ public class TaxWithPersonalAllowanceReductionRuleShould {
   @Before
   public void setUp() throws Exception {
     higherTaxDueToPersonalAllowanceReductionRule =
-        new HigherTaxDueToPersonalAllowanceReductionRule(HIGHER_TAX_RATE, new PersonalAllowanceReductionCalculator());
+        new HigherTaxDueToPersonalAllowanceReductionRule(HIGHER_RATE_TAX_BAND.rate(), new PersonalAllowanceReductionCalculator());
   }
 
   @Test public void

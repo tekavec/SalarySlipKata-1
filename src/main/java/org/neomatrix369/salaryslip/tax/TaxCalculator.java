@@ -18,7 +18,8 @@ public class TaxCalculator {
     this.personalAllowanceReductionCalculator = personalAllowanceReductionCalculator;
 
     higherTaxDueToPersonalAllowanceReductionRule =
-                            new HigherTaxDueToPersonalAllowanceReductionRule(0.40, personalAllowanceReductionCalculator);
+                            new HigherTaxDueToPersonalAllowanceReductionRule(
+                                HIGHER_RATE_TAX_BAND.rate(), personalAllowanceReductionCalculator);
   }
 
   public TaxDetails calculateMonthlyTaxDetailsFor(Money annualSalary) {
