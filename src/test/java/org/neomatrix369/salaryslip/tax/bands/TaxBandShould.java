@@ -2,7 +2,9 @@ package org.neomatrix369.salaryslip.tax.bands;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static java.lang.Double.MAX_VALUE;
+import static org.neomatrix369.salaryslip.tax.bands.TaxBand.ADDITIONAL_RATE_TAX_BAND;
+import static org.neomatrix369.salaryslip.tax.bands.TaxBand.BASIC_RATE_TAX_BAND;
+import static org.neomatrix369.salaryslip.tax.bands.TaxBand.HIGHER_RATE_TAX_BAND;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -19,13 +21,6 @@ public class TaxBandShould {
   private Money annualSalary;
   private TaxBand taxBand;
   private Money expectedAnnualTaxPayable;
-
-  private static final TaxBand ADDITIONAL_RATE_TAX_BAND  =
-      new TaxBand(new Money(150_000.00), new Money(MAX_VALUE), 0.45);
-  private static final TaxBand HIGHER_RATE_TAX_BAND      =
-      new TaxBand(new Money(43_000.00), new Money(150_000.00), 0.40);
-  private static final TaxBand BASIC_RATE_TAX_BAND       =
-      new TaxBand(new Money(11_000.00), new Money( 43_000.00), 0.20);
 
   @Parameters(name = "For an annual salary of {0}, the tax payable is {1}")
   public static Collection<Object[]> data() {
