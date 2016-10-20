@@ -3,7 +3,8 @@ package org.neomatrix369.salaryslip.national_insurance;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.runners.Parameterized.Parameters;
-import static java.lang.Double.MAX_VALUE;
+import static org.neomatrix369.salaryslip.national_insurance.NationalInsuranceBand.BASIC_CONTRIBUTIONS_BAND;
+import static org.neomatrix369.salaryslip.national_insurance.NationalInsuranceBand.HIGHER_CONTRIBUTIONS_BAND;
 import static java.util.Arrays.asList;
 
 import java.util.Collection;
@@ -17,9 +18,6 @@ import org.neomatrix369.salaryslip.components.Money;
 public class NationalInsuranceBandShould {
   private Money annualSalary;
   private Money expectedNationalInsuranceContributions;
-
-  private static final NationalInsuranceBand BASIC_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(8_060.00), new Money(43_000.00), 0.12);
-  private static final NationalInsuranceBand HIGHER_CONTRIBUTIONS_BAND = new NationalInsuranceBand(new Money(43_000.00), new Money(MAX_VALUE), 0.02);
 
   private NationalInsuranceBand nationalInsuranceBand;
 
